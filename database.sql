@@ -69,6 +69,24 @@ BEGIN
 		WHERE restaurants.idRestaurant = OLD.idRestaurant;
 END;
 
+
+-- ######## TRIGGERS TO ALSO DELETE RESTAURANT ENTRIES #########
+--TODO CHANGE TRIGGERS, SOMETHINGS WRONG
+CREATE TRIGGER deleteRestaurantAndReviews BEFORE DELETE ON restaurants
+FOR EACH ROW
+BEGIN
+	DELETE FROM reviews
+	WHERE reviews.idRestaurant = OLD.idRestaurant;
+END;
+	
+CREATE TRIGGER deleteUserAndRestaurants BEFORE DELETE ON users
+FOR EACH ROW
+BEGIN
+	DELETE FROM restaurants
+	WHERE restaurants.idOwner = OLD.idUser;
+END;
+
+
 INSERT INTO restaurants(restaurantName, address, contact, description, category, logoFileName, idOwner)
 	VALUES("Tasca do Bino", "Rua do Azevinho, 135", 223456789,
 	"A melhor tasca que alguma vez irás experimentar", "Tasco",
