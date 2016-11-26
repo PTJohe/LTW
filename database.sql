@@ -27,6 +27,7 @@ CREATE TABLE restaurants (
 	category NVARCHAR2(15),
 	-- imagelist dunno how to do it
 	lastUpdateDate DATE, 
+	logoFileName NVARCHAR2(30),
 	idOwner INTEGER REFERENCES users(idUser) NOT NULL
 	);
 	
@@ -68,15 +69,17 @@ BEGIN
 		WHERE restaurants.idRestaurant = OLD.idRestaurant;
 END;
 
-INSERT INTO restaurants(restaurantName, address, contact, description, category, idOwner)
+INSERT INTO restaurants(restaurantName, address, contact, description, category, logoFileName, idOwner)
 	VALUES("Tasca do Bino", "Rua do Azevinho, 135", 223456789,
 	"A melhor tasca que alguma vez irás experimentar", "Tasco",
+	"./resources/logo2.gif",
 	(SELECT idUser FROM users
 	WHERE username="Maxzelik"));
-INSERT INTO restaurants(restaurantName, address, contact, description, category, idOwner)
-	VALUES("Restaurante Boavista", "Avenida da Boavista, 2001", 22555808,
+INSERT INTO restaurants(restaurantName, address, contact, description, category, logoFileName, idOwner)
+	VALUES("Fork, Knive & Glass", "Avenida da Boavista, 2001", 22555808,
 	"Situado numa zona deveras nobre, o Restaurante Boavista é o
 	mas adequado para refeiçoes com classe", "Restaurante",
+	"./resources/logo1.gif",
 	(SELECT idUser FROM users
 	WHERE username="Joao"));
 INSERT INTO reviews(idOwner, idRestaurant, text, rating)
