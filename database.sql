@@ -72,6 +72,7 @@ END;
 
 -- ######## TRIGGERS TO ALSO DELETE RESTAURANT ENTRIES #########
 --TODO CHANGE TRIGGERS, SOMETHINGS WRONG
+
 CREATE TRIGGER deleteRestaurantAndReviews BEFORE DELETE ON restaurants
 FOR EACH ROW
 BEGIN
@@ -88,7 +89,7 @@ END;
 
 
 INSERT INTO restaurants(restaurantName, address, contact, description, category, logoFileName, idOwner)
-	VALUES("Tasca do Bino", "Rua do Azevinho, 135", 223456789,
+	VALUES("Gondola", "Rua do Azevinho, 135", 223456789,
 	"A melhor tasca que alguma vez irás experimentar", "Tasco",
 	"./resources/logo2.gif",
 	(SELECT idUser FROM users
@@ -102,12 +103,12 @@ INSERT INTO restaurants(restaurantName, address, contact, description, category,
 	WHERE username="Joao"));
 INSERT INTO reviews(idOwner, idRestaurant, text, rating)
 	VALUES(	(SELECT idUser FROM users WHERE username="Maxzelik"),
-			(SELECT idRestaurant FROM restaurants WHERE restaurantName="Restaurante Boavista"),
+			(SELECT idRestaurant FROM restaurants WHERE restaurantName="Fork, Knive & Glass"),
 			"Restaurante bastante bom, mas demasiado caro",
 			4);
 INSERT INTO reviews(idOwner, idRestaurant, text, rating)
 	VALUES(	(SELECT idUser FROM users WHERE username="Bolota"),
-			(SELECT idRestaurant FROM restaurants WHERE restaurantName="Restaurante Boavista"),
+			(SELECT idRestaurant FROM restaurants WHERE restaurantName="Fork, Knive & Glass"),
 			"Gostei bastante,gostaria de repetir a experiencia",
 			5);
 DELETE FROM reviews
