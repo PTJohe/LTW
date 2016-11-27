@@ -4,16 +4,17 @@
 	//TODO use get/post to pass the name/id of the restaurant
 	//Opens database
 		$dbh = new PDO('sqlite:database.db');
-		$username = "Joao";
-	//Gets the user
-		$stmt = $dbh->prepare('SELECT * FROM users WHERE username = ?');
-		$stmt->execute(array($username));
-		$selectedUser = $stmt->fetch();
-	//Gets the restaurant
-		$stmt = $dbh->prepare('SELECT * FROM restaurants WHERE idOwner = ?');
-		$stmt->execute(array($selectedUser['idUser']));
-		$selectedRestaurant = $stmt->fetch();
+		$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //To enable error handling
+		$inputRestaurantName = $_POST['restaurantName'];
 		
+	//Gets the restaurant
+		$stmt = $dbh->prepare('SELECT * FROM restaurants WHERE restaurantName = ?');
+		$stmt->execute(array($inputRestaurantName));
+		$selectedRestaurant = $stmt->fetch();	
+		if($selectedRestaurant == null) //In case of a non-existing name
+		{
+			header('Location: ErrorRestaurantPage.php');
+		}
 	//Get the infos needed
 		$restaurantName = $selectedRestaurant['restaurantName'];
 		$restaurantLogo = $selectedRestaurant['logoFileName'];
