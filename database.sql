@@ -5,6 +5,7 @@
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS restaurants;
 DROP TABLE IF EXISTS reviews;
+DROP TABLE IF EXISTS responses;
 
 
 -- ######### CREATE TABLES #####################
@@ -33,10 +34,17 @@ CREATE TABLE restaurants (
 	
 CREATE TABLE reviews (
 	idReview INTEGER PRIMARY KEY AUTOINCREMENT,
-	idOwner	INTEGER REFERENCES users(idUser) NOT NULL,
+	idUser INTEGER REFERENCES users(idUser) NOT NULL,
 	idRestaurant INTEGER REFERENCES restaurants(idRestaurant) NOT NULL,
 	text TEXT,
 	rating FLOAT
+	);
+	
+CREATE TABLE responses (
+	idResponse INTEGER PRIMARY KEY AUTOINCREMENT,
+	text TEXT,
+	idReview INTEGER REFERENCES reviews(idReview) NOT NULL,
+	idUser INTEGER REFERENCES users(idUser) NOT NULL
 	);
 
 
@@ -71,7 +79,13 @@ END;
 
 
 -- ######## TRIGGERS TO ALSO DELETE RESTAURANT ENTRIES #########
-
+CREATE TRIGGER deleteReviewAndResponses BEFORE DELETE ON reviews
+FOR EACH ROW
+BEGIN
+	DELETE FROM responses
+	WHERE responses.idReview = OLD.idReview;
+END;
+	
 CREATE TRIGGER deleteRestaurantAndReviews BEFORE DELETE ON restaurants
 FOR EACH ROW
 BEGIN
@@ -100,15 +114,20 @@ INSERT INTO restaurants(restaurantName, address, contact, description, category,
 	"./resources/logo1.gif",
 	(SELECT idUser FROM users
 	WHERE username="Joao"));
-INSERT INTO reviews(idOwner, idRestaurant, text, rating)
+INSERT INTO reviews(idUser, idRestaurant, text, rating)
 	VALUES(	(SELECT idUser FROM users WHERE username="Maxzelik"),
 			(SELECT idRestaurant FROM restaurants WHERE restaurantName="Fork, Knive & Glass"),
 			"Restaurante bastante bom, mas demasiado caro",
 			4);
-INSERT INTO reviews(idOwner, idRestaurant, text, rating)
+INSERT INTO reviews(idUser, idRestaurant, text, rating)
 	VALUES(	(SELECT idUser FROM users WHERE username="Bolota"),
 			(SELECT idRestaurant FROM restaurants WHERE restaurantName="Fork, Knive & Glass"),
 			"Gostei bastante,gostaria de repetir a experiencia",
 			5);
 DELETE FROM reviews
 WHERE rating = 5;
+
+INSERT INTO responses(text, idReview, idUser)
+	VALUES("Em quais pratos acha que o custo esta demasiado caro?",
+		(SELECT idReview FROM reviews WHERE idUser=1),
+		(SELECT idUser FROM users WHERE username="Maxzelik"));
