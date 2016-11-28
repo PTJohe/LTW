@@ -14,7 +14,7 @@ CREATE TABLE users (
 	idUser INTEGER PRIMARY KEY AUTOINCREMENT,
 	username NVARCHAR2(30) UNIQUE,
 	password NVARCHAR2(20),
-	name NVARCHAR2(40),
+	name TEXT,
 	photoFileName NVARCHAR2(100)
 	);
 	
@@ -130,4 +130,4 @@ WHERE rating = 5;
 INSERT INTO responses(text, idReview, idUser)
 	VALUES("Em quais pratos acha que o custo esta demasiado caro?",
 		(SELECT idReview FROM reviews WHERE idUser=1),
-		(SELECT idUser FROM users WHERE username="Maxzelik"));
+		(SELECT idUser FROM users WHERE username="Joao"));
