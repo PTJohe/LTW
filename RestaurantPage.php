@@ -21,6 +21,7 @@
 		$restaurantReviews = $stmt->fetchAll();
 		
 	//Get the infos needed
+		$restaurantId = $selectedRestaurant['idRestaurant'];
 		$restaurantName = $selectedRestaurant['restaurantName'];
 		$restaurantLogo = $selectedRestaurant['logoFileName'];
 		$restaurantAddress = $selectedRestaurant['address'];
@@ -32,6 +33,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<title><?=$restaurantName?></title>
+		<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script src="writeReview.js"></script>
 	</head>
 	
 	<body>
@@ -57,6 +60,7 @@
 					$stmt->execute(array($restaurantReviews[$i]['idUser']));
 					$reviewUser = $stmt->fetch();
 					?>
+					<div class="review">
 					<p>Rating: <?=$restaurantReviews[$i]['rating']?></p>
 					
 					<p>Written by <?=$reviewUser['name'];?></p>
@@ -74,15 +78,28 @@
 								$stmt->execute(array($responses[$j]['idUser']));
 								$responseUser = $stmt->fetch();
 							?>
+							<div class="response">
 								<p>Written by <?=$responseUser['name']?></p>
 								<li>
 									<?=$responses[$j]['text']?>
 								</li>
+							</div>
 							<?php } ?>
 						</ul>
 					</li>
+					</div>
 				<?php } ?>
 			</ul>
+			<form>
+				Add Review:<br>
+				<input id="newReviewText" type="text"><br>
+				Rate:<br>
+				<input id="newReviewRating" type="number" min="0" max="5"><br>
+				User:<br>
+				<input id="newReviewUser" type="text"><br>
+				<input id="newReviewRestaurant" type="hidden" value=<?=$restaurantId?> >
+				<input id="submitReview" type="button" value="Send">
+			</form>
 		</div>
 	</body>
 </html>
