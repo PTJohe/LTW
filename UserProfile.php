@@ -26,7 +26,7 @@
 		$userPhoto = $selectedUser['photoFileName'];
 	?>
 <head>
-	<title>Profile/<?=$username?></title>
+	<title>Profile/<?=$inputUsername?></title>
 	<meta charset="utf-8">
 	<style>
 		td,th{border:1px solid black}
@@ -35,7 +35,7 @@
 </head>
 <body>
 	<header>
-		<h1>Profile <?=$userName?></h1>
+		<h1><?=$inputUsername?></h1>
 		<nav>
 			<ul>
 				<li><a href="logout.php">Logout</a></li>
@@ -47,32 +47,36 @@
 	<div id="main">
 		<section id="personalData">
 			<h2>Personal Data</h2>
-			<img src="photo.png" alt="Photo" width="300" height="200"><br>
-			<label>João Araújo</label>
+			<img src=<?=$userPhoto?> alt="Photo" width="300" height="200"><br>
+			<label><?=$userName?></label>
 		</section>
 		<section id="reviews">
+			<p>Total Reviews = <?=count($userReviews)?></p>
 			<h2>Latest Reviews</h2>
-			<article>
-				<h3>Restaurant 1</h3>
-				<img src="img.png" alt="Image" width="300" height="200">
-				<p>Rating: 5/5</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non nisl et nisi faucibus congue id a magna. Donec sed diam non justo blandit venenatis. Nunc vestibulum aliquam sem vitae dignissim. Integer cursus lacus ut lectus varius, a imperdiet est blandit. Mauris iaculis ac erat id sodales. Fusce venenatis eu dui a hendrerit. Aliquam malesuada pretium neque et mollis.</p>
-				<footer>
-					<p>Date: 2016-09-29</p>
-					<p>Comments: 10</p>
-				</footer>
-			</article>
-			<article>
-				<h3>Restaurant 2</h3>
-				<img src="img.png" alt="Image" width="300" height="200">
-				<p>Rating: 3/5</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non nisl et nisi faucibus congue id a magna. Donec sed diam non justo blandit venenatis. Nunc vestibulum aliquam sem vitae dignissim. Integer cursus lacus ut lectus varius, a imperdiet est blandit. Mauris iaculis ac erat id sodales. Fusce venenatis eu dui a hendrerit. Aliquam malesuada pretium neque et mollis.</p>  
-				<footer>
-					<p>Date: 2016-09-29</p>
-					<p>Comments: 5</p>
-				</footer>
-			</article>
-		</section>
+			
+			<?php for($i = 0; $i < count($userReviews); $i++){ 		
+					//Limit 'Latest Reviews' to two reviews
+					if($i > 1){
+						break;			
+					}
+					//Gets the restaurant
+					$stmt = $dbh->prepare('SELECT * FROM restaurants WHERE idRestaurant = ?');
+					$stmt->execute(array($userReviews[$i]['idRestaurant']));
+					$selectedRestaurant = $stmt->fetch();
+					
+					$restaurantId = $selectedRestaurant['idRestaurant'];
+					$restaurantName = $selectedRestaurant['restaurantName'];
+					$restaurantLogo = $selectedRestaurant['logoFileName'];
+					?>
+
+					<article>
+						<h3><?=$restaurantName?></h3>
+						<img src=<?=$restaurantLogo?> alt=<?=$restaurantName?> width="300" height="100">
+						<p>Rating: <?=$userReviews[$i]['rating']?></p>
+						<p><?=$userReviews[$i]['text']?></p>
+					</article>
+				<?php } ?>
+			</section>
 
 	</div>
 	<footer>
