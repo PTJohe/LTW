@@ -1,3 +1,7 @@
+<?php
+//Start the Session
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <?php
@@ -27,6 +31,8 @@ $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $row['password']==$inputPassword){
         $bool=1;
         echo 'Login Successful';
+        $_SESSION["username"]=$inputUsername;
+        $_SESSION["password"]=$inputPassword;
       }
   }
     if(isset($_POST['login'])&& $bool==0){
@@ -35,8 +41,8 @@ $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   ?>
 </div>
   <div id="container">
-    <form method="post" class="form-signin" role = "form" action = "<?php echo $_SERVER['PHP_SELF']; ?>"
-      method = "post">
+    <form method="post" class="form-signin" role = "form"
+    action = "<?php echo $_SERVER['PHP_SELF']; ?>">
     <label><b>Username</b>
     <input class="UserName" type="text" placeholder="Enter Username" name="uname" required>
 	  </label>
