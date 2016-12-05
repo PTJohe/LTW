@@ -12,6 +12,7 @@ $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         <div id="container">
           <?php
 
+          $inputCompleteName=$_POST['cname'];
           $inputUsername=$_POST['uname'];
           $inputPassword1=$_POST['psw1'];
           $inputPassword2=$_POST['psw2'];
@@ -25,6 +26,7 @@ $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
               VALUES (:username,:password,:name)');
               $stmt->bindParam(':username',$inputUsername);
               $stmt->bindParam(':password',$inputPassword1);
+              $stmt->bindParam(':name',$inputCompleteName);
 
               $stmt->execute();
 
@@ -34,9 +36,15 @@ $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
           ?>
           <form method="post" class="form-signup" role = "form"
           action = "<?php echo $_SERVER['PHP_SELF']; ?>" method = "post">
+
+          <label><b>Complete Name</b>
+          <input type="text" placeholder="Enter your name" name="cname" required>
+          </label>
+          <p>
             <label><b>Username</b>
-    <input type="text" placeholder="Enter Username" name="uname" required>
-	</label>
+              <input type="text" placeholder="Enter Username" name="uname" required>
+	           </label>
+           </p>
             <p>
                 <label><b>Password</b>
     <input type="password" placeholder="Enter Password" name="psw1" required>
