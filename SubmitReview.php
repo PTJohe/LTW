@@ -5,10 +5,12 @@ $rating = $_POST['rating'];
 $username = $_POST['username'];
 $idRestaurant = $_POST['idRestaurant'];
 
+/*Just for debugging
 echo $text;
 echo $rating;
 echo $username;
 echo $idRestaurant;
+*/
 
 $stmt = $dbh->prepare('SELECT * FROM users WHERE username = ?');
 $stmt->execute(array($username));

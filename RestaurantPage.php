@@ -61,32 +61,40 @@
 					$reviewUser = $stmt->fetch();
 					?>
 					<div class="review">
-					<p>Rating: <?=$restaurantReviews[$i]['rating']?></p>
-					
-					<p>Written by <?=$reviewUser['name'];?></p>
-					<li>
+						<p>Rating: <?=$restaurantReviews[$i]['rating']?></p>
+						
+						<p>Written by <?=$reviewUser['name'];?></p>
+						<li>
 						<?=$restaurantReviews[$i]['text']?>
-						<ul>
-							<?php 
-							//Get the users who wrote the responses
-							$stmt = $dbh->prepare('SELECT * FROM responses WHERE idReview = ?');
-							$stmt->execute(array($restaurantReviews[$i]['idReview']));
-							$responses = $stmt->fetchAll();
-							for($j = 0; $j < count($responses); $j++)
-							{
-								$stmt = $dbh->prepare('SELECT * FROM users WHERE idUser = ?');
-								$stmt->execute(array($responses[$j]['idUser']));
-								$responseUser = $stmt->fetch();
-							?>
-							<div class="response">
-								<p>Written by <?=$responseUser['name']?></p>
-								<li>
-									<?=$responses[$j]['text']?>
-								</li>
-							</div>
-							<?php } ?>
-						</ul>
-					</li>
+							<ul class="responses" id=<?=$restaurantReviews[$i]['idReview']?>>
+								<?php 
+								//Get the users who wrote the responses
+								$stmt = $dbh->prepare('SELECT * FROM responses WHERE idReview = ?');
+								$stmt->execute(array($restaurantReviews[$i]['idReview']));
+								$responses = $stmt->fetchAll();
+								for($j = 0; $j < count($responses); $j++)
+								{
+									$stmt = $dbh->prepare('SELECT * FROM users WHERE idUser = ?');
+									$stmt->execute(array($responses[$j]['idUser']));
+									$responseUser = $stmt->fetch();
+								?>
+								<div class="response">
+									<p>Written by <?=$responseUser['name']?></p>
+									<li>
+										<?=$responses[$j]['text']?>
+									</li>
+								</div>
+								<?php } ?>
+							</ul>
+							<form>
+									Add Response:<br>
+									<input id="newResponseText" type="text"><br>
+									User:<br>
+									<input id="newResponseUser" type="text"><br>
+									<input id="newResponseReview" type="hidden" value=<?=$restaurantReviews[$i]['idReview']?> >
+									<input id="submitResponse" type="button" value="Send">
+							</form>
+						</li>
 					</div>
 				<?php } ?>
 			</ul>
