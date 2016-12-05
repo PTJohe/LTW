@@ -29,7 +29,7 @@ $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         echo 'Login Successful';
       }
   }
-    if(isset($_POST['login'])&& bool==0){
+    if(isset($_POST['login'])&& $bool==0){
       echo 'wrong Password or Username';
     }
   ?>
