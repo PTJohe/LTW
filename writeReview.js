@@ -36,11 +36,12 @@ $(document).ready(function()
 		return false;
 	});
 	
-	$("#submitResponse").click(function()
+	$(".submitResponse").click(function()
 	{
-		var responseText = $("#newResponseText").val();
-		var responseUser = $("#newResponseUser").val();
-		var responseReview = $("#newResponseReview").val();
+		var responseText = $(this).siblings("#newResponseText").val();
+		console.log($(this).siblings("#newResponseText"));
+		var responseUser = $(this).siblings("#newResponseUser").val();
+		var responseReview = $(this).siblings("#newResponseReview").val();
 		
 		//Calls the PHP to update the database
 		if(responseText == '' || responseUser == '' || responseReview == '')
@@ -66,9 +67,9 @@ $(document).ready(function()
 		var newResponse = $('<div class="response"></div>');
 		newResponse.append('<p>Written by (WORK IN PROGRESS) </p>');
 		newResponse.append('<li>' + responseText + '</li>');
-		$(".responses #newResponseReview").append(newResponse);
-		//TODO this is not working
-		console.log($(".responses #newResponseReview"));
+		$("#response" + responseReview).append(newResponse);
+		console.log($("#" + responseReview));
+		
 		return false;
 	});
 });
