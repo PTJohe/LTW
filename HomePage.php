@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
-
+<?php
+session_start();
+include_once("database/connection");
+include_once("database/get_users");
+include_once("action_login.php");
+?>
 <head>
     <title>Home</title>
     <meta charset="utf-8">
@@ -10,8 +15,18 @@
 <body>
     <section>
         <div id="Login">
+          <?php
+            if(isset($_SESSION['username'])&&$_SESSION['loggedin']){
+           ?>
+           <p class="LogOut"><a href="LogOut.html">LogOut </a></p>
+           <?php
+         }
+         else{
+           ?>
             <p class="SignIn"><a href="SignIn.html">Sign In</a></p>
             <p class="SignUp"><a href="SignUp.html">Sign Up</a></p>
+
+          <?php }?>
         </div>
         <header id="header">
             <h1>RestaurantRating</h1>
