@@ -36,11 +36,13 @@ $(document).ready(function()
 		return false;
 	});
 	
-	$("#submitResponse").click(function()
+	$(".submitResponse").click(function()
 	{
-		var responseText = $("#newResponseText").val();
-		var responseUser = $("#newResponseUser").val();
-		var responseReview = $("#newResponseReview").val();
+		var responseText = $(this).siblings("#newResponseText").val();
+		console.log($(this).siblings("#newResponseText"));
+		var responseUser = $(this).siblings("#newResponseUser").val();
+		var responseReview = $(this).siblings("#newResponseReview").val();
+		var responseUserFullName = "";
 		
 		//Calls the PHP to update the database
 		if(responseText == '' || responseUser == '' || responseReview == '')
@@ -57,18 +59,26 @@ $(document).ready(function()
 			cache: false,
 			success: function(result)
 			{
-				alert(result);
+				if(result == "Invalid user" || result == "Invalid review")
+				{
+					alert(result);
+				}
+				else
+				{
+					responseUserFullName = result;
+					
+					//Adds the HTML to the page
+					var newResponse = $('<div class="response"></div>');
+					newResponse.append('<p>Written by '+ responseUserFullName + ' </p>');
+					newResponse.append('<li>' + responseText + '</li>');
+					$("#response" + responseReview).append(newResponse);
+					console.log($("#" + responseReview));
+				}
 			}
+			
 			});
 		}
 		
-		//Adds the HTML to the page
-		var newResponse = $('<div class="response"></div>');
-		newResponse.append('<p>Written by (WORK IN PROGRESS) </p>');
-		newResponse.append('<li>' + responseText + '</li>');
-		$(".responses #newResponseReview").append(newResponse);
-		//TODO this is not working
-		console.log($(".responses #newResponseReview"));
 		return false;
 	});
 });
