@@ -88,10 +88,8 @@
 								<?php } ?>
 							</ul>
 							<form id="form<?=$reviewId?>" >
-									Add Response:<br>
-									<input id="newResponseText" type="text"><br>
-									User:<br>
-									<input id="newResponseUser" type="text"><br>
+									<input id="newResponseText" type="text" placeholder="Write your response..."><br>
+									<input id="newResponseUser" type="text" placeholder="User"><br>
 									<input id="newResponseReview" type="hidden" value=<?=$reviewId?> >
 									<input class="submitResponse" type="button" value="Send">
 							</form>
@@ -100,12 +98,10 @@
 				<?php } ?>
 			</ul>
 			<form>
-				Add Review:<br>
-				<input id="newReviewText" type="text"><br>
-				Rate:<br>
-				<input id="newReviewRating" type="number" min="0" max="5"><br>
-				User:<br>
-				<input id="newReviewUser" type="text"><br>
+				Add a Review:<br>
+				<input id="newReviewText" type="text" placeholder="Write your review..."><br>
+				<input id="newReviewRating" type="number" min="0" max="5" placeholder="Rate"><br>
+				<input id="newReviewUser" type="text" placeholder="User"><br>
 				<input id="newReviewRestaurant" type="hidden" value=<?=$restaurantId?> >
 				<input id="submitReview" type="button" value="Send">
 			</form>
