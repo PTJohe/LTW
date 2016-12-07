@@ -1,32 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+<base href="https://gnomo.fe.up.pt/~up201303962/LTW/Proj/">
 <?php
+
 	//Opens database
-		$dbh = new PDO('sqlite:database.db');
-		$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //To enable error handling
-		$inputUsername = $_GET['username'];
+	$dbh = new PDO('sqlite:database.db');
+	$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //To enable error handling
+	$inputUsername = $_GET['username'];
 		
 	//Gets the restaurant
-		$stmt = $dbh->prepare('SELECT * FROM users WHERE username = ?');
-		$stmt->execute(array($inputUsername));
-		$selectedUser = $stmt->fetch();	
-		if($selectedUser == null) //In case of a non-existing name
-		{
-			header('Location: ErrorRestaurantPage.php');
-		}
+	$stmt = $dbh->prepare('SELECT * FROM users WHERE username = ?');
+	$stmt->execute(array($inputUsername));
+	$selectedUser = $stmt->fetch();	
+	if($selectedUser == null){ //In case of a non-existing name
+		header('Location: 404.php');
+	}
 		
 	//Gets the reviews
-		$stmt = $dbh->prepare('SELECT * FROM reviews WHERE idUser = ?');
-		$stmt->execute(array($selectedUser['idUser']));
-		$userReviews = $stmt->fetchAll();
+	$stmt = $dbh->prepare('SELECT * FROM reviews WHERE idUser = ?');
+	$stmt->execute(array($selectedUser['idUser']));
+	$userReviews = $stmt->fetchAll();
 		
 	//Get the infos needed
-		$userId = $selectedUser['idUser'];
-		$userName = $selectedUser['name'];
-		$userPhoto = $selectedUser['photoFileName'];
-	?>
+	$userId = $selectedUser['idUser'];
+	$userName = $selectedUser['name'];
+	$userPhoto = $selectedUser['photoFileName'];
+?>
 <head>
-	<title>Profile/<?=$inputUsername?></title>
+	<title><?=$inputUsername?></title>
 	<meta charset="utf-8">
 	<style>
 		td,th{border:1px solid black}
@@ -53,34 +54,33 @@
 		<section id="reviews">
 			<p>Total Reviews = <?=count($userReviews)?></p>
 			<h2>Latest Reviews</h2>
-			
-			<?php for($i = 0; $i < count($userReviews); $i++){ 		
-					//Limit 'Latest Reviews' to two reviews
-					if($i > 1){
-						break;			
-					}
-					//Gets the restaurant
-					$stmt = $dbh->prepare('SELECT * FROM restaurants WHERE idRestaurant = ?');
-					$stmt->execute(array($userReviews[$i]['idRestaurant']));
-					$selectedRestaurant = $stmt->fetch();
-					
-					$restaurantId = $selectedRestaurant['idRestaurant'];
-					$restaurantName = $selectedRestaurant['restaurantName'];
-					$restaurantLogo = $selectedRestaurant['logoFileName'];
-					?>
 
-					<article>
-						<h3><?=$restaurantName?></h3>
-						<img src=<?=$restaurantLogo?> alt=<?=$restaurantName?> width="300" height="100">
-						<p>Rating: <?=$userReviews[$i]['rating']?></p>
-						<p><?=$userReviews[$i]['text']?></p>
-					</article>
-				<?php } ?>
-			</section>
+			<?php if(count($userReviews) == 0){	?>
+				<p>This user hasn't written a review yet.</p> 
+			<?php } 
+				else for($i = 0; $i < count($userReviews); $i++){ 		
+				//Limit 'Latest Reviews' to two reviews
+				if($i > 1){
+					break;			
+				}
+				//Gets the restaurant
+				$stmt = $dbh->prepare('SELECT * FROM restaurants WHERE idRestaurant = ?');
+				$stmt->execute(array($userReviews[$i]['idRestaurant']));
+				$selectedRestaurant = $stmt->fetch();
+				
+				$restaurantId = $selectedRestaurant['idRestaurant'];
+				$restaurantName = $selectedRestaurant['restaurantName'];
+				$restaurantLogo = $selectedRestaurant['logoFileName'];
+				?>
 
+				<article>
+					<h3><?=$restaurantName?></h3>
+					<img src=<?=$restaurantLogo?> alt=<?=$restaurantName?> width="300" height="100">
+					<p>Rating: <?=$userReviews[$i]['rating']?></p>
+					<p><?=$userReviews[$i]['text']?></p>
+				</article>
+			<?php } ?> 
+		</section>
 	</div>
-	<footer>
-		<!--<p>Copyright: Restaurants 2016</p>-->
-	</footer>
 </body>
 </html>

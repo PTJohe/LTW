@@ -1,0 +1,4 @@
+RewriteEngine on
+Options +FollowSymlinks 
+RewriteBase / 
+RewriteRule	^([A-Za-z0-9-]+)/?$ ~up201303962/LTW/Proj/UserProfile.php?username=$1 [L]
