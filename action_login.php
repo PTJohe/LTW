@@ -5,7 +5,7 @@ include_once('database/connection.php');
 include_once('database/get_users.php');
 
 if(userExists($_POST['uname'],$_POST['psw'])){
-  $_SESSION['loggedin'] = true;
+  $_SESSION['username'] = $_POST['uname'];
   echo 'logou';
 }
 else{
