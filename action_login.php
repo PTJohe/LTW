@@ -1,7 +1,7 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 <?php
-session_start();
 
 include_once('database/connection.php');
 include_once('database/get_users.php');

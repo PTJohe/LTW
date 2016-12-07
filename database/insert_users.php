@@ -4,16 +4,16 @@ function insertUser($completeName,$username,$password1,$password2){
 global $dbh;
 
 //Tries to get the username from database, to check if it already exists
-$stmt->prepare('SELECT username FROM users WHERE username = ?');
+$stmt = $dbh->prepare('SELECT username FROM users WHERE username = ?');
 $stmt->execute(array($username));
 $checkedUsername = $stmt->fetch();
 
 if($password1!=$password2){
-  echo 'passwords are different, try again';
+  return 1; // = 'passwords are different, try again';
 }
-else if($checkedUsername == null || $checkedUsername == "")
+elseif($checkedUsername != null && $checkedUsername != "")
 {
-	echo 'username already exists, please choose another';
+	return 2; //= 'username already exists, please choose another';
 }
 else{
 
@@ -25,7 +25,7 @@ else{
 		
 		$stmt->execute();
 		
-		echo 'login Successful';
+		return 0; //= 'registration Successful';
 }
 
 }

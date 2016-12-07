@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html>
 <?php
 session_start();
-
 ?>
+<!DOCTYPE html>
+<html>
 <head>
     <title>Home</title>
     <meta charset="utf-8">
