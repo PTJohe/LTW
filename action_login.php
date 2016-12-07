@@ -11,5 +11,5 @@ if(userExists($_POST['uname'],$_POST['psw'])){
 else{
   echo 'n logou';
 }
-  // header('Location: HomePage.php');
+   header('Location: HomePage.php');
  ?>

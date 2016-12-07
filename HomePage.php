@@ -2,9 +2,7 @@
 <html>
 <?php
 session_start();
-include_once("database/connection");
-include_once("database/get_users");
-include_once("action_login.php");
+
 ?>
 <head>
     <title>Home</title>
@@ -16,15 +14,16 @@ include_once("action_login.php");
     <section>
         <div id="Login">
           <?php
-            if(isset($_SESSION['username'])&&$_SESSION['loggedin']){
+            if($_SESSION['username']){
            ?>
-           <p class="LogOut"><a href="LogOut.html">LogOut </a></p>
+           <p class="LogOut"><a href="Logout.php">LogOut </a></p>
            <?php
          }
          else{
            ?>
-            <p class="SignIn"><a href="SignIn.html">Sign In</a></p>
-            <p class="SignUp"><a href="SignUp.html">Sign Up</a></p>
+
+            <p class="SignIn"><a href="SignIn.php">Sign In</a></p>
+            <p class="SignUp"><a href="SignUp.php">Sign Up</a></p>
 
           <?php }?>
         </div>
