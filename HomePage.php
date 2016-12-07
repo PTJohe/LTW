@@ -17,6 +17,7 @@ session_start();
             if($_SESSION['username']){
            ?>
            <p class="LogOut"><a href="Logout.php">LogOut </a></p>
+		   <p><?=$_SESSION['username']?></p>
            <?php
          }
          else{
@@ -33,7 +34,7 @@ session_start();
         </header>
     </section>
     <div class="Colecoes">
-        <h2>Curiositys</h2>
+        <h2>Curiosities</h2>
         <img src="topSemana.jpg" alt="Image" style="width:104px;height:58px;">Top of the Week
         <p><img src="./resources/restaurantCur.jpg" alt="Image" style="width:104px;height:58px;">News</p>
     </div>
