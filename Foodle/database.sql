@@ -29,8 +29,8 @@ CREATE TABLE reviews (
 	idUser INTEGER REFERENCES users(idUser) NOT NULL,
 	idRestaurant INTEGER REFERENCES restaurants(idRestaurant) NOT NULL,
 	text TEXT,
-	rating FLOAT
-	creationDate DATE DEFAULT (date('now'))
+	rating FLOAT,
+	creationDate DATE
 );
 INSERT INTO reviews (idReview,idUser,idRestaurant,text,rating) VALUES (1,1,2,'Restaurante bastante bom, mas demasiado caro',4.0);
 INSERT INTO reviews (idReview,idUser,idRestaurant,text,rating) VALUES (3,1,1,'Deveras terrível',1.0);
@@ -45,14 +45,15 @@ CREATE TABLE restaurants (
 	averageRating	FLOAT,
 	description	TEXT,
 	category	NVARCHAR2(15),
-	lastUpdateDate	DATE,
+	creationDate DATE,
+	updateDate DATE,
 	idOwner	INTEGER NOT NULL,
 	FOREIGN KEY(idOwner) REFERENCES users(idUser)
 );
-INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRating,description,category,lastUpdateDate,idOwner) VALUES (1,'Gondola','Rua do Azevinho, 135','223456789',3.0,'A melhor tasca que alguma vez irás experimentar','Tasco',NULL,1);
-INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRating,description,category,lastUpdateDate,idOwner) VALUES (2,'Fork, Knive & Glass','Avenida da Boavista, 2001','22555808',3.5,'Situado numa zona deveras nobre, o Restaurante Boavista é o
-	mais adequado para refeições com classe.','Restaurante',NULL,3);
-INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRating,description,category,lastUpdateDate,idOwner) VALUES (3,'Café Majestic','Rua Santa Catarina 112','222003887',4.0,'Um dos cafés mais tradicionais do Porto e um cartão de visitas da cidade.','Café',NULL,2);
+INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRating,description,category,idOwner) VALUES (1,'Gondola','Rua do Azevinho, 135','223456789',3.0,'A melhor tasca que alguma vez irás experimentar','Tasco',1);
+INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRating,description,category,idOwner) VALUES (2,'Fork, Knive & Glass','Avenida da Boavista, 2001','22555808',3.5,'Situado numa zona deveras nobre, o Restaurante Boavista é o
+	mais adequado para refeições com classe.','Restaurante',3);
+INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRating,description,category,idOwner) VALUES (3,'Café Majestic','Rua Santa Catarina 112','222003887',4.0,'Um dos cafés mais tradicionais do Porto e um cartão de visitas da cidade.','Café',2);
 
 
 CREATE TABLE responses (
@@ -60,7 +61,7 @@ CREATE TABLE responses (
 	text TEXT,
 	idReview INTEGER REFERENCES reviews(idReview) NOT NULL,
 	idUser INTEGER REFERENCES users(idUser) NOT NULL,
-	creationDate DATE DEFAULT (date('now'))
+	creationDate DATE
 );
 INSERT INTO responses (idResponse,text,idReview,idUser) VALUES (1,'Em quais pratos acha que o custo esta demasiado caro?',1,3);
 INSERT INTO responses (idResponse,text,idReview,idUser) VALUES (2,'Em todos biatch',1,1);
@@ -68,11 +69,50 @@ INSERT INTO responses (idResponse,text,idReview,idUser) VALUES (3,'Ah, pois comi
 
 CREATE TABLE photos (
 	idPhoto	INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
-	idRestaurant INTEGER REFERENCES restaurants(idRestaurant) NOT NULL,
-	idUser	INTEGER REFERENCES users(idUser) NOT NULL,
+	idRestaurant INTEGER REFERENCES restaurants(idRestaurant),
+	idUser	INTEGER REFERENCES users(idUser),
 	uploadDate DATE
 );
 INSERT INTO photos (idPhoto, idRestaurant, idUser, uploadDate) VALUES (1,3,3,'2016-12-01');
+
+
+-- ######## TRIGGERS TO UPDATE DATES #########
+
+CREATE TRIGGER createDateReview AFTER INSERT ON reviews
+FOR EACH ROW
+BEGIN
+	UPDATE reviews SET creationDate = CURRENT_TIMESTAMP
+	WHERE reviews.idReview = NEW.idReview;
+END;
+
+CREATE TRIGGER createDateRestaurant AFTER INSERT ON restaurants
+FOR EACH ROW
+BEGIN
+	UPDATE restaurants SET creationDate = CURRENT_TIMESTAMP
+	WHERE restaurants.idRestaurant = NEW.idRestaurant;
+END;
+
+CREATE TRIGGER createDateResponse AFTER INSERT ON responses --TODO Also change the lastupdateDate on Reviews
+FOR EACH ROW
+BEGIN
+	UPDATE responses SET creationDate = CURRENT_TIMESTAMP
+	WHERE responses.idResponse = NEW.idResponse;
+END;
+
+CREATE TRIGGER createDatePhoto AFTER INSERT ON photos
+FOR EACH ROW
+BEGIN
+	UPDATE photos SET uploadDate = CURRENT_TIMESTAMP
+	WHERE photos.idPhoto = NEW.idPhoto;
+END;
+
+CREATE TRIGGER updateDateRestaurant AFTER UPDATE ON restaurants
+FOR EACH ROW
+BEGIN
+	UPDATE restaurants SET updateDate = CURRENT_TIMESTAMP
+	WHERE idRestaurant = NEW.idRestaurant;
+END;
+
 
 -- ######## TRIGGERS TO UPDATE AVERAGE RESTAURANT RATING ########
 CREATE TRIGGER updateAverageinsert AFTER INSERT ON reviews
@@ -113,3 +153,7 @@ BEGIN
 	DELETE FROM restaurants
 	WHERE restaurants.idOwner = OLD.idUser;
 END;
+
+INSERT INTO reviews (idUser,idRestaurant,text,rating) VALUES (1,2,'Teste data 1',5.0);
+INSERT INTO restaurants (restaurantName,address,contact,averageRating,description,category,idOwner) VALUES ('Café Doido','Rua Nao Interessa','222003887',4.0,'Um dos cafés mais tradicionais do Porto e um cartão de visitas da cidade.','Café',2);
+
