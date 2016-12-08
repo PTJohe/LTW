@@ -6,7 +6,8 @@ session_start();
 <head>
     <title>Home</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="HomePage.css">
+    <link rel="stylesheet">
+    <!-- href="HomePage.css"> -->
 </head>
 
 <body>
@@ -16,8 +17,7 @@ session_start();
             if($_SESSION['username']){
            ?>
            <p class="LogOut"><a href="Logout.php">LogOut </a></p>
-		   <p><?=$_SESSION['username']?></p>
-           <?php
+<a href="profile/<?php echo $_SESSION['username'];?>"><?=$_SESSION['username']?></a>           <?php
          }
          else{
            ?>
@@ -29,7 +29,11 @@ session_start();
         </div>
         <header id="header">
             <h1>RestaurantRating</h1>
+            <form  class="form-search" role = "form"
+            action = "Restaurant_Search.php" method="post">
             <p class="Search"><input type="text" name="search" placeholder="Search Restaurants by name, location,food,menu"></p>
+            <button type="submit" name="searchBtn">Search</button>
+          </form>
         </header>
     </section>
     <div class="Colecoes">
