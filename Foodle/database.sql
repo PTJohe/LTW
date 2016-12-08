@@ -30,17 +30,18 @@ CREATE TABLE reviews (
 	idRestaurant INTEGER REFERENCES restaurants(idRestaurant) NOT NULL,
 	text TEXT,
 	rating FLOAT
-	);
+	creationDate DATE DEFAULT (date('now'))
+);
 INSERT INTO reviews (idReview,idUser,idRestaurant,text,rating) VALUES (1,1,2,'Restaurante bastante bom, mas demasiado caro',4.0);
 INSERT INTO reviews (idReview,idUser,idRestaurant,text,rating) VALUES (3,1,1,'Deveras terrível',1.0);
 INSERT INTO reviews (idReview,idUser,idRestaurant,text,rating) VALUES (4,1,1,'Muito bonitinho',5.0);
 INSERT INTO reviews (idReview,idUser,idRestaurant,text,rating) VALUES (5,1,2,'Oi, tudo bem?',3.0);
 
 CREATE TABLE restaurants (
-	idRestaurant	INTEGER PRIMARY KEY AUTOINCREMENT,
+	idRestaurant INTEGER PRIMARY KEY AUTOINCREMENT,
 	restaurantName	NVARCHAR2(30) UNIQUE,
 	address	NVARCHAR2(70),
-	contact	INTEGER,
+	contact	TEXT,
 	averageRating	FLOAT,
 	description	TEXT,
 	category	NVARCHAR2(15),
@@ -48,29 +49,30 @@ CREATE TABLE restaurants (
 	idOwner	INTEGER NOT NULL,
 	FOREIGN KEY(idOwner) REFERENCES users(idUser)
 );
-INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRating,description,category,lastUpdateDate,idOwner) VALUES (1,'Gondola','Rua do Azevinho, 135',223456789,3.0,'A melhor tasca que alguma vez irás experimentar','Tasco',NULL,1);
-INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRating,description,category,lastUpdateDate,idOwner) VALUES (2,'Fork, Knive & Glass','Avenida da Boavista, 2001',22555808,3.5,'Situado numa zona deveras nobre, o Restaurante Boavista é o
+INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRating,description,category,lastUpdateDate,idOwner) VALUES (1,'Gondola','Rua do Azevinho, 135','223456789',3.0,'A melhor tasca que alguma vez irás experimentar','Tasco',NULL,1);
+INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRating,description,category,lastUpdateDate,idOwner) VALUES (2,'Fork, Knive & Glass','Avenida da Boavista, 2001','22555808',3.5,'Situado numa zona deveras nobre, o Restaurante Boavista é o
 	mais adequado para refeições com classe.','Restaurante',NULL,3);
-INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRating,description,category,lastUpdateDate,idOwner) VALUES (3,'Café Majestic','Rua Santa Catarina 112',222003887,4.0,'Um dos cafés mais tradicionais do Porto e um cartão de visitas da cidade.','Café',NULL,2);
+INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRating,description,category,lastUpdateDate,idOwner) VALUES (3,'Café Majestic','Rua Santa Catarina 112','222003887',4.0,'Um dos cafés mais tradicionais do Porto e um cartão de visitas da cidade.','Café',NULL,2);
 
 
 CREATE TABLE responses (
 	idResponse INTEGER PRIMARY KEY AUTOINCREMENT,
 	text TEXT,
 	idReview INTEGER REFERENCES reviews(idReview) NOT NULL,
-	idUser INTEGER REFERENCES users(idUser) NOT NULL
-	);
+	idUser INTEGER REFERENCES users(idUser) NOT NULL,
+	creationDate DATE DEFAULT (date('now'))
+);
 INSERT INTO responses (idResponse,text,idReview,idUser) VALUES (1,'Em quais pratos acha que o custo esta demasiado caro?',1,3);
 INSERT INTO responses (idResponse,text,idReview,idUser) VALUES (2,'Em todos biatch',1,1);
 INSERT INTO responses (idResponse,text,idReview,idUser) VALUES (3,'Ah, pois comigo não brincas',1,1);
 
 CREATE TABLE photos (
 	idPhoto	INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
-	idRestaurant	INTEGER,
-	idUser	INTEGER,
-	uploadDate	INTEGER
+	idRestaurant INTEGER REFERENCES restaurants(idRestaurant) NOT NULL,
+	idUser	INTEGER REFERENCES users(idUser) NOT NULL,
+	uploadDate DATE
 );
-
+INSERT INTO photos (idPhoto, idRestaurant, idUser, uploadDate) VALUES (1,3,3,'2016-12-01');
 
 -- ######## TRIGGERS TO UPDATE AVERAGE RESTAURANT RATING ########
 CREATE TRIGGER updateAverageinsert AFTER INSERT ON reviews
