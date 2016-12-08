@@ -12,7 +12,7 @@
 		$selectedRestaurant = $stmt->fetch();	
 		if($selectedRestaurant == null) //In case of a non-existing name
 		{
-			header('Location: ErrorRestaurantPage.php');
+			header('Location: Error404.html');
 		}
 		
 	//Gets the reviews
