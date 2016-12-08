@@ -32,10 +32,7 @@ CREATE TABLE reviews (
 	rating FLOAT,
 	creationDate DATE
 );
-INSERT INTO reviews (idReview,idUser,idRestaurant,text,rating) VALUES (1,1,2,'Restaurante bastante bom, mas demasiado caro',4.0);
-INSERT INTO reviews (idReview,idUser,idRestaurant,text,rating) VALUES (3,1,1,'Deveras terrível',1.0);
-INSERT INTO reviews (idReview,idUser,idRestaurant,text,rating) VALUES (4,1,1,'Muito bonitinho',5.0);
-INSERT INTO reviews (idReview,idUser,idRestaurant,text,rating) VALUES (5,1,2,'Oi, tudo bem?',3.0);
+
 
 CREATE TABLE restaurants (
 	idRestaurant INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -50,10 +47,6 @@ CREATE TABLE restaurants (
 	idOwner	INTEGER NOT NULL,
 	FOREIGN KEY(idOwner) REFERENCES users(idUser)
 );
-INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRating,description,category,idOwner) VALUES (1,'Gondola','Rua do Azevinho, 135','223456789',3.0,'A melhor tasca que alguma vez irás experimentar','Tasco',1);
-INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRating,description,category,idOwner) VALUES (2,'Fork, Knive & Glass','Avenida da Boavista, 2001','22555808',3.5,'Situado numa zona deveras nobre, o Restaurante Boavista é o
-	mais adequado para refeições com classe.','Restaurante',3);
-INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRating,description,category,idOwner) VALUES (3,'Café Majestic','Rua Santa Catarina 112','222003887',4.0,'Um dos cafés mais tradicionais do Porto e um cartão de visitas da cidade.','Café',2);
 
 
 CREATE TABLE responses (
@@ -63,9 +56,6 @@ CREATE TABLE responses (
 	idUser INTEGER REFERENCES users(idUser) NOT NULL,
 	creationDate DATE
 );
-INSERT INTO responses (idResponse,text,idReview,idUser) VALUES (1,'Em quais pratos acha que o custo esta demasiado caro?',1,3);
-INSERT INTO responses (idResponse,text,idReview,idUser) VALUES (2,'Em todos biatch',1,1);
-INSERT INTO responses (idResponse,text,idReview,idUser) VALUES (3,'Ah, pois comigo não brincas',1,1);
 
 CREATE TABLE photos (
 	idPhoto	INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
@@ -73,7 +63,6 @@ CREATE TABLE photos (
 	idUser	INTEGER REFERENCES users(idUser),
 	uploadDate DATE
 );
-INSERT INTO photos (idPhoto, idRestaurant, idUser, uploadDate) VALUES (1,3,3,'2016-12-01');
 
 
 -- ######## TRIGGERS TO UPDATE DATES #########
@@ -154,6 +143,18 @@ BEGIN
 	WHERE restaurants.idOwner = OLD.idUser;
 END;
 
-INSERT INTO reviews (idUser,idRestaurant,text,rating) VALUES (1,2,'Teste data 1',5.0);
-INSERT INTO restaurants (restaurantName,address,contact,averageRating,description,category,idOwner) VALUES ('Café Doido','Rua Nao Interessa','222003887',4.0,'Um dos cafés mais tradicionais do Porto e um cartão de visitas da cidade.','Café',2);
+INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRating,description,category,idOwner) VALUES (1,'Gondola','Rua do Azevinho, 135','223456789',3.0,'A melhor tasca que alguma vez irás experimentar','Tasco',1);
+INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRating,description,category,idOwner) VALUES (2,'Fork, Knive & Glass','Avenida da Boavista, 2001','22555808',3.5,'Situado numa zona deveras nobre, o Restaurante Boavista é o
+	mais adequado para refeições com classe.','Restaurante',3);
+INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRating,description,category,idOwner) VALUES (3,'Café Majestic','Rua Santa Catarina 112','222003887',4.0,'Um dos cafés mais tradicionais do Porto e um cartão de visitas da cidade.','Café',2);
 
+INSERT INTO reviews (idReview,idUser,idRestaurant,text,rating) VALUES (1,1,2,'Restaurante bastante bom, mas demasiado caro',4.0);
+INSERT INTO reviews (idReview,idUser,idRestaurant,text,rating) VALUES (3,1,1,'Deveras terrível',1.0);
+INSERT INTO reviews (idReview,idUser,idRestaurant,text,rating) VALUES (4,1,1,'Muito bonitinho',5.0);
+INSERT INTO reviews (idReview,idUser,idRestaurant,text,rating) VALUES (5,1,2,'Oi, tudo bem?',3.0);
+
+INSERT INTO responses (idResponse,text,idReview,idUser) VALUES (1,'Em quais pratos acha que o custo esta demasiado caro?',1,3);
+INSERT INTO responses (idResponse,text,idReview,idUser) VALUES (2,'Em todos biatch',1,1);
+INSERT INTO responses (idResponse,text,idReview,idUser) VALUES (3,'Ah, pois comigo não brincas',1,1);
+
+INSERT INTO photos (idPhoto, idRestaurant, idUser, uploadDate) VALUES (1,3,3,'2016-12-01');
