@@ -1,5 +1,5 @@
-*{
-font-family: "Arial";
+{
+  font-family: "Arial";
 }
 
 
@@ -26,10 +26,10 @@ font-family: "Arial";
   text-align: center;
 }
 
-section{
-    width: 100%;
-    height: 400px;
-    background-repeat: no-repeat;
-    background-image:url(resources/restaurant.png);
-    background-position: center;
+#SearchBar {
+  width: 100%;
+  height: 400px;
+  background-repeat: no-repeat;
+  background-image: url("resources/restaurant.png");
+  background-position: center;
 }
