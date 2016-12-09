@@ -42,18 +42,20 @@ $userPhoto = getProfilePicturePath($userId);
 		<h1>Edit Profile</h1>
 	</header>
 	<div id="main">
+		<section id="editImage">
+			<form action="upload.php" method="post" enctype="multipart/form-data">
+				Change Profile Picture:<br>
+				<img src=<?=$userPhoto?> alt="Photo" width="200" height="200"><br>
+				<input type="file" name="fileToUpload" id="fileToUpload">
+				<input type="submit" value="Upload Image" name="uploadImage">
+			</form>
+		</section>
 		<section id="editData">
 			<form>
 				Change Name - <?=$userName?>:<br>
 				<input type="text" name="fullname"><br>
 				Change Password:<br>
 				<input type="text" name="password"><br>
-			</form>
-			<form action="upload.php" method="post" enctype="multipart/form-data">
-				Change Profile Picture:<br>
-				<img src=<?=$userPhoto?> alt="Photo" width="200" height="200"><br>
-				<input type="file" name="fileToUpload" id="fileToUpload">
-				<input type="submit" value="Upload Image" name="uploadImage">
 			</form>
 		</section>
 		<section id="confirmChanges">
