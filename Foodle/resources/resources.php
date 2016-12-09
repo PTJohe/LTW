@@ -1,6 +1,12 @@
 <?php
 
-$resourcesPath = "https://gnomo.fe.up.pt/~up201303962/Foodle/resources/";
+include_once '../paths.php';
+
+function getLogo(){
+	global $resourcesPath;
+	$imagePath = $resourcesPath."foodle.png";
+	return $imagePath;
+}
 
 function getProfilePicturePath($userId){
     global $resourcesPath;
