@@ -60,12 +60,12 @@ $(document).ready(function()
 			var dataString = 'text=' + responseText + '&username=' + responseUser + '&idReview=' + responseReview;
 			$.ajax({
 			type: "POST",
-			url: "SubmitResponse.php",
+			url: "action_submitResponse.php",
 			data: dataString,
 			cache: false,
 			success: function(result)
 			{
-				if(result == "Invalid user" || result == "Invalid review")
+				if(result == "Invalid User" || result == "Invalid Review" || result == "Text empty")
 				{
 					alert(result);
 				}
