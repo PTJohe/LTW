@@ -17,22 +17,28 @@ $(document).ready(function()
 			var dataString = 'text=' + reviewText + '&rating=' + reviewRating + '&username=' + reviewUser + '&idRestaurant=' + reviewRestaurant;
 			$.ajax({
 			type: "POST",
-			url: "SubmitReview.php",
+			url: "action_submitReview.php",
 			data: dataString,
 			cache: false,
 			success: function(result)
 			{
-				alert(result);
+				if(result == "Text/Rating empty" || result == "Invalid User" || result == "Invalid Restaurant")
+				{
+					alert(result);
+				}
+				else
+				{
+					//Adds the HTML to the page
+					var newReview = $('<div class="review"></div>');
+					newReview.append('<p>Rating: ' + reviewRating + '</p>');
+					newReview.append('<p>Written by '+ result + '</p>');
+					newReview.append('<li>' + reviewText + '</li>');
+					$("#reviews").append(newReview);
+				}
 			}
 			});
 		}
-		
-		//Adds the HTML to the page
-		var newReview = $('<div class="review"></div>');
-		newReview.append('<p>Rating: ' + reviewRating + '</p>');
-		newReview.append('<p>Written by (WORK IN PROGRESS) </p>');
-		newReview.append('<li>' + reviewText + '</li>');
-		$("#reviews").append(newReview);
+
 		return false;
 	});
 	
