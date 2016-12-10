@@ -3,6 +3,9 @@ session_start();
 ?>
 <!DOCTYPE html>
 <html>
+<?php include_once('database/get_restaurants.php');
+			include_once('database/connection.php') ;
+			?>
 <head>
 	<title>Home</title>
 	<meta charset="utf-8">
@@ -27,7 +30,10 @@ session_start();
 	</div>
 	<div id="Colecoes">
 		<h2>Curiosities</h2>
-		<img src="topSemana.jpg" alt="Image" style="width:104px;height:58px;">Top of the Week
+		<img src="topSemana.jpg" alt="Image" style="width:104px;height:58px;">
+		<p>
+			<?php bestRestaurantsLastWeek(); ?>
+		 </p>
 		<p><img src="./resources/restaurantCur.jpg" alt="Image" style="width:104px;height:58px;">News</p>
 	</div>
 </body>

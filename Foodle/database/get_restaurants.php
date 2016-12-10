@@ -15,6 +15,20 @@ $stmt = $dbh->prepare('SELECT * FROM restaurants WHERE restaurantName = ? OR
   }
   else{
     return $result['restaurantName'];
+
   }
 }
+
+
+
+function bestRestaurantsLastWeek(){
+global $dbh;
+  $stmt=$dbh->prepare("SELECT * FROM restaurants WHERE updateDate BETWEEN datetime('now', '-6 days') AND datetime('now', 'localtime')");
+  $stmt->execute();
+  $result=$stmt->fetchAll();
+  return $result['restaurantName'];
+}
+
+
+
  ?>
