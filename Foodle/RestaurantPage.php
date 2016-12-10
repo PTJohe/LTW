@@ -40,7 +40,7 @@ session_start();
 		$selectedRestaurant = $stmt->fetch();	
 		if($selectedRestaurant == null) //In case of a non-existing name
 		{
-			header('Location: Error404.php'); //TODO não se pode simplesmente mostrar ERROR 404 sem explicar a razão de erro.
+			header('Location: Error404.php?info=2');
 		}
 		
 	//Gets the reviews
