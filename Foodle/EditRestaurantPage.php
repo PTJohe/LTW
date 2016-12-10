@@ -4,7 +4,6 @@ session_start();
 <!DOCTYPE html>
 <html>
 	<?php
-	//TODO Maybe put this hunk of code into a separate php file, to include in both edit and restaurant page
 	
 	//Get session parameters
 		if(isset($_SESSION['username']))
@@ -18,11 +17,11 @@ session_start();
 			$username = "anonymous";
 		}
 	//Opens database
-	
-	//FOR DEBUGGING
+	/*
+	FOR DEBUGGING
 		$loggedUser = true;
-		$username = "PTJohe";
-	
+		$username = "Maxzelik";
+	*/
 		$dbh = new PDO('sqlite:database.db');
 		$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //To enable error handling
 		
@@ -32,7 +31,6 @@ session_start();
 			$_SESSION['restaurantName'] = $_POST['restaurantName'];
 		}
 		$inputRestaurantName = $_SESSION['restaurantName'];
-		print_r($inputRestaurantName);
 		
 	//Gets the restaurant
 		$stmt = $dbh->prepare('SELECT * FROM restaurants WHERE restaurantName = ?');
@@ -73,18 +71,12 @@ session_start();
 	<body>
 		<div>
 			<img src=<?=$restaurantLogo?> alt=<?=$restaurantName?> width="300" height="100">
+			<!-- TODO Upload Logo -->
 		</div>
 		<div>
 			<h2><?=$restaurantName?></h2>
 			
-			<?php
-			//If user is the owner of the page, he can choose to edit the page
-			if($username == $restaurantOwner && $loggedUser == true)
-			{?>
-				<form action="EditRestaurantPage.php" method="post">
-					<input id="editRestaurantPage" type="submit" value="Edit">
-				</form>
-			<?php } ?>
+			<!-- TODO Confirm changes -->
 			
 			<p>Address: <?=$restaurantAddress?></p>
 			<p>Number: <?=$restaurantContact?></p>
@@ -145,7 +137,7 @@ session_start();
 				<?php } ?>
 			</ul>
 			<?php
-			if($loggedUser == true && $username != $restaurantOwner) //Anonymous users or Owner can't review
+			if($loggedUser == true) //Anonymous users can't review
 			{ ?>
 			<form>
 				Add a Review:<br>
