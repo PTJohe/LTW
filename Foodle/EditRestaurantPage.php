@@ -5,6 +5,8 @@ session_start();
 <html>
 	<?php
 	
+	include 'paths.php';
+	include 'nav.php';
 	//Get session parameters
 		if(isset($_SESSION['username']))
 		{
@@ -60,22 +62,26 @@ session_start();
 		$restaurantAverageRating = $selectedRestaurant['averageRating'];
 		$restaurantDescription = $selectedRestaurant['description'];
 		$restaurantCategory = $selectedRestaurant['category'];
+		$restaurantCreationDate = $selectedRestaurant['creationDate'];
 	?>
 	<head>
 		<meta charset="UTF-8">
 		<title><?=$restaurantName?></title>
 		<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 		<script src="writeComment.js"></script>
+		<script src="editRestaurantInfo.js"></script>
 	</head>
 	
 	<body>
 		<div>
-			<img src=<?=$restaurantLogo?> alt=<?=$restaurantName?> width="300" height="100">
+			<img src="<?=$resourcesPath?>/restaurantLogos/<?=$restaurantId?>" alt=<?=$restaurantName?> width="300" height="100">
 			<!-- TODO Upload Logo -->
 		</div>
 		<div>
-			<h2><?=$restaurantName?></h2>
-			
+			<div class="editable" id="restaurantname">
+				<h2><?=$restaurantName?></h2>
+				<input type="image" src="<?=$resourcesPath?>/editIcon.png" alt="Edit" width="25" height="25">
+			</div>
 			<!-- TODO Confirm changes -->
 			
 			<p>Address: <?=$restaurantAddress?></p>
@@ -83,6 +89,7 @@ session_start();
 			<p>Rating: <?=$restaurantAverageRating?> / 5 </p>
 			<p><?=$restaurantDescription?></p>
 			<p>Category: <?=$restaurantCategory?></p>
+			<p>Creation Date: <?=$restaurantCreationDate?></p>
 		</div>
 		<br>
 		<div>
@@ -121,33 +128,11 @@ session_start();
 								</div>
 								<?php } ?>
 							</ul>
-							
-							<?php
-							if($loggedUser == true) //Anonymous users can't comment
-							{ ?>
-							<form id="form<?=$reviewId?>" >
-									<input id="newResponseText" type="text" placeholder="Write your response..."><br>
-									<input id="newResponseUser" type="hidden" value=<?=$username?>><br>
-									<input id="newResponseReview" type="hidden" value=<?=$reviewId?> >
-									<input class="submitResponse" type="button" value="Send">
-							</form>
-							<?php } ?>
 						</li>
 					</div>
 				<?php } ?>
 			</ul>
-			<?php
-			if($loggedUser == true) //Anonymous users can't review
-			{ ?>
-			<form>
-				Add a Review:<br>
-				<input id="newReviewText" type="text" placeholder="Write your review..."><br>
-				<input id="newReviewRating" type="number" min="0" max="5" placeholder="Rate"><br>
-				<input id="newReviewUser" type="hidden" value=<?=$username?>><br>
-				<input id="newReviewRestaurant" type="hidden" value=<?=$restaurantId?> >
-				<input id="submitReview" type="button" value="Send">
-			</form>
-			<?php } ?>
 		</div>
+		<div>Icons made by <a href="http://www.flaticon.com/authors/madebyoliver" title="Madebyoliver">Madebyoliver</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 	</body>
 </html>

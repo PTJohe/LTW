@@ -5,7 +5,8 @@ session_start();
 <html>
 	<?php
 	//TODO Maybe put this hunk of code into a separate php file, to include in both edit and restaurant page
-	
+	include 'paths.php';
+
 	//Get session parameters
 		if(isset($_SESSION['username']))
 		{
@@ -22,6 +23,8 @@ session_start();
 	//FOR DEBUGGING
 		$loggedUser = true;
 		$username = "PTJohe";
+		$_SESSION['username'] = $username;
+		include 'nav.php';
 	
 		$dbh = new PDO('sqlite:database.db');
 		$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //To enable error handling
@@ -32,7 +35,6 @@ session_start();
 			$_SESSION['restaurantName'] = $_POST['restaurantName'];
 		}
 		$inputRestaurantName = $_SESSION['restaurantName'];
-		print_r($inputRestaurantName);
 		
 	//Gets the restaurant
 		$stmt = $dbh->prepare('SELECT * FROM restaurants WHERE restaurantName = ?');
@@ -62,6 +64,7 @@ session_start();
 		$restaurantAverageRating = $selectedRestaurant['averageRating'];
 		$restaurantDescription = $selectedRestaurant['description'];
 		$restaurantCategory = $selectedRestaurant['category'];
+		$restaurantCreationDate = $selectedRestaurant['creationDate'];
 	?>
 	<head>
 		<meta charset="UTF-8">
@@ -72,7 +75,7 @@ session_start();
 	
 	<body>
 		<div>
-			<img src=<?=$restaurantLogo?> alt=<?=$restaurantName?> width="300" height="100">
+			<img src="<?=$resourcesPath?>/restaurantLogos/<?=$restaurantId?>"  alt=<?=$restaurantName?> width="300" height="100">
 		</div>
 		<div>
 			<h2><?=$restaurantName?></h2>
@@ -91,6 +94,7 @@ session_start();
 			<p>Rating: <?=$restaurantAverageRating?> / 5 </p>
 			<p><?=$restaurantDescription?></p>
 			<p>Category: <?=$restaurantCategory?></p>
+			<p>Creation Date: <?=$restaurantCreationDate?></p>
 		</div>
 		<br>
 		<div>
