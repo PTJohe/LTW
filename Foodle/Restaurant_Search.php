@@ -16,25 +16,15 @@ session_start();
 <body>
     <section>
         <div id="Login">
-          <?php
-            if($_SESSION['username']){
-           ?>
-           <p class="LogOut"><a href="Logout.php">LogOut </a></p>
-		   <p><?=$_SESSION['username']?></p>
-           <?php
-         }
-         else{
-           ?>
 
-            <p class="SignIn"><a href="SignIn.php">Sign In</a></p>
-            <p class="SignUp"><a href="SignUp.php">Sign Up</a></p>
+           <?php include 'nav.php';
+           //$_SESSION['restaurantName']=$_POST['search'];
+          $_SESSION['restaurantName']=$_POST['search'];?>
 
-          <?php }?>
         </div>
         <header id="header">
-
             <h1>Restaurants -
-              <?php $result=restaurantExist($_POST['search']);?>
+              <?php include('search.php'); ?>
             </h1>
         </header>
     </section>

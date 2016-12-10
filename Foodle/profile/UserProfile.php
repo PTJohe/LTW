@@ -13,7 +13,7 @@ $stmt = $dbh->prepare('SELECT * FROM users WHERE username = ?');
 $stmt->execute(array($inputUsername));
 $selectedUser = $stmt->fetch();	
 if($selectedUser == null){ //In case of a non-existing name
-	header('Location: ../Error404.php');
+	header('Location: ../Error404.php?page=1');
 }
 
 //Gets the reviews
