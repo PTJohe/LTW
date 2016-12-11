@@ -10,6 +10,19 @@ session_start();
 	<title>Home</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="HomePage.css">
+	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script>
+function getStates(value){
+	if(value.length==0){
+		$("#results").html("");
+		return;
+	}
+	$.post("livesearch.php",{partialState:value},function(data){
+	$("#results").html(data);
+});
+}
+
+</script>
 </head>
 
 <body>
@@ -23,8 +36,11 @@ session_start();
 	<div id="SearchBar">
 		<form  class="form-search" role = "form" action = "Restaurant_Search.php" method="post">
 			<p class="Search">
-				<input type="text" name="search" placeholder="Search Restaurants by name, location,food,menu">
+				<input type="text" name="search" placeholder="Search Restaurants by name, location,food,menu" onkeyup="getStates(this.value)">
 				<button type="submit" name="searchBtn">Search</button>
+				<div id="results">
+				</div>
+				<p><a href=<?php echo $navPath."restaurant/"?>></a></p>
 			</p>
 		</form>
 	</div>

@@ -18,13 +18,18 @@ session_start();
         <div id="Login">
 
            <?php include 'nav.php';
-          $_SESSION['restaurantName']=$_POST['search'];?>
+           if(restaurantExist($_POST['search'])!=false){
+             $_SESSION['restaurantName']=$_POST['search'];
+           ?>
 
         </div>
         <header id="header">
             <h1>Restaurants -
-              <?php include('search.php'); ?>
+              <?php include('search.php'); }?>
             </h1>
+            <form action="HomePage.php">
+              <button type="submit" name="back">Go Back</button>
+            </form>
         </header>
     </section>
 </body>
