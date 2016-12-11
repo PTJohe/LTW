@@ -1,28 +1,29 @@
 <?php
 session_start();
+
+include_once('database/get_restaurants.php');
+include_once('database/connection.php') ;
+
 ?>
+
 <!DOCTYPE html>
-<html>
-<?php include_once('database/get_restaurants.php');
-			include_once('database/connection.php') ;
-			?>
+<html lang="en">
 <head>
 	<title>Home</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="HomePage.css">
-	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script>
-function getStates(value){
-	if(value.length==0){
-		$("#results").html("");
-		return;
-	}
-	$.post("livesearch.php",{partialState:value},function(data){
-	$("#results").html(data);
-});
-}
-
-</script>
+	<script src="js/lib/jquery-1.11.3.min.js"></script>
+	<script>
+		function getStates(value){
+			if(value.length==0){
+				$("#results").html("");
+				return;
+			}
+			$.post("livesearch.php",{partialState:value},function(data){
+				$("#results").html(data);
+			});
+		}
+	</script>
 </head>
 
 <body>
@@ -48,8 +49,8 @@ function getStates(value){
 		<h2>Curiosities</h2>
 		<h3>Top of the Week</h3>
 		<img src="topSemana.jpg" alt="Image" style="width:104px;height:58px;">
-			<?php include 'topWeek.php' ?>
-			<h3> New Restaurants </h3>
+		<?php include 'topWeek.php' ?>
+		<h3> New Restaurants </h3>
 		<p><img src="./resources/restaurantCur.jpg" alt="Image" style="width:104px;height:58px;"></p>
 		<?php include 'news.php' ?>
 	</div>
