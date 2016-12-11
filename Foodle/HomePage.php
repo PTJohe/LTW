@@ -46,10 +46,12 @@ function getStates(value){
 	</div>
 	<div id="Colecoes">
 		<h2>Curiosities</h2>
-		<img src="topSemana.jpg" alt="Image" style="width:104px;height:58px;">
 		<h3>Top of the Week</h3>
+		<img src="topSemana.jpg" alt="Image" style="width:104px;height:58px;">
 			<?php include 'topWeek.php' ?>
-		<p><img src="./resources/restaurantCur.jpg" alt="Image" style="width:104px;height:58px;">News</p>
+			<h3> New Restaurants </h3>
+		<p><img src="./resources/restaurantCur.jpg" alt="Image" style="width:104px;height:58px;"></p>
+		<?php include 'news.php' ?>
 	</div>
 </body>
 

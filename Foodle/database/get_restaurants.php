@@ -15,7 +15,6 @@ $stmt = $dbh->prepare('SELECT * FROM restaurants WHERE restaurantName = ? OR
   }
   else{
     return $result['restaurantName'];
-
   }
 }
 
@@ -31,6 +30,18 @@ global $dbh;
      $array[]=$row['restaurantName'];
    }
   return $array;
+}
+
+function newRestaurants(){
+  global $dbh;
+    $stmt=$dbh->prepare("SELECT * FROM restaurants ORDER BY creationDate DESC LIMIT 5");
+    $stmt->execute();
+    $result=$stmt->fetchAll();
+    $array=array();
+     foreach($result as $row){
+       $array[]=$row['restaurantName'];
+     }
+    return $array;
 }
 
 
