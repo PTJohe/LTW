@@ -44,9 +44,6 @@ $maxLatestPhotos = 2;
 <body>
 	<header>
 		<?php include '../header.php' ?>
-		<nav>
-			<?php include '../nav.php' ?>
-		</nav>
 	</header>
 	<h1><?=$inputUsername?></h1>
 	<div id="main">

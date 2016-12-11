@@ -10,7 +10,7 @@ for($i=0;$i<count($arrayNews);$i++){
 
 <p><a href=
   <?php
-  echo $navPath."restaurant/" . $arrayNews[$i];
-?>><?php echo $arrayNews[$i]; }?>
+  echo $navPath."restaurant/" . $arrayNews[$i][0];
+?>><?php echo $arrayNews[$i][1]; }?>
 </a>
 </p>

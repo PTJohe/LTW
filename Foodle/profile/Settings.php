@@ -43,9 +43,7 @@ $userPhoto = getProfilePicturePath($userId);
 <body>
 	<header>
 		<?php include '../header.php' ?>
-		<nav>
-			<?php include '../nav.php' ?>
-		</nav>
+		
 		<h1>Edit Profile</h1>
 	</header>
 

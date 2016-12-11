@@ -10,7 +10,7 @@ for($i=0;$i<count($array);$i++){
 
 <p><a href=
   <?php
-  echo $navPath."restaurant/" . $array[$i];
-?>><?php echo $array[$i]; }?>
+  echo $navPath."restaurant/" . $array[$i][0];
+?>><?php echo $array[$i][1]; }?>
 </a>
 </p>
