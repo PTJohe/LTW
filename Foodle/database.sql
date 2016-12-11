@@ -158,3 +158,4 @@ INSERT INTO responses (idResponse,text,idReview,idUser) VALUES (2,'Em todos biat
 INSERT INTO responses (idResponse,text,idReview,idUser) VALUES (3,'Ah, pois comigo não brincas',1,1);
 
 INSERT INTO photos (idPhoto, idRestaurant, idUser, uploadDate) VALUES (1,3,3,'2016-12-01');
+INSERT INTO photos (idPhoto, idRestaurant, idUser, uploadDate) VALUES (2,3,3,'2016-12-02');

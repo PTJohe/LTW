@@ -6,7 +6,7 @@ $(document).ready(function()
 		$("#resultImageProfile").html('<img src="../resources/loading.gif" alt="" />');
 		$('#MyImageProfileUploadForm').ajaxForm(
 		{ // AJAX form plugin to upload a single image
-			url: 'uploadImage.php', // Call this file to update database and send back the correct new image and URL
+			url: 'uploadFile.php', // Call this file to update database and send back the correct new image and URL
 			dataType: 'json', // JSON farmat
 			success: function(data){
 				$('#resultImageProfile').html(data.text); // We display text in the div resultImageProfile tank

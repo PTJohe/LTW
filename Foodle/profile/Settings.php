@@ -37,7 +37,7 @@ $userPhoto = getProfilePicturePath($userId);
 
 	<script src="../js/lib/jquery-1.11.3.min.js"></script>
 	<script src="../js/lib/jquery.form.js"></script>
-	<script src="../js/upload.js"></script>
+	<script src="../js/uploadFile.js"></script>
 
 </head>
 <body>

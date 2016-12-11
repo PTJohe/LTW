@@ -84,7 +84,7 @@ $maxLatestPhotos = 2;
 					</article>
 					<?php 
 				} ?>
-				<a href="allReviews.php">View All (<?=count($userReviews)?>)</a> 
+				<a href="<?php echo $inputUsername ?>/allReviews/1">View All (<?=count($userReviews)?>)</a> 
 				<?php 
 			} ?>
 		</section>
@@ -117,7 +117,7 @@ $maxLatestPhotos = 2;
 				</article>
 				<?php 
 			} ?>
-			<a href="allPhotos.php">View All (<?=count($userSubmittedPhotos)?>)</a> 
+			<a href="<?php echo $inputUsername ?>/allPhotos/1">View All (<?=count($userSubmittedPhotos)?>)</a> 
 			<?php 
 		} ?>
 	</section>
