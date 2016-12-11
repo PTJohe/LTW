@@ -74,13 +74,15 @@ session_start();
 	
 	<body>
 		<div>
-			<img src="<?=$resourcesPath?>/restaurantLogos/<?=$restaurantId?>" alt=<?=$restaurantName?> width="300" height="100">
+			<img src="<?=$resourcesPath?>restaurantLogos/<?=$restaurantId?>" alt=<?=$restaurantName?> width="300" height="100">
 			<!-- TODO Upload Logo -->
 		</div>
 		<div>
 			<div class="editable" id="restaurantname">
 				<h2><?=$restaurantName?></h2>
-				<input type="image" src="<?=$resourcesPath?>/editIcon.png" alt="Edit" width="25" height="25">
+				<input class="editButton" type="image" src="<?=$resourcesPath?>editIcon.png" alt="Edit" width="25" height="25">
+				<input class="checkButton" type="hidden" src="<?=$resourcesPath?>checkEditIcon.png" alt="Check" width="25" height="25">
+				<input class="cancelButton" type="hidden" src="<?=$resourcesPath?>cancelEditIcon.png" alt="Cancel" width="25" height="25">
 			</div>
 			<!-- TODO Confirm changes -->
 			
@@ -133,6 +135,8 @@ session_start();
 				<?php } ?>
 			</ul>
 		</div>
-		<div>Icons made by <a href="http://www.flaticon.com/authors/madebyoliver" title="Madebyoliver">Madebyoliver</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+		<div>Icons made by <a href="http://www.flaticon.com/authors/madebyoliver" title="Madebyoliver">Madebyoliver</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+		<a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+		</div>
 	</body>
 </html>
