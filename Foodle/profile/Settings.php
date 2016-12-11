@@ -27,11 +27,18 @@ $userPassword = $selectedUser['password'];
 $userPhoto = getProfilePicturePath($userId);
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<title>Edit Profile</title>
 	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<script src="../js/lib/jquery-1.11.3.min.js"></script>
+	<script src="../js/lib/jquery.form.js"></script>
+	<script src="../js/upload.js"></script>
+
 </head>
 <body>
 	<header>
@@ -41,19 +48,31 @@ $userPhoto = getProfilePicturePath($userId);
 		</nav>
 		<h1>Edit Profile</h1>
 	</header>
+
 	<div id="main">
 		<section id="editImage">
-			<form action="upload.php" method="post" enctype="multipart/form-data">
-				Change Profile Picture:<br>
-				<img src=<?=$userPhoto?> alt="Photo" width="200" height="200"><br>
-				<input type="file" name="fileToUpload" id="fileToUpload">
-				<input type="submit" value="Upload Image" name="uploadImage">
-			</form>
+			<div id="resultImageProfile">
+				<?php echo '<p class="myImage"><img src="'.$userPhoto.'" width=250 height=250 alt="" /></p>';?>
+			</div>
+			<p>
+				<form method="post" enctype="multipart/form-data" id="MyImageProfileUploadForm" action=""> <!-- Our form with a file type field and a hidden field containing the user ID (here 1) -->
+					<div>
+						<b>Add / change your profile image: </b>
+					</div>
+					<div>
+						<input name="imageProfile" id="imageProfile" type="file" />
+						<input name='userId' type='hidden' value="<?PHP echo $userId; ?>" />
+						<button type="button" name="uploadImage" id="submitImage">Change Image</button>
+					</div>
+				</form>
+			</p>
+			<p>Maximum size : <b>512 Kb</b></p>
+			<p>Formats accepted : <b>jpg</b>, <b>jpeg</b>, <b>png</b></p>
 		</section>
 		<section id="editData">
 			<form>
-				Change Name - <?=$userName?>:<br>
-				<input type="text" name="fullname"><br>
+				Change Name:<br>
+				<input type="text" contenteditable="true" value="<?php echo $userName ?>" name="fullname"><br>
 				Change Password:<br>
 				<input type="text" name="password"><br>
 			</form>
@@ -66,6 +85,5 @@ $userPhoto = getProfilePicturePath($userId);
 			</form>
 		</section>
 	</div>
-
 </body>
 </html>

@@ -13,7 +13,7 @@ $stmt = $dbh->prepare('SELECT * FROM users WHERE username = ?');
 $stmt->execute(array($inputUsername));
 $selectedUser = $stmt->fetch();	
 if($selectedUser == null){ //In case of a non-existing name
-	header('Location: ../Error404.php?page=1');
+	header('Location: ../Error404.php?info=1');
 }
 
 //Gets the reviews
@@ -52,7 +52,7 @@ $maxLatestPhotos = 2;
 	<div id="main">
 		<section id="personalData">
 			<h2>Personal Data</h2>
-			<img src=<?=$userPhoto?> alt="Photo" width="200" height="200"><br>
+			<img src=<?=$userPhoto?> alt="Photo" width="250" height="250"><br>
 			<p><?=$userName?></p>
 		</section>
 		<section id="reviews">
