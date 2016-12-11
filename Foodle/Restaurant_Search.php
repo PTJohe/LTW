@@ -18,7 +18,6 @@ session_start();
         <div id="Login">
 
            <?php include 'nav.php';
-           //$_SESSION['restaurantName']=$_POST['search'];
           $_SESSION['restaurantName']=$_POST['search'];?>
 
         </div>

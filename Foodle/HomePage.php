@@ -31,9 +31,8 @@ session_start();
 	<div id="Colecoes">
 		<h2>Curiosities</h2>
 		<img src="topSemana.jpg" alt="Image" style="width:104px;height:58px;">
-		<p>
-			<?php bestRestaurantsLastWeek(); ?>
-		 </p>
+		<h3>Top of the Week</h3>
+			<?php include 'topWeek.php' ?>
 		<p><img src="./resources/restaurantCur.jpg" alt="Image" style="width:104px;height:58px;">News</p>
 	</div>
 </body>
