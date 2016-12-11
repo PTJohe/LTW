@@ -1,0 +1,4 @@
+RewriteEngine on
+Options +FollowSymlinks 
+RewriteBase / 
+RewriteRule	^([A-Za-z0-9-]+)/?$ ~up201404293/Foodle/restaurant/RestaurantPage.php?restaurantId=$1 [QSA,L]

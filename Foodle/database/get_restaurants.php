@@ -18,6 +18,23 @@ $stmt = $dbh->prepare('SELECT * FROM restaurants WHERE restaurantName = ? OR
   }
 }
 
+function getRestaurantName($id){
+
+global $dbh;
+
+$stmt = $dbh->prepare('SELECT * FROM restaurants WHERE idRestaurant = ?');
+  $stmt->execute(array($id));
+
+  $result=$stmt->fetch();
+  if($result==null){
+    echo 'restaurant not found, try again';
+    return false;
+  }
+  else{
+    return $result['restaurantName'];
+  }
+}
+
 
 
 function bestRestaurantsLastWeek(){

@@ -17,7 +17,7 @@ $(document).ready(function()
 			var dataString = 'text=' + reviewText + '&rating=' + reviewRating + '&username=' + reviewUser + '&idRestaurant=' + reviewRestaurant;
 			$.ajax({
 			type: "POST",
-			url: "action_submitReview.php",
+			url: "../action_submitReview.php",
 			data: dataString,
 			cache: false,
 			success: function(result)
@@ -60,7 +60,7 @@ $(document).ready(function()
 			var dataString = 'text=' + responseText + '&username=' + responseUser + '&idReview=' + responseReview;
 			$.ajax({
 			type: "POST",
-			url: "action_submitResponse.php",
+			url: "../action_submitResponse.php",
 			data: dataString,
 			cache: false,
 			success: function(result)

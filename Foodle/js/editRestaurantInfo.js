@@ -21,14 +21,29 @@ $(document).ready(function()
 	
 	$(".checkButton").click(function()
 	{
-		alert("oi");
 		var newEditValue = $(this).siblings(".editText").val();
 		initialEditValue = newEditValue;
-		$(this).siblings(".editText").replaceWith('<h2>' + newEditValue + '</h2>');
+		$(this).siblings(".editText").replaceWith('<h2>' + newEditValue + '</h2>'); //TODO NAO PODE SER ASSIM! NEM TODOS TEEM A TAG H2!
 		$(this).siblings(".editButton").attr('type', 'image');
 		$(this).siblings(".cancelButton").attr('type', 'hidden');
 		$(this).attr('type', 'hidden');
 		
+		return false;
+
+	});
+	
+	$(".cancelButton").click(function()
+	{
+		$(this).siblings(".editText").replaceWith('<h2>' + initialEditValue + '</h2>')
+		$(this).siblings(".editButton").attr('type', 'image');
+		$(this).siblings(".checkButton").attr('type', 'hidden');
+		$(this).attr('type', 'hidden');
+		return false;
+	});
+	
+	//TODO o Botão de done coloca tudo na base de dados
+	$(".doneButton").click(function()
+	{
 		//TODO AJAX CALL TO ALTER THE DATABASE
 		var column = translateIdToColumn($(this).attr('id'));
 		/*
@@ -56,18 +71,8 @@ $(document).ready(function()
 			}
 		}
 		});
-		*/
-		return false;
-
-	});
-	
-	$(".cancelButton").click(function()
-	{
-		alert("damn");
-		$(this).siblings(".editText").replaceWith('<h2>' + initialEditValue + '</h2>')
-		$(this).siblings(".editButton").attr('type', 'image');
-		$(this).siblings(".checkButton").attr('type', 'hidden');
-		$(this).attr('type', 'hidden');
+		*/	
+		
 		return false;
 	});
 });

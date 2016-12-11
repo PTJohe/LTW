@@ -4,9 +4,9 @@ session_start();
 <!DOCTYPE html>
 <html>
 	<?php
-	//TODO Maybe put this hunk of code into a separate php file, to include in both edit and restaurant page
-	include 'paths.php';
-
+	
+	include '../paths.php';
+	include '../nav.php';
 	//Get session parameters
 		if(isset($_SESSION['username']))
 		{
@@ -19,20 +19,22 @@ session_start();
 			$username = "anonymous";
 		}
 	//Opens database
-	
-	//FOR DEBUGGING
+	/*
+	FOR DEBUGGING
 		$loggedUser = true;
-		$username = "PTJohe";
-		$_SESSION['username'] = $username;
-		include 'nav.php';
-	
-		$dbh = new PDO('sqlite:database.db');
+		$username = "Maxzelik";
+	*/
+		$dbh = new PDO('sqlite:../database.db');
 		$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //To enable error handling
 		
 	//Store restaurantName in session
-		if(isset($_POST['restaurantName']))
+		if(isset($_GET['restaurantId']))
 		{
-			$_SESSION['restaurantName'] = $_POST['restaurantName'];
+			$restaurantName = getRestaurantName($_GET['restaurantId']);
+			if($restaurantName != null || $restaurantName != "")
+			{
+				$_SESSION['restaurantName'] = $restaurantName;
+			}
 		}
 		$inputRestaurantName = $_SESSION['restaurantName'];
 		
@@ -70,24 +72,22 @@ session_start();
 		<meta charset="UTF-8">
 		<title><?=$restaurantName?></title>
 		<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-		<script src="writeComment.js"></script>
+		<script src="../js/editRestaurantInfo.js"></script>
 	</head>
 	
 	<body>
 		<div>
-			<img src="<?=$resourcesPath?>/restaurantLogos/<?=$restaurantId?>"  alt=<?=$restaurantName?> width="300" height="100">
+			<img src="<?=$resourcesPath?>restaurantLogos/<?=$restaurantId?>" alt=<?=$restaurantName?> width="300" height="100">
+			<!-- TODO Upload Logo -->
 		</div>
 		<div>
-			<h2><?=$restaurantName?></h2>
-			
-			<?php
-			//If user is the owner of the page, he can choose to edit the page
-			if($username == $restaurantOwner && $loggedUser == true)
-			{?>
-				<form action="EditRestaurantPage.php" method="post">
-					<input id="editRestaurantPage" type="submit" value="Edit">
-				</form>
-			<?php } ?>
+			<div class="editable" id="restaurantname">
+				<h2><?=$restaurantName?></h2>
+				<input class="editButton" type="image" src="<?=$resourcesPath?>editIcon.png" alt="Edit" width="25" height="25">
+				<input class="checkButton" type="hidden" src="<?=$resourcesPath?>checkEditIcon.png" alt="Check" width="25" height="25">
+				<input class="cancelButton" type="hidden" src="<?=$resourcesPath?>cancelEditIcon.png" alt="Cancel" width="25" height="25">
+			</div>
+			<!-- TODO Confirm changes -->
 			
 			<p>Address: <?=$restaurantAddress?></p>
 			<p>Number: <?=$restaurantContact?></p>
@@ -133,33 +133,13 @@ session_start();
 								</div>
 								<?php } ?>
 							</ul>
-							
-							<?php
-							if($loggedUser == true) //Anonymous users can't comment
-							{ ?>
-							<form id="form<?=$reviewId?>" >
-									<input id="newResponseText" type="text" placeholder="Write your response..."><br>
-									<input id="newResponseUser" type="hidden" value=<?=$username?>><br>
-									<input id="newResponseReview" type="hidden" value=<?=$reviewId?> >
-									<input class="submitResponse" type="button" value="Send">
-							</form>
-							<?php } ?>
 						</li>
 					</div>
 				<?php } ?>
 			</ul>
-			<?php
-			if($loggedUser == true && $username != $restaurantOwner) //Anonymous users or Owner can't review
-			{ ?>
-			<form>
-				Add a Review:<br>
-				<input id="newReviewText" type="text" placeholder="Write your review..."><br>
-				<input id="newReviewRating" type="number" min="0" max="5" placeholder="Rate"><br>
-				<input id="newReviewUser" type="hidden" value=<?=$username?>><br>
-				<input id="newReviewRestaurant" type="hidden" value=<?=$restaurantId?> >
-				<input id="submitReview" type="button" value="Send">
-			</form>
-			<?php } ?>
+		</div>
+		<div>Icons made by <a href="http://www.flaticon.com/authors/madebyoliver" title="Madebyoliver">Madebyoliver</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+		<a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
 		</div>
 	</body>
 </html>
