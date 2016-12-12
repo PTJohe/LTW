@@ -13,6 +13,7 @@ $partialStates=$_POST['partialState'];
 $stmt = $dbh->prepare("SELECT restaurantName,idRestaurant FROM restaurants WHERE restaurantName LIKE '%$partialStates%'");
   $stmt->execute();
 
+
   $result=$stmt->fetchAll();
   foreach($result as $row){
   //echo "<div>".$row['restaurantName']."</div>";

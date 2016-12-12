@@ -7,11 +7,11 @@ include_once 'paths.php';
 include_once 'Utilities.php';
 
 
-$partialStates=$_POST['search'];
+$rating=$_POST['restRating'];
 
 
-$stmt = $dbh->prepare("SELECT restaurantName,idRestaurant FROM restaurants WHERE restaurantName LIKE '%$partialStates%'");
-  $stmt->execute();
+$stmt = $dbh->prepare("SELECT restaurantName,idRestaurant FROM restaurants WHERE restaurantRating >= ?");
+  $stmt->execute($rating);
 
 
   $result=$stmt->fetchAll();
