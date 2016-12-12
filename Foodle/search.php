@@ -10,8 +10,8 @@ include_once 'Utilities.php';
 $partialStates=$_POST['search'];
 
 
-$stmt = $dbh->prepare("SELECT restaurantName,idRestaurant FROM restaurants WHERE restaurantName LIKE '%$partialStates%'");
-  $stmt->execute();
+$stmt = $dbh->prepare("SELECT restaurantName,idRestaurant FROM restaurants WHERE restaurantName LIKE ? ");
+  $stmt->execute(array('%'.$partialStates.'%'));
 
 
   $result=$stmt->fetchAll();

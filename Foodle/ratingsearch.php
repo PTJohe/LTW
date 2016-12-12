@@ -10,8 +10,8 @@ include_once 'Utilities.php';
 $rating=$_POST['restRating'];
 
 
-$stmt = $dbh->prepare("SELECT restaurantName,idRestaurant FROM restaurants WHERE restaurantRating >= ?");
-  $stmt->execute($rating);
+$stmt = $dbh->prepare("SELECT restaurantName,idRestaurant FROM restaurants WHERE averageRating > ?");
+  $stmt->execute(array($rating));
 
 
   $result=$stmt->fetchAll();

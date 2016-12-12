@@ -107,7 +107,7 @@ END;
 CREATE TRIGGER updateAverageinsert AFTER INSERT ON reviews
 FOR EACH ROW
 BEGIN
-	UPDATE restaurants SET averageRating = 
+	UPDATE restaurants SET averageRating =
 		(SELECT AVG(rating) FROM reviews WHERE reviews.idRestaurant = NEW.idRestaurant)
 		WHERE restaurants.idRestaurant = NEW.idRestaurant;
 END;
@@ -115,7 +115,7 @@ END;
 CREATE TRIGGER updateAveragedelete AFTER DELETE ON reviews
 FOR EACH ROW
 BEGIN
-	UPDATE restaurants SET averageRating = 
+	UPDATE restaurants SET averageRating =
 		(SELECT AVG(rating) FROM reviews WHERE reviews.idRestaurant = OLD.idRestaurant)
 		WHERE restaurants.idRestaurant = OLD.idRestaurant;
 END;
@@ -128,14 +128,14 @@ BEGIN
 	DELETE FROM responses
 	WHERE responses.idReview = OLD.idReview;
 END;
-	
+
 CREATE TRIGGER deleteRestaurantAndReviews BEFORE DELETE ON restaurants
 FOR EACH ROW
 BEGIN
 	DELETE FROM reviews
 	WHERE reviews.idRestaurant = OLD.idRestaurant;
 END;
-	
+
 CREATE TRIGGER deleteUserAndRestaurants BEFORE DELETE ON users
 FOR EACH ROW
 BEGIN
@@ -147,6 +147,10 @@ INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRati
 INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRating,description,category,idOwner) VALUES (2,'Fork, Knive & Glass','Avenida da Boavista, 2001','22555808',3.5,'Situado numa zona deveras nobre, o Restaurante Boavista é o
 	mais adequado para refeições com classe.','Restaurante',3);
 INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRating,description,category,idOwner) VALUES (3,'Café Majestic','Rua Santa Catarina 112','222003887',4.0,'Um dos cafés mais tradicionais do Porto e um cartão de visitas da cidade.','Café',2);
+INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRating,description,category,idOwner) VALUES (4,'Café Invictus','Rua Carlos Alberto 332','255123432',3.5,'A melhor francesinha do país','Café',4);
+INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRating,description,category,idOwner) VALUES (5,'O Brouas','Rua de S. Brás 535','255781887',4.5,'Cozinha tradicional de excelente qualidade. Possui uma boa carta de vinhos e sobremesas variadas.','Restaurante ',4);
+INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRating,description,category,idOwner) VALUES (6,'O Sapo','Rua Almeida Garret 182','255298312',3.8,'Um dos restaurantes mais conhecidos na zona, se vens a Penafiel tens de passar no Sapo','Restaurante',5);
+INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRating,description,category,idOwner) VALUES (7,'Pinheiral dos Leitoes','Rua da Senhora do Monte','255781300',2.0,'O melhor leitão da zona e nao só!','Restaurante',6);
 
 INSERT INTO reviews (idReview,idUser,idRestaurant,text,rating) VALUES (1,1,2,'Restaurante bastante bom, mas demasiado caro',4.0);
 INSERT INTO reviews (idReview,idUser,idRestaurant,text,rating) VALUES (3,1,1,'Deveras terrível',1.0);

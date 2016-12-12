@@ -13,6 +13,8 @@ include_once('database/get_restaurants.php');
 	<meta charset="utf-8">
 	<link rel="stylesheet">
 	<script src="js/setSearchRatings.js"></script>
+	<script src="js/lib/jquery-1.11.3.min.js"></script>
+	<script src="js/rangeValues.js"></script>
 </head>
 
 <body>
@@ -25,15 +27,19 @@ include_once('database/get_restaurants.php');
 
 
 		<h1>Restaurants:
-				<?php include 'search.php' ?>
-			<div id=#resultRating></div>
+			<div id=resultRating>	<?php include ('search.php') ?></div>
 		</h1>
 	</div>
 <form>
-	<p>Rating<p>
-		<form action="" method="POST">
-	<input type="range" name="rating" id="rating"  min="0" max="5" step="1"  oninput="getRatings(this.value)" onchange="getRatings(this.value)"/>
-		</form>
+		<form action="" method="post">
+			<p>Rating >
+			<span id="slider_value"></span>
+		</p>
+	<input type="range" id="slider" value="2.5" min="0.0" max="5.0" step="0.1" oninput="getRanges(this.value)" onchange="getRanges(this.values)" />
+
+	<br />
+
+</form>
 
 	<p>Category<p>
 		<div id="categoria">
