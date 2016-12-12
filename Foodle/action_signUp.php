@@ -12,7 +12,7 @@ $resultStringsArray = array('Registration Successful', 'Passwords don\'t match',
 
 $resultString = $resultStringsArray[$result];
 
- ?>
+?>
 <head>
 	<meta charset="utf-8">
 	<title><?=$resultString?></title>
@@ -22,16 +22,16 @@ $resultString = $resultStringsArray[$result];
 	<h2><?=$resultString?></h2>
 	<?php
 	if($result == 0)
-	{ ?>
-		<form action="HomePage.php">
-			<button type="submit" name="back">Go Back</button>
-		</form>
+		{ ?>
+	<form action="HomePage.php">
+		<button type="submit" name="back">Go Back</button>
+	</form>
 	<?php } 
 	else
-	{?>
-		<form action="SignUp.php">
-			<button type="submit" name="back">Try Again</button>
-		</form>
+		{?>
+	<form action="SignUp.php">
+		<button type="submit" name="back">Try Again</button>
+	</form>
 	<?php } ?>
 </body>
 </html>

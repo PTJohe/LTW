@@ -19,14 +19,14 @@ if (in_array($imgType, $acceptedExtension) && $imgSize <= $maxSize && $imgSize !
 	if(move_uploaded_file($imgTmpName,$destFolder.$newThumbImageName)) { // Upload image
 		
 		$text = '<p class="myImage"><img src="../resources/profilePictures/'.$newThumbImageName.'" width="100" alt="" /></p>'; // Send back the image...
-		$text .= '<div class="alert alert-success" role="alert">Image profile uploaded successfully.</div>'; //...and a successfull text
+		$text .= '<div class="alert alert-success" role="alert">Profile picture successfully changed.</div>'; //...and a successfull text
 		
 		$dataBack = array('text' => $text, 'imgURL' => '../resources/profilePictures/'.$newThumbImageName); // Also send back the image URL
 	}
  
 } else {
 	if (!in_array($imgType, $acceptedExtension)) $text = '<div class="alert alert-danger" role="alert">Wrong format! Formats accepted: jpeg, jpg, png.</div>';
-	if ($imgSize > $maxSize) $text = '<div class="alert alert-danger" role="alert">Image too heavy. Maximum 512 Kb.</div>';
+	if ($imgSize > $maxSize) $text = '<div class="alert alert-danger" role="alert">Image too heavy. Maximum size is 512 Kb.</div>';
 	if ($imgSize == "") $text = '<div class="alert alert-danger" role="alert">Please choose an image!</div>';
 	
 	$dataBack = array('text' => $text);

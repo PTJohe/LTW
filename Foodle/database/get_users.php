@@ -1,18 +1,16 @@
 <?php
+
 function userExists($username,$password){
 
-global $dbh;
+	global $dbh;
 
-$stmt = $dbh->prepare('SELECT * FROM users WHERE username = ? AND password = ?');
-  $stmt->execute(array($username,$password));
+	$stmt = $dbh->prepare('SELECT password FROM users WHERE username = ?');
+	$stmt->execute(array($username));
+	$storedPassword = $stmt->fetch();
 
-  $result=$stmt->fetch();
+	$hashedPassword = $storedPassword['password'];
 
-  if($result==null){
-    return false;
-  }
-  else{
-    return true;
-  }
+	return password_verify($password, $hashedPassword);
 }
- ?>
+
+?>

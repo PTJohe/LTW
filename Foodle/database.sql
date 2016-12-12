@@ -12,17 +12,17 @@ DROP TABLE IF EXISTS responses;
 CREATE TABLE users (
 	idUser	INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
 	username	NVARCHAR2(20) UNIQUE,
-	password	NVARCHAR2(20),
+	password	NVARCHAR2(60),
 	name	TEXT
 );
-INSERT INTO users (idUser,username,password,name) VALUES (1,'Maxzelik','21ago96','José Carlos Coutinho');
-INSERT INTO users (idUser,username,password,name) VALUES (2,'Bolota','oporquinhofoiahorta','Francisco Barbosa');
-INSERT INTO users (idUser,username,password,name) VALUES (3,'PTJohe','aquelapass','João Araújo');
-INSERT INTO users (idUser,username,password,name) VALUES (4,'testando','barbosa','Francisco');
-INSERT INTO users (idUser,username,password,name) VALUES (5,'barbosa','barbosa','Francisco');
-INSERT INTO users (idUser,username,password,name) VALUES (6,'Francisco96','lamares12','Francisco Barbosa');
-INSERT INTO users (idUser,username,password,name) VALUES (7,'ZeCarlosCoutinho','21ago96','José Carlos Coutinho');
-INSERT INTO users (idUser,username,password,name) VALUES (8,'Toni','1234','António Maria Silva');
+INSERT INTO users (idUser,username,password,name) VALUES (1,'Maxzelik','$2y$10$TkEw3q91xPQL4SpdbDIZ6OEYszHKhQ.FePlZaTBgrMQiDiZHaXxme','José Carlos Coutinho'); -- password = 21ago96
+INSERT INTO users (idUser,username,password,name) VALUES (2,'Bolota','$2y$10$WwUPZGuVgrU7BFJ8RFgd0.rByVM9.V7p5unPNROnOz3VssPg63jxq','Francisco Barbosa'); -- password = oporquinhofoiahorta
+INSERT INTO users (idUser,username,password,name) VALUES (3,'PTJohe','$2y$10$C3NZyv/uiXYhs/DW1CaT..KXf5HsMqizY1h/cNeH.6LC5pYB0Myb2','João Araújo'); -- password = aquelapass
+INSERT INTO users (idUser,username,password,name) VALUES (4,'testando','$2y$10$9eiDUr7w5oX4HMuTTJlyFeJt4NPIr3g2zv2lLmpdUcFle0F1Fvnem','Francisco'); -- pasword = barbosa
+INSERT INTO users (idUser,username,password,name) VALUES (5,'barbosa','$2y$10$9eiDUr7w5oX4HMuTTJlyFeJt4NPIr3g2zv2lLmpdUcFle0F1Fvnem','Francisco'); -- password = barbosa
+INSERT INTO users (idUser,username,password,name) VALUES (6,'Francisco96','$2y$10$ZBkyM3sV1vjYOsdcxMbJLexKREZLHm85K1CT4u3e57zPMRQcng36i','Francisco Barbosa'); -- password = lamares12
+INSERT INTO users (idUser,username,password,name) VALUES (7,'ZeCarlosCoutinho','$2y$10$TkEw3q91xPQL4SpdbDIZ6OEYszHKhQ.FePlZaTBgrMQiDiZHaXxme','José Carlos Coutinho'); -- password = 21ago96
+INSERT INTO users (idUser,username,password,name) VALUES (8,'Toni','$2y$10$VG03bZm9bQRBhBfHnNqO6Oy9uJB5alnxKNTLJ39HxhwO14U/djbAK','António Maria Silva'); --pasword = 123456
 
 CREATE TABLE reviews (
 	idReview INTEGER PRIMARY KEY AUTOINCREMENT,
