@@ -74,7 +74,7 @@ $userPhoto = getProfilePicturePath($userId);
 			<div id="editNotification"></div>
 			<p>
 				<form method="post"id ="editDetailsForm">
-					<input name='userId' type='hidden' value="<?PHP echo $userId; ?>" />
+					<input name='username' type='hidden' value="<?PHP echo $inputUsername ?>" />
 					Change Name:<br><input type="text" contenteditable="true" value="<?php echo $userName ?>" name="fullname"><br>
 					Change Password:<br><input type="password" name="newPassword"><br>
 					Confirm New Password:<br><input type="password" name="newPasswordConfirm">
