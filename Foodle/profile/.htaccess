@@ -4,3 +4,4 @@ RewriteBase /
 RewriteRule	^([A-Za-z0-9-]+)/?$ ~up201303962/Foodle/profile/UserProfile.php?username=$1 [QSA,L]
 RewriteRule	^([A-Za-z0-9-]+)/allReviews/([0-9-]+)/?$ ~up201303962/Foodle/profile/allReviews.php?username=$1&page=$2 [QSA,L]
 RewriteRule	^([A-Za-z0-9-]+)/allPhotos/([0-9-]+)/?$ ~up201303962/Foodle/profile/allPhotos.php?username=$1&page=$2 [QSA,L]
+RewriteRule	^([A-Za-z0-9-]+)/allRestaurants/([0-9-]+)/?$ ~up201303962/Foodle/profile/allRestaurants.php?username=$1&page=$2 [QSA,L]
