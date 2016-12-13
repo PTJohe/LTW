@@ -3,7 +3,7 @@ function getStates(value){
     $("#results").html("");
     return;
   }
-  $.post("livesearch.php",{partialState:value},function(data){
+  $.post("search/livesearch.php",{partialState:value},function(data){
     $("#results").html(data);
   });
 }

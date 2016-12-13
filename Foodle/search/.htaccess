@@ -1,0 +1,4 @@
+RewriteEngine on
+Options +FollowSymlinks 
+RewriteBase / 
+RewriteRule	^/?$ ~up201303962/Foodle/search/RestaurantSearch.php [L]

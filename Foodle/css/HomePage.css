@@ -30,6 +30,6 @@
   width: 100%;
   height: 400px;
   background-repeat: no-repeat;
-  background-image: url("resources/restaurant.png");
+  background-image: url("../resources/restaurant.png");
   background-position: center;
 }

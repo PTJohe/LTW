@@ -21,7 +21,6 @@ $(document).ready(function()
 
 	$('#submitChanges').click(function() 
 	{ // jQuery click form
-		console.log('1');
 		$('#editDetailsForm').ajaxForm(
 		{ // AJAX form plugin to edit details
 			url: 'editProfile.php', // Call this file to update database and send back a response message

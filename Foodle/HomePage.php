@@ -11,7 +11,7 @@ include_once('database/connection.php') ;
 <head>
 	<title>Home</title>
 	<meta charset="utf-8">
-	<link rel="stylesheet" href="HomePage.css">
+	<link rel="stylesheet" href="css/HomePage.css">
 	<script src="js/lib/jquery-1.11.3.min.js"></script>
 	<script src="js/setLiveSearch.js"></script>
 </head>
@@ -22,13 +22,11 @@ include_once('database/connection.php') ;
 	</header>
 
 	<div id="SearchBar">
-		<form  class="form-search" role = "form" action = "Restaurant_Search.php" method="post">
+		<form  class="form-search" role = "form" action = "search/" method="post">
 			<p class="Search">
 				<input id="liveSearch" type="text" name="search" placeholder="Search Restaurants by name, location,food,menu" onkeyup="getStates(this.value)">
 				<button type="submit" name="searchBtn">Search</button>
-				<div id="results">
-				</div>
-
+				<div id="results"></div>
 			</p>
 		</form>
 	</div>
