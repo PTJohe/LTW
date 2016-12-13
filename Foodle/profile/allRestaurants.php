@@ -64,8 +64,10 @@ if(count($ownedRestaurants != 0) && $inputPage != 1){
 					?>
 
 					<article>
-						<h3><?=$restaurantName?></h3>
-						<img src=<?=$restaurantLogo?> alt=<?=$restaurantName?> width="200" height="100">
+						<a href="../../../restaurant/<?php echo $restaurantId ?>">
+							<h3><?=$restaurantName?></h3>
+							<img src=<?=$restaurantLogo?> alt=<?=$restaurantName?> width="200" height="100">
+						</a>
 						<p>Rating: <?=$restaurantRating?></p>
 						<p>Category: <?=$restaurantCategory?></p>
 					</article>

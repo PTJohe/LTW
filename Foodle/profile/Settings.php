@@ -43,23 +43,23 @@ $userPhoto = getProfilePicturePath($userId);
 <body>
 	<header>
 		<?php include '../header.php' ?>
-		
-		<h1>Edit Profile</h1>
 	</header>
 
-	<div id="main">
+	<h1>Settings</h1>
+	<div id="editProfile">
+		<h2>Edit Profile</h2>
 		<section id="editImage">
-			<h2>Change Image</h2>
+			<h3>Change Image</h3>
 			<div id="currentPhoto">
 				<?php echo '<p class="myImage"><img src="'.$userPhoto.'" width=250 height=250 alt="" /></p>';?>
 			</div>
 			<p>
-				<form method="post" enctype="multipart/form-data" id="editImageForm" action=""> <!-- Our form with a file type field and a hidden field containing the user ID (here 1) -->
+				<form method="post" enctype="multipart/form-data" id="editImageForm">
 					<div>
 						<b>Add / change your profile image: </b>
 					</div>
 					<div>
-						<input name='userId' type='hidden' value="<?PHP echo $userId; ?>" />
+						<input type='hidden' name='userId' value="<?PHP echo $userId; ?>" />
 						<input type="file" name="imageProfile" id="imageProfile"/>
 						<button type="submit" id="submitImage">Change Image</button>
 					</div>
@@ -70,12 +70,12 @@ $userPhoto = getProfilePicturePath($userId);
 		</section>
 
 		<section id="editData">
-			<h2>Change User Details</h2>
+			<h3>Change User Details</h3>
 			<div id="editNotification"></div>
 			<p>
-				<form method="post"id ="editDetailsForm">
-					<input name='username' type='hidden' value="<?PHP echo $inputUsername ?>" />
-					Change Name:<br><input type="text" contenteditable="true" value="<?php echo $userName ?>" name="fullname"><br>
+				<form method="post" id="editDetailsForm">
+					<input type='hidden' name='username' value=<?=$inputUsername?> />
+					Change Name:<br><input type="text" contenteditable="true" value="<?php echo $userName?>" name="fullname"><br>
 					Change Password:<br><input type="password" name="newPassword"><br>
 					Confirm New Password:<br><input type="password" name="newPasswordConfirm">
 					<br>
@@ -85,6 +85,17 @@ $userPhoto = getProfilePicturePath($userId);
 				</form>
 			</p>
 		</section>
+	</div>
+	<div id="addRestaurant">
+		<h2>Add Restaurant</h2>
+		<div id="addNotification"></div>
+		<p>
+			<form method="post" id="addRestaurantForm">
+				<input type='hidden' name='userId' value=<?=$userId?> />
+				Restaurant Name:<br><input type="text" name="restaurantName"><br>
+				<button type="submit" id="createRestaurant">Create Restaurant</button>
+			</form>
+		</p>
 	</div>
 </body>
 </html>
