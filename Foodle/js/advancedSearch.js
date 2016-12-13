@@ -3,7 +3,14 @@ $(document).ready(function()
 	$("#advancedSearch ").click(function(){
 		var senderElement = event.target.id;
 		
-		switch(senderElement){
+		switch(senderElement){			
+			case 'sortFilter':
+			if ($('#sortFilterInput').is(':visible'))
+				$("#sortFilterInput").slideUp();			
+			else
+				$("#sortFilterInput").slideDown();
+			break;
+
 			case 'ratingFilter':
 			if ($('#ratingFilterInput').is(':visible'))
 				$("#ratingFilterInput").slideUp();			

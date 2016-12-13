@@ -1,7 +1,5 @@
 <?php
 
-include '../resources/resources.php';
-
 //Opens database
 $dbh = new PDO('sqlite:../database.db');
 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //To enable error handling
@@ -15,18 +13,18 @@ if($selectedUser == null){ //In case of a non-existing name
 	header('Location: ../../../Error404.php?info=1');
 }
 
-//Gets the photos
-$stmt = $dbh->prepare('SELECT * FROM photos WHERE idUser = ?');
+//Gets the restaurants
+$stmt = $dbh->prepare('SELECT * FROM restaurants WHERE idOwner = ?');
 $stmt->execute(array($selectedUser['idUser']));
-$userSubmittedPhotos = $stmt->fetchAll();
+$ownedRestaurants = $stmt->fetchAll();
 
 $inputPage = $_GET['page'];
 
-$maxResultsPerPage = 2;
+$maxResultsPerPage = 3;
 $offset = ($inputPage - 1 ) * $maxResultsPerPage;
-$totalPages = ceil(count($userSubmittedPhotos) / $maxResultsPerPage);
+$totalPages = ceil(count($ownedRestaurants) / $maxResultsPerPage);
 
-if(count($userSubmittedPhotos != 0) && $inputPage != 1){
+if(count($ownedRestaurants != 0) && $inputPage != 1){
 	if($inputPage < 1 || $inputPage > $totalPages)
 	{
 		header('Location: ../../../Error404.php');
@@ -47,31 +45,29 @@ if(count($userSubmittedPhotos != 0) && $inputPage != 1){
 	</header>
 	<h1><?=$inputUsername?></h1>
 	<div id="main">
-		<section id="photos">
-			<?php
-			if(count($userSubmittedPhotos) == 0){	
-				?>
-				<p>This user hasn't submitted a photo yet.</p>
-				<?php 
+		<section id="ownedRestaurants">
+			<h2>All Owned Restaurants</h2>
+			<?php 
+			if(count($ownedRestaurants) == 0){	
+				?><p>This user doesn't own any restaurant.</p><?php 
 			} else { 
-				for($i = $offset; $i < count($userSubmittedPhotos); $i++){
+				for($i = $offset; $i < count($ownedRestaurants); $i++){ 
 					//Limit number of Results Per Page
 					if($i >= $offset + $maxResultsPerPage)
-						break;	
-					//Gets the restaurant name
-					$stmt = $dbh->prepare('SELECT * FROM restaurants WHERE idRestaurant = ?');
-					$stmt->execute(array($userSubmittedPhotos[$i]['idRestaurant']));
-					$selectedRestaurant = $stmt->fetch();
-					$restaurantName = $selectedRestaurant['restaurantName'];
+						break;			
 
-					$restaurantPhoto = getRestaurantPhotoPath($userSubmittedPhotos[$i]['idPhoto']);
-					$uploadDate = $userSubmittedPhotos[$i]['uploadDate'];
+					$restaurantId = $ownedRestaurants[$i]['idRestaurant'];
+					$restaurantName = $ownedRestaurants[$i]['restaurantName'];
+					$restaurantLogo = getRestaurantLogoPath($restaurantId);
+					$restaurantRating = $ownedRestaurants[$i]['averageRating'];
+					$restaurantCategory = $ownedRestaurants[$i]['category'];
 					?>
 
 					<article>
 						<h3><?=$restaurantName?></h3>
-						<img src=<?=$restaurantPhoto?> alt=<?=$restaurantPhoto?> width="300" height="200">
-						<p>Submitted on <?=$uploadDate?></p>
+						<img src=<?=$restaurantLogo?> alt=<?=$restaurantName?> width="200" height="100">
+						<p>Rating: <?=$restaurantRating?></p>
+						<p>Category: <?=$restaurantCategory?></p>
 					</article>
 					<?php 
 				}

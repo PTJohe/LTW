@@ -20,7 +20,7 @@ $userReviews = $stmt->fetchAll();
 
 $inputPage = $_GET['page'];
 
-$maxResultsPerPage = 2;
+$maxResultsPerPage = 4;
 $offset = ($inputPage - 1 ) * $maxResultsPerPage;
 $totalPages = ceil(count($userReviews) / $maxResultsPerPage);
 

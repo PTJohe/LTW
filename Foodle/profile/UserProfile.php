@@ -16,6 +16,11 @@ if($selectedUser == null){ //In case of a non-existing name
 	header('Location: ../Error404.php?info=1');
 }
 
+//Gets the owned restaurants
+$stmt = $dbh->prepare('SELECT * FROM restaurants WHERE idOwner = ?');
+$stmt->execute(array($selectedUser['idUser']));
+$ownedRestaurants = $stmt->fetchAll();
+
 //Gets the reviews
 $stmt = $dbh->prepare('SELECT * FROM reviews WHERE idUser = ?');
 $stmt->execute(array($selectedUser['idUser']));
@@ -31,6 +36,7 @@ $userId = $selectedUser['idUser'];
 $userName = $selectedUser['name'];
 $userPhoto = getProfilePicturePath($userId);
 
+$maxOwnedRestaurants = 2;
 $maxLatestReviews = 2;
 $maxLatestPhotos = 2;
 ?>
@@ -52,6 +58,34 @@ $maxLatestPhotos = 2;
 			<img src=<?=$userPhoto?> alt="Photo" width="250" height="250"><br>
 			<p><?=$userName?></p>
 		</section>
+		<section id="ownedRestaurants">
+			<?php 
+			if(count($ownedRestaurants) > 0){
+				?><h2>Owned Restaurants</h2><?php	
+				for($i = 0; $i < count($ownedRestaurants); $i++){ 		
+					//Limit number of 'Owned Restaurants'
+					if($i >= $maxOwnedRestaurants)
+						break;			
+
+					$restaurantId = $ownedRestaurants[$i]['idRestaurant'];
+					$restaurantName = $ownedRestaurants[$i]['restaurantName'];
+					$restaurantLogo = getRestaurantLogoPath($restaurantId);
+					$restaurantRating = $ownedRestaurants[$i]['averageRating'];
+					$restaurantCategory = $ownedRestaurants[$i]['category'];
+					?>
+
+					<article>
+						<h3><?=$restaurantName?></h3>
+						<img src=<?=$restaurantLogo?> alt=<?=$restaurantName?> width="200" height="100">
+						<p>Rating: <?=$restaurantRating?></p>
+						<p>Category: <?=$restaurantCategory?></p>
+					</article>
+					<?php 
+				} ?>
+				<a href="<?php echo $inputUsername ?>/allRestaurants/1">View All (<?=count($ownedRestaurants)?>)</a> 
+				<?php 
+			} ?>
+		</section>
 		<section id="reviews">
 			<h2>Latest Reviews</h2>
 			<?php 
@@ -59,11 +93,11 @@ $maxLatestPhotos = 2;
 				?><p>This user hasn't written a review yet.</p><?php 
 			} else { 
 				for($i = 0; $i < count($userReviews); $i++){ 		
-				//Limit number of 'Latest Reviews'
+					//Limit number of 'Latest Reviews'
 					if($i >= $maxLatestReviews)
 						break;			
 
-				//Gets the restaurant
+					//Gets the restaurant
 					$stmt = $dbh->prepare('SELECT * FROM restaurants WHERE idRestaurant = ?');
 					$stmt->execute(array($userReviews[$i]['idRestaurant']));
 					$selectedRestaurant = $stmt->fetch();

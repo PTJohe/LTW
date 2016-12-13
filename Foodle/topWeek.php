@@ -1,16 +1,21 @@
 <?php
+include_once 'resources/resources.php';
 include_once 'paths.php';
 include_once 'Utilities.php';
-include_once('database/get_restaurants.php');
-include_once('database/connection.php') ;
+include_once 'database/get_restaurants.php';
+include_once 'database/connection.php';
 
-$array=bestRestaurantsLastWeek();
-for($i=0;$i<count($array);$i++){
-?>
+$arrayTopWeek = bestRestaurantsLastWeek();
 
-<p><a href=
-  <?php
-  echo $navPath."restaurant/" . $array[$i][0];
-?>><?php echo $array[$i][1]; }?>
-</a>
-</p>
+for($i=0;$i<count($arrayTopWeek);$i++){
+	$logoPath = getRestaurantLogoPath($arrayTopWeek[$i][0]);
+	$linkRestaurant = $navPath."restaurant/" . $arrayTopWeek[$i][0];
+	?>
+
+	<p>
+		<a href=<?=$linkRestaurant?>>
+			<img src=<?=$logoPath?> alt="Image" height = "25" width = "25"><?php echo $arrayTopWeek[$i][1]?>
+		</a>
+	</p>
+	<?php 
+} ?>

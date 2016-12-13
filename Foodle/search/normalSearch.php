@@ -9,9 +9,12 @@ $partialStates=$_POST['search'];
 $dbh=new PDO('sqlite:../database.db');
 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$stmt = $dbh->prepare("SELECT * FROM restaurants WHERE restaurantName LIKE ? ");
+$stmt = $dbh->prepare("SELECT * FROM restaurants WHERE restaurantName LIKE ? ORDER BY averageRating DESC");
 $stmt->execute(array('%'.$partialStates.'%'));
 $result=$stmt->fetchAll();
+
+
+echo "<p>Restaurants found = ".count($result)."</p>";
 
 foreach($result as $row){
 	$restaurantLogoPath = getRestaurantLogoPath($row['idRestaurant']);
