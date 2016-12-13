@@ -22,7 +22,7 @@ $userSubmittedPhotos = $stmt->fetchAll();
 
 $inputPage = $_GET['page'];
 
-$maxResultsPerPage = 1;
+$maxResultsPerPage = 2;
 $offset = ($inputPage - 1 ) * $maxResultsPerPage;
 $totalPages = ceil(count($userSubmittedPhotos) / $maxResultsPerPage);
 

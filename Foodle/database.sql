@@ -148,13 +148,13 @@ INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRati
 	mais adequado para refeições com classe.','Restaurante',3);
 INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRating,description,category,idOwner) VALUES (3,'Café Majestic','Rua Santa Catarina 112','222003887',4.0,'Um dos cafés mais tradicionais do Porto e um cartão de visitas da cidade.','Café',2);
 INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRating,description,category,idOwner) VALUES (4,'Café Santiago','Rua de Passos Manuel 226','255123432',4.2,'Avaliada como a melhor francesinha do mundo!','Café',4);
-INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRating,description,category,idOwner) VALUES (5,'O Brouas','Rua de S. Brás 535','255781887',4.5,'Cozinha tradicional de excelente qualidade. Possui uma boa carta de vinhos e sobremesas variadas.','Restaurante ',4);
+INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRating,description,category,idOwner) VALUES (5,'O Brouas','Rua de S. Brás 535','255781887',4.5,'Cozinha tradicional de excelente qualidade. Possui uma boa carta de vinhos e sobremesas variadas.','Restaurante',4);
 INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRating,description,category,idOwner) VALUES (6,'O Sapo','Rua Almeida Garret 182','255298312',3.8,'Um dos restaurantes mais conhecidos na zona, se vens a Penafiel tens de passar no Sapo','Restaurante',5);
 INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRating,description,category,idOwner) VALUES (7,'Pinheiral dos Leitoes','Rua da Senhora do Monte 77','255781300',2.0,'O melhor leitão da zona e nao só!','Restaurante',6);
 INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRating,description,category,idOwner) VALUES (8,'Animar','Rua da Linda 21','25578354',3.0,'Vem provar a nossa comida caseira, nao te vais arrepender!','Tasco',7);
-INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRating,description,category,idOwner) VALUES (9,'Tricana','Rua da igreja velha','255787363',3.7,'Ambiente calmo e acolhedor para tomares o teu café','Café',6);
+INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRating,description,category,idOwner) VALUES (9,'Tricana','Rua da Igreja Velha','255787363',3.7,'Ambiente calmo e acolhedor para tomares o teu café','Café',6);
 INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRating,description,category,idOwner) VALUES (10,'O Piolho','Praça de Parada Leitão 45','215781340',4.1,'Local emblemático para os universitários com ambiente muito descontraído e jovem.','Café',8);
-INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRating,description,category,idOwner) VALUES (11,'Lusiada','Rua dos Lusiadas','287477633',3.2,'Local acolhedor com boas refeições diarias','Restaurante',6);
+INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRating,description,category,idOwner) VALUES (11,'Lusíada','Rua dos Lusiadas','287477633',3.2,'Local acolhedor com boas refeições diarias','Restaurante',6);
 INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRating,description,category,idOwner) VALUES (12,'Mensagem','Rua Fernando Pessoa','212343225',3.8,'Restaurante luxuoso muito bem decorado, refeições gourmet e preços acessiveis','Restaurante',1);
 INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRating,description,category,idOwner) VALUES (13,'Tasca do Zé','Rua Jose Almirante','298475876',3.4,'Vem as Tasca do Zé experimentar as tradições de Penafiel!','Tasco',1);
 INSERT INTO restaurants (idRestaurant,restaurantName,address,contact,averageRating,description,category,idOwner) VALUES (14,'Maus Hábitos','Rua de Passos Manuel 178','213456789',4.4,'Espaço de intervenção cultural com vários espaços distintos. Galeria de arte, bar, restaurante e discoteca.','Bar',3);
@@ -176,3 +176,6 @@ INSERT INTO photos (idPhoto, idRestaurant, idUser, uploadDate) VALUES (4,14,1,'2
 INSERT INTO photos (idPhoto, idRestaurant, idUser, uploadDate) VALUES (5,15,3,'2016-12-02');
 INSERT INTO photos (idPhoto, idRestaurant, idUser, uploadDate) VALUES (6,4,2,'2016-12-02');
 INSERT INTO photos (idPhoto, idRestaurant, idUser, uploadDate) VALUES (7,10,2,'2016-12-02');
+INSERT INTO photos (idPhoto, idRestaurant, idUser, uploadDate) VALUES (8,4,3,'2016-12-02');
+INSERT INTO photos (idPhoto, idRestaurant, idUser, uploadDate) VALUES (9,8,2,'2016-12-02');
+INSERT INTO photos (idPhoto, idRestaurant, idUser, uploadDate) VALUES (10,7,1,'2016-12-02');

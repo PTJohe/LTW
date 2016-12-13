@@ -23,16 +23,23 @@ if(!(isset($_POST['category1']) || isset($_POST['category2']) || isset($_POST['c
 
 $rating = $_POST['minRating'];
 
-$implodedArray = implode(', ',$checkBoxValues);
-
 $dbh=new PDO('sqlite:../database.db');
 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$stmt = $dbh->prepare("SELECT * FROM restaurants WHERE (averageRating > ? AND category IN (?) )");
-$stmt->execute(array($rating, $implodedArray));
+
+$implodedArray = implode("', '",$checkBoxValues);
+$query = "('" . $implodedArray . "')";
+
+
+if($_POST['sort'] == 'name')
+	$stmt = $dbh->prepare("SELECT * FROM restaurants WHERE (averageRating > ? AND category IN ". $query . " ) ORDER BY restaurantName ASC");
+else 
+	$stmt = $dbh->prepare("SELECT * FROM restaurants WHERE (averageRating > ? AND category IN ". $query . " ) ORDER BY averageRating DESC, restaurantName ASC");
+
+$stmt->execute(array($rating));
 $result=$stmt->fetchAll();
 
-$text = "<p>Number of Results = ".count($result)."</p>";
+$text = "<p>Restaurants found = ".count($result)."</p>";
 
 /*$inputPage = $_POST['currentPage'];
 
