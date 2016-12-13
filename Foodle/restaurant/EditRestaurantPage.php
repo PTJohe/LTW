@@ -84,22 +84,43 @@ $restaurantCreationDate = $selectedRestaurant['creationDate'];
 	</header>
 
 	<div id="restaurantDetails">
+		<input class="restaurantId" type="hidden" value=<?=$restaurantId?>>
+		<input class="doneButton" type="button" value="Done editing"><br>
 		<img src="<?=$restaurantLogo?>" alt=<?=$restaurantName?> width="300" height="100">
 		<!-- TODO Upload Logo -->
 
-		<div class="editable" id="restaurantname">
-			<h2><?=$restaurantName?></h2>
+		<div class="editable" id="restaurantName">
+			<h2 class="editItem"><?=$restaurantName?></h2>
 			<input class="editButton" type="image" src="<?=$resourcesPath?>editIcon.png" alt="Edit" width="25" height="25">
 			<input class="checkButton" type="hidden" src="<?=$resourcesPath?>checkEditIcon.png" alt="Check" width="25" height="25">
 			<input class="cancelButton" type="hidden" src="<?=$resourcesPath?>cancelEditIcon.png" alt="Cancel" width="25" height="25">
 		</div>
-		<!-- TODO Confirm changes -->
 
-		<p>Address: <?=$restaurantAddress?></p>
-		<p>Number: <?=$restaurantContact?></p>
+		<div class="editable" id="restaurantAddress">
+			<p>Address:</p>
+			<p class="editItem"><?=$restaurantAddress?></p>
+			<input class="editButton" type="image" src="<?=$resourcesPath?>editIcon.png" alt="Edit" width="25" height="25">
+			<input class="checkButton" type="hidden" src="<?=$resourcesPath?>checkEditIcon.png" alt="Check" width="25" height="25">
+			<input class="cancelButton" type="hidden" src="<?=$resourcesPath?>cancelEditIcon.png" alt="Cancel" width="25" height="25">
+		</div>
+		<div class="editable" id="restaurantNumber">
+			<p>Number:</p>
+			<p class="editItem"><?=$restaurantContact?></p>
+			<input class="editButton" type="image" src="<?=$resourcesPath?>editIcon.png" alt="Edit" width="25" height="25">
+			<input class="checkButton" type="hidden" src="<?=$resourcesPath?>checkEditIcon.png" alt="Check" width="25" height="25">
+			<input class="cancelButton" type="hidden" src="<?=$resourcesPath?>cancelEditIcon.png" alt="Cancel" width="25" height="25">
+		</div>
 		<p>Rating: <?=$restaurantAverageRating?> / 5 </p>
-		<p><?=$restaurantDescription?></p>
-		<p>Category: <?=$restaurantCategory?></p>
+		<div class="editable" id="restaurantDescription">
+			<p class="editItem"><?=$restaurantDescription?></p>
+			<input class="editButton" type="image" src="<?=$resourcesPath?>editIcon.png" alt="Edit" width="25" height="25">
+			<input class="checkButton" type="hidden" src="<?=$resourcesPath?>checkEditIcon.png" alt="Check" width="25" height="25">
+			<input class="cancelButton" type="hidden" src="<?=$resourcesPath?>cancelEditIcon.png" alt="Cancel" width="25" height="25">
+		</div>
+		<div class="editableList" id="restaurantCategory">
+			<p>Category:</p>
+			<p class="editItem"><?=$restaurantCategory?></p>
+		</div>
 		<p>Creation Date: <?=$restaurantCreationDate?></p>
 	</div>
 	<div id="reviews">
