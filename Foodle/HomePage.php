@@ -13,7 +13,6 @@ include_once('database/connection.php') ;
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="css/HomePage.css">
 	<script src="js/lib/jquery-1.11.3.min.js"></script>
-	<script src="js/setLiveSearch.js"></script>
 	<script src="js/homePage.js"></script>
 </head>
 
@@ -22,7 +21,7 @@ include_once('database/connection.php') ;
 		<?php include 'header.php' ?>
 		<div id="SearchBar">
 			<form  class="form-search" role = "form" action = "search/" method="post">
-				<input id="liveSearch" type="text" name="search" placeholder="Search for Restaurants in your area." autocomplete="off" onkeyup="getStates(this.value)">
+				<input id="liveSearch" type="text" name="search" placeholder="Search for Restaurants in your area." autocomplete="off">
 				<button type="submit" name="searchBtn">Search</button>
 				<div id="results"></div>
 			</form>
