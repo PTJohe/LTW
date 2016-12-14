@@ -3,7 +3,6 @@ include_once 'paths.php';
 include_once 'Utilities.php';
 
 
-
 if(isLoggedIn()){
 	?><a href=<?php echo $navPath."profile/".$_SESSION['username']?>><?=$_SESSION['username']?></a>
 	<?php
