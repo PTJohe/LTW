@@ -46,6 +46,7 @@ b{
 	padding-bottom: 4%;
 	top:20%;
 	height:300px;
+	font-size: 30px;
 }
 
 #username{
@@ -58,22 +59,24 @@ b{
 	top:150px;
 }
 
-#submit{
+#loginButton{
 	top:200px;
 
 	position: relative;
 	border: 3px solid rgb(221,72,21);
 	background-color: rgb(221,72,21);
 	border-radius:5px;
-	left:30%;
+	left:0%;
 	height:40px;
 	width:100px;
 	color: white;
 	font-size: 18px;
 	font-family: Arial, Helvetica, sans-serif;
+
+	color: white;
 }
 
-#submit:hover{
+#loginButton:hover{
 	border: 3px solid Coral;
 	background-color: Coral;
 	cursor: pointer;
@@ -85,6 +88,8 @@ b{
 	border-radius:5px 5px 0px 0px;
 	height:35px;
 	width: 250px;
+	left: 2%;
+	font-size: 20px;
 }
 
 
