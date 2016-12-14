@@ -1,0 +1,98 @@
+@import url("header.css");
+
+body {
+	text-align: center;
+	margin:0;
+	padding:0;
+	background-color: black;
+}
+
+b{
+	font-size:30px;
+}
+
+
+#main {
+	text-align: center;
+	background-color: Cornsilk;
+	white-space: nowrap;
+	height:850px;
+}
+
+
+#LoginFoodle{
+	position: relative;
+	top:70px;
+}
+
+#LoginFoodle h1{
+	font-size:40px;
+	display:inline;
+	text-align: center;
+	margin-left: 0%;
+}
+
+
+#Inputs{
+	position:relative;
+	text-align: center;
+	border-radius:25px;
+	border: 2px solid white;
+	background-color: Bisque;
+	width: 40%;
+	left:20%;
+	overflow: hidden;
+	margin: 2% 10%;
+	padding-bottom: 4%;
+	top:20%;
+	height:300px;
+}
+
+#username{
+	position:relative;
+	top:100px;
+}
+
+#password{
+	position:relative;
+	top:150px;
+}
+
+#submit{
+	top:200px;
+
+	position: relative;
+	border: 3px solid rgb(221,72,21);
+	background-color: rgb(221,72,21);
+	border-radius:5px;
+	left:30%;
+	height:40px;
+	width:100px;
+	color: white;
+	font-size: 18px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#submit:hover{
+	border: 3px solid Coral;
+	background-color: Coral;
+	cursor: pointer;
+}
+
+
+.form-user input, .form-pass input{
+	position: relative;
+	border-radius:5px 5px 0px 0px;
+	height:35px;
+	width: 250px;
+}
+
+
+
+
+
+
+
+#foodle{
+	color: rgb(221,72,21);
+}
