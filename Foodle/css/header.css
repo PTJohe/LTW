@@ -22,20 +22,27 @@ nav{
 	z-index:999;
 	position:relative;
 	top: 20px;
+	right: 20px;
 	float:right;
 }
 
 nav a{
-	padding: 2px;
+	background-color: rgb(221,72,21);
 	border:solid rgb(221,72,21);
 	border-radius:5px;
 	color: white;
 	display:inline;
-	background-color: rgb(221,72,21);
+	padding: 2px;
 	text-decoration: none;
 	font-size: 20px;
 }
 
-h1,h2,h3,p {
+nav a:hover{
+	background-color: Coral;
+	border:solid Coral;
+	cursor: pointer
+}
+
+h1,h2,h3,p,a {
     font-family: Arial, Helvetica, sans-serif;
 }

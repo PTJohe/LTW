@@ -14,6 +14,7 @@ include_once('database/connection.php') ;
 	<link rel="stylesheet" href="css/HomePage.css">
 	<script src="js/lib/jquery-1.11.3.min.js"></script>
 	<script src="js/setLiveSearch.js"></script>
+	<script src="js/homePage.js"></script>
 </head>
 
 <body>
@@ -21,14 +22,16 @@ include_once('database/connection.php') ;
 		<?php include 'header.php' ?>
 		<div id="SearchBar">
 			<form  class="form-search" role = "form" action = "search/" method="post">
-				<input id="liveSearch" type="text" name="search" placeholder="Search for Restaurants in your area." onkeyup="getStates(this.value)">
+				<input id="liveSearch" type="text" name="search" placeholder="Search for Restaurants in your area." autocomplete="off" onkeyup="getStates(this.value)">
 				<button type="submit" name="searchBtn">Search</button>
 				<div id="results"></div>
 			</form>
 		</div>
 	</header>
 	<div id="main">
-		<h1>Welcome To Foodle!</h1>
+		<div id="welcomeToFoodle">
+			<h1>Welcome to </h1><h1 id="foodle">foodle</h1><h1>!</h1>
+		</div>
 		<div id="collections">
 			<h2>Collections</h2>
 			<div class="collection" id="topWeek">
@@ -43,6 +46,10 @@ include_once('database/connection.php') ;
 			</div>
 		</div>
 	</div>
+	<footer>
+		<h2>Linguagens e Tecnologias Web 2016</h2>
+		<h3><pre>Francisco Barbosa      João Araújo      José Carlos Coutinho</pre></h3>
+	</footer>
 </body>
 
 </html>

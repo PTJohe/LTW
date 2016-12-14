@@ -5,6 +5,7 @@ $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 include_once '../paths.php';
 include_once '../Utilities.php';
+include_once '../resources/resources.php';
 
 
 $partialStates=$_POST['partialState'];
@@ -16,7 +17,7 @@ $stmt->execute(array('%'.$partialStates.'%'));
 
 $result=$stmt->fetchAll();
 foreach($result as $row){
-  //echo "<div>".$row['restaurantName']."</div>";
-	echo "<div><a href=".$navPath."restaurant/".$row['idRestaurant'].">".$row['restaurantName']."</a></div>";
+	$restaurantLogoPath = getRestaurantLogoPath($row['idRestaurant']);
+	echo "<a id='liveSearchLink' href=".$navPath."restaurant/".$row['idRestaurant']."><div id='liveSearchResult'><img id='liveSearchImage' src=".$restaurantLogoPath." width='50' height='50'>  ".$row['restaurantName']."</div></a>";
 }
 ?>
