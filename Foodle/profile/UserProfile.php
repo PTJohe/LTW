@@ -46,23 +46,27 @@ $maxLatestPhotos = 2;
 <head>
 	<title><?=$inputUsername?></title>
 	<meta charset="utf-8">
-	<link rel="stylesheet" href="../css/UserProfile.css">
+	<link rel="stylesheet" href="../css/profile/UserProfile.css">
 </head>
 <body>
 	<header>
 		<?php include '../header.php' ?>
 	</header>
-	<h1><?=$inputUsername?></h1>
 	<div id="main">
-		<section id="personalData">
-			<h2>Personal Data</h2>
-			<img src=<?=$userPhoto?> alt="Photo" width="250" height="250"><br>
-			<p><?=$userName?></p>
-		</section>
+		<div id="personalData">
+			<article>
+				<h2>Profile</h2>
+				<img src=<?=$userPhoto?> alt="Photo" width="250" height="250">
+				<h3><?=$inputUsername?></h3>
+				<p><?=$userName?></p>
+			</article>
+		</div>
 		<section id="ownedRestaurants">
-			<?php 
-			if(count($ownedRestaurants) > 0){
-				?><h2>Owned Restaurants</h2><?php	
+			<h2>Owned Restaurants</h2><?php	
+			if(count($ownedRestaurants) == 0){
+				?><p>This user doesn't own any restaurant.</p><?php 
+			}
+			else{
 				for($i = 0; $i < count($ownedRestaurants); $i++){ 		
 					//Limit number of 'Owned Restaurants'
 					if($i >= $maxOwnedRestaurants)
@@ -80,8 +84,10 @@ $maxLatestPhotos = 2;
 							<h3><?=$restaurantName?></h3>
 							<img src=<?=$restaurantLogo?> alt=<?=$restaurantName?> width="200" height="100">
 						</a>
-						<p>Rating: <?=$restaurantRating?></p>
-						<p>Category: <?=$restaurantCategory?></p>
+						<div id="restaurantDetails">
+							<p><b>Rating:</b> <?=$restaurantRating?></p> 
+							<p><b>Category:</b> <?=$restaurantCategory?></p>
+						</div>
 					</article>
 					<?php 
 				} ?>
@@ -111,10 +117,14 @@ $maxLatestPhotos = 2;
 					?>
 
 					<article>
-						<h3><?=$restaurantName?></h3>
-						<img src=<?=$restaurantLogo?> alt=<?=$restaurantName?> width="200" height="100">
-						<p>Rating: <?=$userReviews[$i]['rating']?></p>
-						<p><?=$userReviews[$i]['text']?></p>
+						<a href="../restaurant/<?php echo $restaurantId ?>">
+							<h3><?=$restaurantName?></h3>
+							<img src=<?=$restaurantLogo?> alt=<?=$restaurantName?> width="200" height="100">
+						</a>
+						<div id="reviewDetails">
+							<p><b>Rated:</b> <?=$userReviews[$i]['rating']?></p>
+							<p id="reviewText"><b>Review:</b> <?=$userReviews[$i]['text']?></p>
+						</div>
 					</article>
 					<?php 
 				} ?>
@@ -145,8 +155,10 @@ $maxLatestPhotos = 2;
 				?>
 
 				<article>
-					<h3><?=$restaurantName?></h3>
-					<img src=<?=$restaurantPhoto?> alt=<?=$restaurantPhoto?> width="300" height="200">
+					<a href="../restaurant/<?php echo $userSubmittedPhotos[$i]['idRestaurant'] ?>">
+						<h3><?=$restaurantName?></h3>
+						<img src=<?=$restaurantPhoto?> alt=<?=$restaurantName?> width="300" height="200">
+					</a>
 					<p>Submitted on <?=$uploadDate?></p>
 				</article>
 				<?php } ?>
@@ -155,7 +167,6 @@ $maxLatestPhotos = 2;
 			} ?>
 		</section>
 	</div>
-
 	<footer>
 		<?php include '../footer.php' ?>
 	</footer>
