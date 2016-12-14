@@ -14,7 +14,7 @@ for($i=0;$i<count($arrayTopWeek);$i++){
 
 	<p>
 		<a href=<?=$linkRestaurant?>>
-			<img src=<?=$logoPath?> alt="Image" height = "25" width = "25"><?php echo $arrayTopWeek[$i][1]?>
+			<label id="averageRating"><?=$arrayTopWeek[$i][2]?></label><img src=<?=$logoPath?> alt="Image" height = "25" width = "25">&#9<?php echo $arrayTopWeek[$i][1]?>
 		</a>
 	</p>
 	<?php 

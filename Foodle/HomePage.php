@@ -9,7 +9,7 @@ include_once('database/connection.php') ;
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Home</title>
+	<title>Foodle</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="css/HomePage.css">
 	<script src="js/lib/jquery-1.11.3.min.js"></script>
@@ -19,29 +19,29 @@ include_once('database/connection.php') ;
 <body>
 	<header>
 		<?php include 'header.php' ?>
-	</header>
-
-	<div id="SearchBar">
-		<form  class="form-search" role = "form" action = "search/" method="post">
-			<p class="Search">
-				<input id="liveSearch" type="text" name="search" placeholder="Search Restaurants by name, location,food,menu" onkeyup="getStates(this.value)">
+		<div id="SearchBar">
+			<form  class="form-search" role = "form" action = "search/" method="post">
+				<input id="liveSearch" type="text" name="search" placeholder="Search for Restaurants in your area." onkeyup="getStates(this.value)">
 				<button type="submit" name="searchBtn">Search</button>
 				<div id="results"></div>
-			</p>
-		</form>
-	</div>
-	<div id="Colecoes">
-		<h2>Curiosities</h2>
-		<p>
-			<h3>Top of the Week</h3>
-			<img src="resources/topWeek.png" alt="Image" height = "100" width = "100">
-			<?php include 'topWeek.php' ?>
-		</p>
-		<p>
-			<h3> New Restaurants </h3>
-			<img src="resources/newRestaurants.png" alt="Image" height = "100" width = "100">
-			<?php include 'newRestaurants.php' ?>
-		</p>
+			</form>
+		</div>
+	</header>
+	<div id="main">
+		<h1>Welcome To Foodle!</h1>
+		<div id="collections">
+			<h2>Collections</h2>
+			<div class="collection" id="topWeek">
+				<h3>Top of the Week</h3>
+				<img src="resources/topWeek.png" alt="Image" height = "200" width = "250">
+				<div class="collectionResults"><?php include 'topWeek.php' ?></div>
+			</div>
+			<div class="collection" id="newRestaurants">
+				<h3> New Restaurants </h3>
+				<img src="resources/newRestaurants.png" alt="Image" height = "200" width = "250">
+				<div class="collectionResults"><?php include 'newRestaurants.php' ?></div>
+			</div>
+		</div>
 	</div>
 </body>
 

@@ -1,35 +1,115 @@
-{
-  font-family: "Arial";
+@import url("header.css");
+
+body {
+	text-align: center;
+	background-color: Cornsilk;
+}
+
+#collections{
+	position:relative;
+	top:10px;
+	text-align: center;
+	border: 2px solid white;
+	background-color: Bisque; 
+	width: 75%;
+	overflow-y: hidden;
+	margin: 0 10%;
+}
+.collection{
+	background-color: Azure; 
+	border: 1px solid white;
+	float: left;
+	min-height: 450px;
+	color: white;
+}
+.collection h3{
+	color: rgb(221,72,21);
+}
+.collection a{
+	text-decoration: none;
+}
+.collectionResults{
+	position: relative;
+	text-align: left;
+	left: 15%;
+	font-size: 30px;
+}
+.collectionResults p{
+	position: relative;
+	border: 3px solid rgb(221,72,21);
+	background-color: rgb(221,72,21);
+	height: 50px;
+	width: 75%;
+}
+.collectionResults img{
+	position: relative;
+	text-align: left;
+	top: 15px;
+	height: 50px;
+	width: 50px;
+}
+.collectionResults a{
+    white-space: nowrap;
+	position: relative;
+	bottom: 15px;
+	color: white;
+}
+.collectionResults #averageRating{
+	border: 8px solid green;
+	border-bottom: 10px solid green;
+	background-color: green;
+	height: 50px;
+	width: 50px;
+	margin-right: 2px;
+
+}
+#topWeek{
+	position: relative;
+	left:4%;
+	text-align: center;
+	background-color: inherit;
+	width: 40%;
+}
+#newRestaurants{
+	position: relative;
+	left:16%;
+	text-align: center;
+	background-color: inherit;
+	width: 40%
 }
 
 
-#Login a{
-  padding: 2px;
-  border:solid;
-  border-radius:5px;
-  color: red;
-  text-decoration: none;
-}
-.SignIn {
-  text-align: right;
-}
-
-.SignUp{
-  text-align: right;
-}
-
-#header h1{
-  text-align: center;
-}
 
 .Search{
-  text-align: center;
+	position:relative;
+	text-align: center;
 }
 
 #SearchBar {
-  width: 100%;
-  height: 400px;
-  background-repeat: no-repeat;
-  background-image: url("../resources/restaurant.png");
-  background-position: center;
+	position: relative;
+	left: 0;
+	width: 100%;
+	height: 300px;
+	text-align: center;
+	font-size: 18px;
+
+	background-repeat: no-repeat;
+	background-image: url("../resources/restaurant.png");
+	background-position: center;
+}
+
+.form-search{
+	position:relative;
+	top:200px;
+}
+.form-search input {
+	height:35px;
+	width: 500px;
+}
+#liveSearch input.placeholder{
+	text-align: center;
+}
+.form-search button{
+	height:35px;
+	width:100px;
 }

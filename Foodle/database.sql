@@ -39,7 +39,7 @@ CREATE TABLE restaurants (
 	restaurantName	NVARCHAR2(30) UNIQUE,
 	address	NVARCHAR2(70),
 	contact	TEXT,
-	averageRating	FLOAT,
+	averageRating	FLOAT DEFAULT 0.0,
 	description	TEXT,
 	category	NVARCHAR2(15),
 	creationDate DATE,

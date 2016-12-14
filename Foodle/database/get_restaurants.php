@@ -53,7 +53,7 @@ function bestRestaurantsLastWeek(){
 
 	$array=array();
 	foreach($result as $row){
-		$array[]=array($row['idRestaurant'], $row['restaurantName']);
+		$array[]=array($row['idRestaurant'], $row['restaurantName'], $row['averageRating']);
 	}
 	return $array;
 }
@@ -67,7 +67,7 @@ function newRestaurants(){
 
 	$array=array();
 	foreach($result as $row){
-		$array[]=array($row['idRestaurant'], $row['restaurantName']);
+		$array[]=array($row['idRestaurant'], $row['restaurantName'], $row['averageRating']);
 	}
 	return $array;
 }

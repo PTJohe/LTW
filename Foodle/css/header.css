@@ -1,0 +1,41 @@
+/*logoColor:
+rgb(221,72,21)
+*/
+
+header {
+	display:inline;
+	padding-top: 0px;
+	padding-bottom: 1000px;
+}
+
+#siteLogo{
+	z-index:999;
+	position:relative;
+	float:left;
+}
+#siteLogo img{
+	width:200px;
+	height: 200px;
+}
+
+nav{
+	z-index:999;
+	position:relative;
+	top: 20px;
+	float:right;
+}
+
+nav a{
+	padding: 2px;
+	border:solid rgb(221,72,21);
+	border-radius:5px;
+	color: white;
+	display:inline;
+	background-color: rgb(221,72,21);
+	text-decoration: none;
+	font-size: 20px;
+}
+
+h1,h2,h3,p {
+    font-family: Arial, Helvetica, sans-serif;
+}

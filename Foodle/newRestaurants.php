@@ -14,7 +14,7 @@ for($i=0;$i<count($arrayNewRestaurants);$i++){
 
 	<p>
 		<a href=<?=$linkRestaurant?>>
-			<img src=<?=$logoPath?> alt="Image" height = "25" width = "25"><?php echo $arrayNewRestaurants[$i][1]?>
+		<label id="averageRating"><?=$arrayNewRestaurants[$i][2]?></label><img src=<?=$logoPath?> alt="Image" height = "25" width = "25">&#9<?php echo $arrayNewRestaurants[$i][1]?>
 		</a>
 	</p>
 	<?php 
