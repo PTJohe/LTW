@@ -46,6 +46,7 @@ $maxLatestPhotos = 2;
 <head>
 	<title><?=$inputUsername?></title>
 	<meta charset="utf-8">
+	<link rel="stylesheet" href="../css/UserProfile.css">
 </head>
 <body>
 	<header>
@@ -148,12 +149,15 @@ $maxLatestPhotos = 2;
 					<img src=<?=$restaurantPhoto?> alt=<?=$restaurantPhoto?> width="300" height="200">
 					<p>Submitted on <?=$uploadDate?></p>
 				</article>
+				<?php } ?>
+				<a href="<?php echo $inputUsername ?>/allPhotos/1">View All (<?=count($userSubmittedPhotos)?>)</a> 
 				<?php 
 			} ?>
-			<a href="<?php echo $inputUsername ?>/allPhotos/1">View All (<?=count($userSubmittedPhotos)?>)</a> 
-			<?php 
-		} ?>
-	</section>
-</div>
+		</section>
+	</div>
+
+	<footer>
+		<?php include '../footer.php' ?>
+	</footer>
 </body>
 </html>

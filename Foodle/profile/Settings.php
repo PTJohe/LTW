@@ -97,5 +97,9 @@ $userPhoto = getProfilePicturePath($userId);
 			</form>
 		</p>
 	</div>
+	
+	<footer>
+		<?php include '../footer.php' ?>
+	</footer>
 </body>
 </html>

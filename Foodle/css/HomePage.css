@@ -1,20 +1,9 @@
 @import url("header.css");
 
-body {
-	text-align: center;
-	margin:0;
-	padding:0;
-	background-color: black;
-}
 #main {
 	text-align: center;
 	background-color: Cornsilk;
 	white-space: nowrap;
-}
-footer{
-	position: relative;
-	top: -20%;
-	color:white;
 }
 
 

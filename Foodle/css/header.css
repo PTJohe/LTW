@@ -2,6 +2,16 @@
 rgb(221,72,21)
 */
 
+@import url("footer.css");
+
+
+body {
+	text-align: center;
+	margin:0;
+	padding:0;
+	background-color: black;
+}
+
 header {
 	display:inline;
 	padding-top: 0px;

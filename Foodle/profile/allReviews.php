@@ -89,5 +89,9 @@ if(count($userReviews != 0) && $inputPage != 1){
 			} ?>
 		</section>
 	</div>
+	
+	<footer>
+		<?php include '../footer.php' ?>
+	</footer>
 </body>
 </html>
