@@ -111,44 +111,49 @@ $restaurantCreationDate = $selectedRestaurant['creationDate'];
 				$stmt->execute(array($restaurantReviews[$i]['idUser']));
 				$reviewUser = $stmt->fetch();
 				$reviewId = $restaurantReviews[$i]['idReview'];
+				$reviewUserPicture = getProfilePicturePath($restaurantReviews[$i]['idUser']);
 				?>
 				
 				<div class="review">
 					<p>Rating: <?=$restaurantReviews[$i]['rating']?></p>
 
-					<p>Written by <a href="../profile/<?=$reviewUser['username'];?>"><?=$reviewUser['name'];?></a></p>
-					<li>
-						<?=$restaurantReviews[$i]['text']?>
-						<ul class="responses" id="response<?=$reviewId?>">
-							<?php 
+					<?=$restaurantReviews[$i]['text']?>
+					<p><img src=<?=$reviewUserPicture?> width="25" height="25"> <a href="../profile/<?=$reviewUser['username'];?>"><?=$reviewUser['name'];?></a></p>
+					<ul class="responses" id="response<?=$reviewId?>">
+						<?php 
 							//Get the users who wrote the responses
-							$stmt = $dbh->prepare('SELECT * FROM responses WHERE idReview = ?');
-							$stmt->execute(array($reviewId));
-							$responses = $stmt->fetchAll();
-							for($j = 0; $j < count($responses); $j++){
-								$stmt = $dbh->prepare('SELECT * FROM users WHERE idUser = ?');
-								$stmt->execute(array($responses[$j]['idUser']));
-								$responseUser = $stmt->fetch();
-								?>
-								<div class="response">
-									<p>Written by <a href="../profile/<?=$responseUser['username']?>"><?=$responseUser['name']?></a></p>
-									<li>
-										<?=$responses[$j]['text']?>
-									</li>
-								</div>
-								<?php 
-							} ?>
-						</ul>
+						$stmt = $dbh->prepare('SELECT * FROM responses WHERE idReview = ?');
+						$stmt->execute(array($reviewId));
+						$responses = $stmt->fetchAll();
+						for($j = 0; $j < count($responses); $j++){
+							$stmt = $dbh->prepare('SELECT * FROM users WHERE idUser = ?');
+							$stmt->execute(array($responses[$j]['idUser']));
+							$responseUser = $stmt->fetch();
 
-						<?php if($loggedUser == true){ //Anonymous users can't comment ?> 
-						<form id="form<?=$reviewId?>" >
-							<input id="newResponseText" type="text" placeholder="Write your response..."><br>
-							<input id="newResponseUser" type="hidden" value=<?=$username?>><br>
-							<input id="newResponseReview" type="hidden" value=<?=$reviewId?> >
-							<input class="submitResponse" type="button" value="Send">
-						</form>
-						<?php } ?>
-					</li>
+							$responseUserPicture = getProfilePicturePath($responses[$j]['idUser']);
+							?>
+							<div class="response">
+								<li>
+									<?=$responses[$j]['text']?>
+								</li>
+								<p>
+									<img src=<?=$responseUserPicture?> width="25" height="25"> <a href="../profile/<?=$responseUser['username']?>"><?=$responseUser['name']?></a>
+									<?php if($responseUser['username'] == $restaurantOwner){ ?>
+									<label id="ownerTag">Owner</label> <?php } ?>
+								</p>
+							</div>
+							<?php 
+						} ?>
+					</ul>
+
+					<?php if($loggedUser == true){ //Anonymous users can't comment ?> 
+					<form id="form<?=$reviewId?>" >
+						<input id="newResponseText" type="text" placeholder="Write your response..."><br>
+						<input id="newResponseUser" type="hidden" value=<?=$username?>><br>
+						<input id="newResponseReview" type="hidden" value=<?=$reviewId?> >
+						<input class="submitResponse" type="button" value="Send">
+					</form>
+					<?php } ?>
 				</div>
 				<?php 
 			} ?>
