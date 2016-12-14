@@ -116,7 +116,7 @@ $restaurantCreationDate = $selectedRestaurant['creationDate'];
 				<div class="review">
 					<p>Rating: <?=$restaurantReviews[$i]['rating']?></p>
 
-					<p>Written by <a href="https://gnomo.fe.up.pt/~up201404293/Foodle/profile/<?=$reviewUser['username'];?>"><?=$reviewUser['name'];?></a></p>
+					<p>Written by <a href="../profile/<?=$reviewUser['username'];?>"><?=$reviewUser['name'];?></a></p>
 					<li>
 						<?=$restaurantReviews[$i]['text']?>
 						<ul class="responses" id="response<?=$reviewId?>">
@@ -131,7 +131,7 @@ $restaurantCreationDate = $selectedRestaurant['creationDate'];
 								$responseUser = $stmt->fetch();
 								?>
 								<div class="response">
-									<p>Written by <a href="https://gnomo.fe.up.pt/~up201404293/Foodle/profile/<?=$responseUser['username']?>"><?=$responseUser['name']?></a></p>
+									<p>Written by <a href="../profile/<?=$responseUser['username']?>"><?=$responseUser['name']?></a></p>
 									<li>
 										<?=$responses[$j]['text']?>
 									</li>
