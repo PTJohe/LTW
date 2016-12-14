@@ -1,0 +1,48 @@
+@import url("../header.css");
+
+#personalData{
+	position: relative;
+	border-radius:25px;
+	float:center;
+	width: 50%;
+	left: 25%;
+}
+
+#personalData article{
+	position: relative;
+	display: inline-block;
+	text-align: center;
+	left: -10%;
+	margin-left: 0px;
+}
+#personalData img{
+	border: 3px solid rgb(221,72,21);
+	border-radius:5px;
+}
+
+#main {
+	background-color: Cornsilk;
+}
+
+section{
+	display: inline-block;
+	vertical-align: top;
+	border-radius:25px;
+	border: 2px solid white;
+	background-color: Bisque; 
+	margin-top: 0px;
+	height: 750px;
+	width: 300px;
+	margin-bottom: 1em;
+}
+section a{
+	text-decoration: none;
+}
+#restaurantDetails{
+	text-align: left;
+	margin-left: 15%;
+}
+#reviewDetails{
+	text-align: left;
+	margin-left: 15%;
+}
