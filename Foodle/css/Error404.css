@@ -1,0 +1,27 @@
+@import url("header.css");
+
+#main {
+	background-color: Cornsilk;
+}
+
+#sorry{
+	display: inline-block;
+	position: relative;
+	border-radius:25px;
+	float:center;
+	width: 50%;
+}
+
+#sorry article{
+	position: relative;
+	text-align: center;
+	margin-left: 0px;
+}
+
+#message{
+	position: relative;
+	display: block;
+	margin: 0;
+	width: 50%;
+	left: 20%;
+}
