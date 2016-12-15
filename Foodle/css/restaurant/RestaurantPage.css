@@ -1,27 +1,32 @@
 @import url("../header.css");
-/*
-body {
-	text-align: center;
-	margin:0;
-	padding:0;
-	background-color: black;
-}*/
 
 #main
 {
 	text-align: center;
 	background-color: Cornsilk;
 	white-space: nowrap;
-	padding-top: 250px;
+	padding-top: 5%;
 	padding-bottom: 20px;
 }
 
-#restaurantDetails
-{
-	background-color: Bisque;
-	border-style: groove;
-	border-color: rgb(243, 96, 63);
-	margin-bottom: 20px;
+a{
+	text-decoration: none;
+}
+
+#restaurantDetails {
+	position: relative;
+	border-radius:25px;
+	float:center;
+	width: 50%;
+	left: 25%;
+}
+
+#restaurantDetails article{
+	position: relative;
+	display: inline-block;
+	text-align: center;
+	left: -10%;
+	margin-left: 0px;
 }
 
 #reviews
@@ -52,8 +57,9 @@ body {
 
 .review
 {
-	margin:auto;
+	margin:2em;
 	border: 2px solid rgb(221,72,21);
+	border-radius: 25px;
 }
 
 #logo
@@ -79,12 +85,35 @@ input[type="button"] {
 	padding: 2px;
 	text-decoration: none;
 	font-size: 20px;
+	margin-bottom: 1em;
 }
 
 input[type="button"]:hover{
 	background-color: Coral;
 	border:solid Coral;
 	cursor: pointer;
+}
+
+
+#editRestaurantPage
+{
+	background-color:  rgb(221,72,21);
+	border:solid rgb(221,72,21);
+	border-radius:5px;
+	font-size: 20px;
+	color: white;
+}
+#editRestaurantPage:hover
+{
+	background-color: Coral;
+	border:solid Coral;
+	border-radius:5px;
+	color: white;
+	cursor: pointer;
+}
+
+#addReview{
+	margin-top: 2em;
 }
 
 #addReview input:not([type="button"])
@@ -153,19 +182,32 @@ input[type="button"]:hover{
 .responses
 {
 	list-style-type: none;
+	margin: 2em;
 }
 
 .response
-{
+{	
 	margin-left:10px;
 	margin-right: 3px;
 	border: 2px solid rgb(221,72,21);
 	padding-top: 5px;
-	border-style: inset;
+	border-radius: 25px;
+	margin:1em;
 }
 
 .addResponse textarea
 {
 	resize: none;
 	width:30%;
+
+	border-radius:10px;
+	border: 2px solid white;
+	background-color: white;
+}
+
+#ownerTag{
+	border-radius:10px;
+	border: 2px solid rgb(221,72,21);
+	background-color: rgb(221,72,21);
+	color:white;
 }

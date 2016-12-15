@@ -88,36 +88,38 @@ $restaurantCreationDate = $selectedRestaurant['creationDate'];
 	</div>
 	<div id="main">
 		<div id="restaurantDetails">
-			<input id="restaurantId" type="hidden" value=<?=$restaurantId?>>
-			<img id="logo" src="<?=$restaurantLogo?>" alt=<?=$restaurantName?> width="300" height="100">
-			<h2><?=$restaurantName?></h2>
-			
-			<div id="imageSlideShow">
-				<div>
-					<img src='../resources/restaurantPhotos/default.png' alt="noimage" width="300" height="300">
+			<article>
+				<input id="restaurantId" type="hidden" value=<?=$restaurantId?>>
+				<img id="logo" src="<?=$restaurantLogo?>" alt=<?=$restaurantName?> width="300" height="100">
+				<h2><?=$restaurantName?></h2>
+
+				<div id="imageSlideShow">
+					<div>
+						<img src='../resources/restaurantPhotos/default.png' alt="noimage" width="300" height="300">
+					</div>
+					<div>
+						<input id="previousPhoto" type="button" value="Previous">
+						<input id="nextPhoto" type="button" value="Next">
+					</div>
 				</div>
-				<div>
-					<input id="previousPhoto" type="button" value="Previous">
-					<input id="nextPhoto" type="button" value="Next">
-				</div>
-			</div>
-	
-			<?php
+
+				<?php
 			//If user is the owner of the page, he can choose to edit the page
-			if($username == $restaurantOwner && $loggedUser == true){ ?>
-			<form action="EditRestaurantPage.php" method="post">
-				<input id="editRestaurantPage" type="submit" value="Edit">
-			</form>
-			<?php } ?>
-	
-			<p>Address: <?=$restaurantAddress?></p>
-			<p>Number: <?=$restaurantContact?></p>
-			<p>Rating: <?=$restaurantAverageRating?> / 5 </p>
-			<p><?=$restaurantDescription?></p>
-			<p>Category: <?=$restaurantCategory?></p>
-			<p>Creation Date: <?=date("d/m/Y", strtotime($restaurantCreationDate));?></p>
+				if($username == $restaurantOwner && $loggedUser == true){ ?>
+				<form action="EditRestaurantPage.php" method="post">
+					<input id="editRestaurantPage" type="submit" value="Edit">
+				</form>
+				<?php } ?>
+
+				<p><b>Address:</b> <?=$restaurantAddress?></p>
+				<p><b>Number:</b> <?=$restaurantContact?></p>
+				<p><b>Rating:</b> <?=$restaurantAverageRating?> / 5 </p>
+				<p><?=$restaurantDescription?></p>
+				<p><b>Category:</b> <?=$restaurantCategory?></p>
+				<p><b>Creation Date:</b> <?=date("d/m/Y", strtotime($restaurantCreationDate));?></p>
+			</article>
 		</div>
-	
+
 		<div id="reviews">
 			<h1>Reviews:</h1>
 			<ul id="reviewsList">
@@ -131,7 +133,7 @@ $restaurantCreationDate = $selectedRestaurant['creationDate'];
 					?>
 					<div class="review">
 						<p class="reviewRating">Rating: <?=intval($restaurantReviews[$i]['rating'])?></p>
-	
+
 						<p><?=$restaurantReviews[$i]['text']?></p>
 						<p><img src=<?=$reviewUserPicture?> width="25" height="25"> <a href="../profile/<?=$reviewUser['username'];?>"><?=$reviewUser['name'];?></a></p>
 						<ul class="responses" id="response<?=$reviewId?>">
@@ -144,7 +146,7 @@ $restaurantCreationDate = $selectedRestaurant['creationDate'];
 								$stmt = $dbh->prepare('SELECT * FROM users WHERE idUser = ?');
 								$stmt->execute(array($responses[$j]['idUser']));
 								$responseUser = $stmt->fetch();
-	
+
 								$responseUserPicture = getProfilePicturePath($responses[$j]['idUser']);
 								?>
 								<div class="response">
@@ -160,7 +162,7 @@ $restaurantCreationDate = $selectedRestaurant['creationDate'];
 								<?php 
 							} ?>
 						</ul>
-	
+
 						<?php if($loggedUser == true){ //Anonymous users can't comment ?> 
 						<form class="addResponse" id="form<?=$reviewId?>" >
 							<textarea id="newResponseText" rows="3" placeholder="Write your response..."></textarea><br>
@@ -174,11 +176,11 @@ $restaurantCreationDate = $selectedRestaurant['creationDate'];
 				} ?>
 			</ul>
 		</div>
-	
+
 		<div id="addReview">
 			<?php if($loggedUser == true && $username != $restaurantOwner){ //Anonymous users or Owner can't review ?>
 			<form id="formReview">
-				<textarea id="newReviewText"  rows="6" placeholder="Write your review..."></textarea>
+				<textarea id="newReviewText"  rows="5" placeholder="Write your review..."></textarea>
 				<br>
 				Rating:
 				<div class="newReviewRadio">
@@ -200,10 +202,6 @@ $restaurantCreationDate = $selectedRestaurant['creationDate'];
 				<div class="newReviewRadio">
 					<input class="newReviewRating" type="radio" id="radio1" name="select" value="1"/>
 					<label for="radio1">1</label>
-				</div>
-				<div class="newReviewRadio">
-					<input class="newReviewRating" type="radio" id="radio0" name="select" value="0"/>
-					<label for="radio0">0</label>
 				</div>
 				<br>
 				<input id="newReviewUser" type="hidden" value=<?=$username?>><br>
