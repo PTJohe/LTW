@@ -39,36 +39,23 @@ else
 $stmt->execute(array($rating));
 $result=$stmt->fetchAll();
 
-//$text = "<p id='count'>Restaurants found = ".count($result)."</p>";
+$text = "<p id='count'>Found ".count($result)." restaurants.</p>";
 
-/*$inputPage = $_POST['currentPage'];
+foreach ($result as $row) {
+	$restaurantLogoPath = getRestaurantLogoPath($row['idRestaurant']);
+	$restaurantPath = $navPath . "restaurant/" . $row['idRestaurant'];
 
-
-$maxResultsPerPage = 5;
-$offset = ($inputPage - 1 ) * $maxResultsPerPage;
-$totalPages = ceil(count($result) / $maxResultsPerPage);
-
-
-for($i = $offset; $i < count($result); $i++){
-	//Limit number of Results Per Page
-	if($i >= $offset + $maxResultsPerPage)
-	break;	*/
-	foreach ($result as $row) {
-		$restaurantLogoPath = getRestaurantLogoPath($row['idRestaurant']);
-		$restaurantPath = $navPath . "restaurant/" . $row['idRestaurant'];
-
-		$text .="
-		<article>
-		<div id='results'>
-			<a href=".$navPath."restaurant/".$row['idRestaurant'].">
-				<img src=".$restaurantLogoPath." width = '200' height = '100'>
-				".$row['restaurantName']."
-			</a>
-			<div id='rating'>Rating: ".$row['averageRating']."</div>
-			<div id='category'>Category: ".$row['category']."</div>
-		</div>
-		</article>";
-	}
+	$text .="<article>
+	<div id='results'>
+		<a href=".$navPath."restaurant/".$row['idRestaurant'].">
+			<img src=".$restaurantLogoPath." width = '200' height = '100'>
+			<p>".$row['restaurantName']."</p>
+		</a>
+		<div id='rating'><b>Rating:</b> ".$row['averageRating']."</div>
+		<div id='category'><b>Category:</b> ".$row['category']."</div>
+	</div>
+</article>";
+}
 
 sendAnswer:
 

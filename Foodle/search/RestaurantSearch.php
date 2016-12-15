@@ -3,17 +3,29 @@
 <head>
 	<title>Search Restaurants</title>
 	<meta charset="utf-8">
-	<link rel="stylesheet" href="../css/RestaurantSearch.css">	
+	<link rel="stylesheet" href="../css/search/RestaurantSearch.css">	
 	<script src="../js/lib/jquery-1.11.3.min.js"></script>
 	<script src="../js/lib/jquery.form.js"></script>
-	<script src="../js/advancedSearch.js"></script>
+	<script src="../js/search.js"></script>
 </head>
 
 <body>
 	<header>
 		<?php include '../header.php' ?>
 	</header>
-	<div id="backg">
+	<div id="main">
+		<div id="titleSearch">
+			<article>
+				<h2>Search</h2>
+			</article>
+		</div>
+		<div id="SearchBar">
+			<form  class="form-search" role = "form" action = "" method="post">
+				<input id="liveSearch" type="text" name="search" placeholder="Search for Restaurants in your area." autocomplete="off">
+				<button type="submit" name="searchBtn" id="searchButton" >Search</button>
+			</form>
+		</div>
+
 		<div id="advancedSearch">
 			&#9906 Filters
 			<div id="Filters">
@@ -47,15 +59,13 @@
 				</form>
 			</div>
 		</div>
-		<div id="container">
+		<section>
 			<div id="Restaurants">
-				<h1>Restaurants:</h1>
-
-				<div id="searchResults"><?php include 'normalSearch.php'; ?></div>
+				<div id="searchResults"></div>
 			</div>
-		</div>
+		</section>
 	</div>
-	
+
 	<footer>
 		<?php include '../footer.php' ?>
 	</footer>
