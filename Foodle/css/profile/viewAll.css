@@ -1,0 +1,79 @@
+@import url("../header.css");
+
+#main {
+	background-color: Cornsilk;
+}
+
+#personalData{
+	position: relative;
+	border-radius:25px;
+	float:center;
+	width: 50%;
+	left: 25%;
+}
+
+#personalData article{
+	position: relative;
+	display: inline-block;
+	text-align: center;
+	left: -10%;
+	margin-left: 0px;
+}
+
+
+section{
+	border-radius:25px;
+	border: 2px solid white;
+	background-color: Bisque; 
+	vertical-align: top;
+	position: relative;
+	width: 70%;
+	left: 15%;
+	margin-bottom: 1em;
+}
+
+section article{
+	display: inline-block;
+	width: 300px;
+	height: 300px;
+	margin: 10px;
+	border: 3px solid white;
+	border-radius:25px;
+}
+
+#articleReviews{
+	overflow-y:scroll;
+}
+
+section article:hover{
+	background-color: Cornsilk;
+	border: 3px solid Cornsilk;
+}
+section a{
+	text-decoration: none;
+	color: black;
+}
+
+#allResults{
+	display:inline-block;
+	position: relative;
+	width: 70%;
+	left: -8%;
+}
+
+#pageButtons a{
+	background-color: rgb(221,72,21);
+	border:solid rgb(221,72,21);
+	border-radius:5px;
+	color: white;
+	display:inline;
+	padding: 2px;
+	text-decoration: none;
+	font-size: 20px;
+}
+
+#pageButtons a:hover{
+	background-color: Coral;
+	border:solid Coral;
+	cursor: pointer
+}

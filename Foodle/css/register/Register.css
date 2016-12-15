@@ -1,0 +1,107 @@
+@import url("../header.css");
+
+body {
+	text-align: center;
+	margin:0;
+	padding:0;
+	background-color: black;
+}
+
+b{
+	font-size:30px;
+}
+
+
+#main {
+	text-align: center;
+	background-color: Cornsilk;
+	white-space: nowrap;
+	height:850px;
+}
+
+
+#RegFoodle{
+	position: relative;
+	top:70px;
+}
+
+#RegFoodle h1{
+	font-size:40px;
+	display:inline;
+	text-align: center;
+	margin-left: 0%;
+}
+
+
+#Inputs{
+	position:relative;
+	text-align: center;
+	border-radius:25px;
+	border: 2px solid white;
+	background-color: Bisque;
+	width: 40%;
+	left:20%;
+	overflow: hidden;
+	margin: 2% 10%;
+	padding-bottom: 4%;
+	top:20%;
+	height:400px;
+	font-size: 30px;
+}
+
+#cname,#username,#password,#cpassword{
+	position:relative;
+	top:100px;
+}
+
+
+
+#RegButton{
+	top:100px;
+
+	position: relative;
+	border: 3px solid rgb(221,72,21);
+	background-color: rgb(221,72,21);
+	border-radius:5px;
+	left:0%;
+	height:40px;
+	width:100px;
+	color: white;
+	font-size: 18px;
+	font-family: Arial, Helvetica, sans-serif;
+
+	color: white;
+}
+
+#RegButton:hover{
+	border: 3px solid Coral;
+	background-color: Coral;
+	cursor: pointer;
+}
+
+.form-input {
+	text-align: center;
+	margin: 1em;
+}
+
+.form-input input{
+	position: relative;
+	border-radius:5px 5px 0px 0px;
+	height:35px;
+	width: 250px;
+	left: 2%;
+	font-size: 20px;
+}
+
+#notification{
+	width: 100%;
+	top: 8%;
+	text-align: center;
+	position: absolute;
+	color:red;
+}
+
+
+#foodle{
+	color: rgb(221,72,21);
+}

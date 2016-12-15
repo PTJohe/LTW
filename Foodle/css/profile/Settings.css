@@ -1,0 +1,66 @@
+@import url("../header.css");
+
+#main {
+	background-color: Cornsilk;
+}
+#settings{
+	position: relative;
+	border-radius:25px;
+	float:center;
+	width: 50%;
+	left: 25%;
+}
+
+#settings article{
+	position: relative;
+	display: inline-block;
+	text-align: center;
+	left: -10%;
+	margin-left: 0px;
+}
+
+#editProfile{
+	position: relative;
+	display: inline-block;
+	border-radius:25px;
+	text-align: center;
+	float:center;
+	width: 50%;
+	left: -5%;
+}
+
+.myImage img {
+	background-color: rgb(221,72,21);
+	border: 3px solid rgb(221,72,21);
+	border-radius: 5px;
+}
+
+
+section{
+	display: inline-block;
+	vertical-align: top;
+	border-radius:25px;
+	border: 2px solid white;
+	background-color: Bisque; 
+	margin-top: 0px;
+	height: 750px;
+	width: 300px;
+	margin-bottom: 1em;
+}
+section a{
+	text-decoration: none;
+}
+
+.notification{
+	width: 100%;
+	top: 8%;
+	text-align: center;
+}
+
+.alert-danger{
+	color:red;
+}
+
+.alert-success{
+	color:green;
+}

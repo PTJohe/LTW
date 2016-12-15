@@ -21,12 +21,12 @@ foreach($result as $row){
 	$restaurantPath = $navPath . "restaurant/" . $row['idRestaurant'];
 	
 	echo "
-	<div>
+	<div id="searchResult">
 		<a href=".$navPath."restaurant/".$row['idRestaurant'].">
 			".$row['restaurantName']."<br>
 			<img src=".$restaurantLogoPath." width = '200' height = '100'>
 		</a>
-		<p>Rating: ".$row['averageRating']."</p>
+		<p class="averageRating">Rating: ".$row['averageRating']."</p>
 		<p>Category: ".$row['category']."</p>
 	</div>";
 }

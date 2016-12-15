@@ -38,58 +38,68 @@ if(count($userReviews != 0) && $inputPage != 1){
 <head>
 	<title><?=$inputUsername?></title>
 	<meta charset="utf-8">
+	<link rel="stylesheet" href="../../../css/profile/viewAll.css">
 </head>
 <body>
 	<header>
 		<?php include '../header.php' ?>
 	</header>
-	<h1><?=$inputUsername?></h1>
 	<div id="main">
+		<div id="personalData">
+			<article>
+				<h1>All Submitted Reviews</h1>
+			</article>
+		</div>
 		<section id="reviews">
-			<h2>All Reviews</h2>
-			<?php 
-			if(count($userReviews) == 0){	
-				?><p>This user hasn't written a review yet.</p><?php 
-			} else { 
-				for($i = $offset; $i < count($userReviews); $i++){ 
+			<div id="allResults">
+				<?php 
+				if(count($userReviews) == 0){	
+					?><p>This user hasn't written a review yet.</p><?php 
+				} else { 
+					for($i = $offset; $i < count($userReviews); $i++){ 
 					//Limit number of Results Per Page
-					if($i >= $offset + $maxResultsPerPage)
-						break;			
+						if($i >= $offset + $maxResultsPerPage)
+							break;			
 					//Gets the restaurant
-					$stmt = $dbh->prepare('SELECT * FROM restaurants WHERE idRestaurant = ?');
-					$stmt->execute(array($userReviews[$i]['idRestaurant']));
-					$selectedRestaurant = $stmt->fetch();
+						$stmt = $dbh->prepare('SELECT * FROM restaurants WHERE idRestaurant = ?');
+						$stmt->execute(array($userReviews[$i]['idRestaurant']));
+						$selectedRestaurant = $stmt->fetch();
 
-					$restaurantId = $selectedRestaurant['idRestaurant'];
-					$restaurantName = $selectedRestaurant['restaurantName'];
-					$restaurantLogo = getRestaurantLogoPath($restaurantId);
-					?>
+						$restaurantId = $selectedRestaurant['idRestaurant'];
+						$restaurantName = $selectedRestaurant['restaurantName'];
+						$restaurantLogo = getRestaurantLogoPath($restaurantId);
+						?>
 
-					<article>
-						<h3><?=$restaurantName?></h3>
-						<img src=<?=$restaurantLogo?> alt=<?=$restaurantName?> width="200" height="100">
-						<p>Rating: <?=$userReviews[$i]['rating']?></p>
-						<p><?=$userReviews[$i]['text']?></p>
-					</article>
-					<?php 
-				}
-				if($inputPage > 1){
+						<article id="articleReviews">
+							<h3><?=$restaurantName?></h3>
+							<img src=<?=$restaurantLogo?> alt=<?=$restaurantName?> width="200" height="100">
+							<p><b>Rating:</b> <?=$userReviews[$i]['rating']?></p>
+							<p><?=$userReviews[$i]['text']?></p>
+						</article>
+						<?php 
+					}
 					?>
-					<a href="<?php echo $inputPage - 1?>">Previous</a> 
-					<?php 
-				}
-				if($inputPage < $totalPages){
+				</div>
+				<div id="pageButtons">
+					<?php
+					if($inputPage > 1){
+						?>
+						<a href="<?php echo $inputPage - 1?>">Previous</a> 
+						<?php 
+					}
+					if($inputPage < $totalPages){
+						?>
+						<a href="<?php echo $inputPage + 1?>">Next</a> 
+						<?php 
+					} 
 					?>
-					<a href="<?php echo $inputPage + 1?>">Next</a> 
-					<?php 
-				} 
-				?>
+				</div>
 				<p>Page <?=$inputPage?> of <?=$totalPages?></p>
 				<?php 
 			} ?>
 		</section>
 	</div>
-	
+
 	<footer>
 		<?php include '../footer.php' ?>
 	</footer>

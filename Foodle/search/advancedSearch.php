@@ -39,7 +39,7 @@ else
 $stmt->execute(array($rating));
 $result=$stmt->fetchAll();
 
-$text = "<p>Restaurants found = ".count($result)."</p>";
+//$text = "<p id='count'>Restaurants found = ".count($result)."</p>";
 
 /*$inputPage = $_POST['currentPage'];
 
@@ -58,29 +58,17 @@ for($i = $offset; $i < count($result); $i++){
 		$restaurantPath = $navPath . "restaurant/" . $row['idRestaurant'];
 
 		$text .="
-		<div>
+		<article>
+		<div id='results'>
 			<a href=".$navPath."restaurant/".$row['idRestaurant'].">
-				".$row['restaurantName']."<br>
 				<img src=".$restaurantLogoPath." width = '200' height = '100'>
+				".$row['restaurantName']."
 			</a>
-			<p>Rating: ".$row['averageRating']."</p>
-			<p>Category: ".$row['category']."</p>
-		</div>";
+			<div id='rating'>Rating: ".$row['averageRating']."</div>
+			<div id='category'>Category: ".$row['category']."</div>
+		</div>
+		</article>";
 	}
-/*
-$text .= "<br>";
-
-if($inputPage > 1){
-	$previousPage = $inputPage - 1;
-	$text .= "<a href=".$previousPage.">Previous</a>";
-}
-if($inputPage < $totalPages){
-	$nextPage = $inputPage + 1;
-	$text .= "<a href=".$nextPage.">Next</a>";
-} 
-
-$text .= "<p>Page ".$inputPage." of ".$totalPages."</p>";
-*/
 
 sendAnswer:
 
