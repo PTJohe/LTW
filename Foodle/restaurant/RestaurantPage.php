@@ -74,113 +74,145 @@ $restaurantCreationDate = $selectedRestaurant['creationDate'];
 <head>
 	<meta charset="UTF-8">
 	<title><?=$restaurantName?></title>
+	<link rel="stylesheet" href="../css/restaurant/RestaurantPage.css">
 	<script src="../js/lib/jquery-1.11.3.min.js"></script>
 	<script src="../js/writeComment.js"></script>
 	<script src="../js/showPhotosRestaurant.js"></script>
 </head>
 
 <body>
-	<header>
-		<?php include '../header.php' ?>
-	</header>
-	
-	<div id="restaurantDetails">
-		<input id="restaurantId" type="hidden" value=<?=$restaurantId?>>
-		<img src="<?=$restaurantLogo?>" alt=<?=$restaurantName?> width="300" height="100">
-		<h2><?=$restaurantName?></h2>
-		
-		<div id="imageSlideShow">
-			<img src='../resources/loading.gif' alt="loading" width="300" height="300">
-			<input id="previousPhoto" type="button" value="Previous">
-			<input id="nextPhoto" type="button" value="Next">
-		</div>
-
-		<?php
-		//If user is the owner of the page, he can choose to edit the page
-		if($username == $restaurantOwner && $loggedUser == true){ ?>
-		<form action="EditRestaurantPage.php" method="post">
-			<input id="editRestaurantPage" type="submit" value="Edit">
-		</form>
-		<?php } ?>
-
-		<p>Address: <?=$restaurantAddress?></p>
-		<p>Number: <?=$restaurantContact?></p>
-		<p>Rating: <?=$restaurantAverageRating?> / 5 </p>
-		<p><?=$restaurantDescription?></p>
-		<p>Category: <?=$restaurantCategory?></p>
-		<p>Creation Date: <?=$restaurantCreationDate?></p>
+	<div id="headerdiv">
+		<header>
+			<?php include '../header.php' ?>
+		</header>
 	</div>
-
-	<div id="reviews">
-		<ul>
-			<?php for($i = 0; $i < count($restaurantReviews); $i++){ 
-				//Gets the user who wrote the actual review
-				$stmt = $dbh->prepare('SELECT * FROM users WHERE idUser = ?');
-				$stmt->execute(array($restaurantReviews[$i]['idUser']));
-				$reviewUser = $stmt->fetch();
-				$reviewId = $restaurantReviews[$i]['idReview'];
-				$reviewUserPicture = getProfilePicturePath($restaurantReviews[$i]['idUser']);
-				?>
-				
-				<div class="review">
-					<p>Rating: <?=$restaurantReviews[$i]['rating']?></p>
-
-					<?=$restaurantReviews[$i]['text']?>
-					<p><img src=<?=$reviewUserPicture?> width="25" height="25"> <a href="../profile/<?=$reviewUser['username'];?>"><?=$reviewUser['name'];?></a></p>
-					<ul class="responses" id="response<?=$reviewId?>">
-						<?php 
-							//Get the users who wrote the responses
-						$stmt = $dbh->prepare('SELECT * FROM responses WHERE idReview = ?');
-						$stmt->execute(array($reviewId));
-						$responses = $stmt->fetchAll();
-						for($j = 0; $j < count($responses); $j++){
-							$stmt = $dbh->prepare('SELECT * FROM users WHERE idUser = ?');
-							$stmt->execute(array($responses[$j]['idUser']));
-							$responseUser = $stmt->fetch();
-
-							$responseUserPicture = getProfilePicturePath($responses[$j]['idUser']);
-							?>
-							<div class="response">
-								<li>
-									<?=$responses[$j]['text']?>
-								</li>
-								<p>
-									<img src=<?=$responseUserPicture?> width="25" height="25"> <a href="../profile/<?=$responseUser['username']?>"><?=$responseUser['name']?></a>
-									<?php if($responseUser['username'] == $restaurantOwner){ ?>
-									<label id="ownerTag">Owner</label> <?php } ?>
-								</p>
-							</div>
-							<?php 
-						} ?>
-					</ul>
-
-					<?php if($loggedUser == true){ //Anonymous users can't comment ?> 
-					<form id="form<?=$reviewId?>" >
-						<input id="newResponseText" type="text" placeholder="Write your response..."><br>
-						<input id="newResponseUser" type="hidden" value=<?=$username?>><br>
-						<input id="newResponseReview" type="hidden" value=<?=$reviewId?> >
-						<input class="submitResponse" type="button" value="Send">
-					</form>
-					<?php } ?>
+	<div id="main">
+		<div id="restaurantDetails">
+			<input id="restaurantId" type="hidden" value=<?=$restaurantId?>>
+			<img id="logo" src="<?=$restaurantLogo?>" alt=<?=$restaurantName?> width="300" height="100">
+			<h2><?=$restaurantName?></h2>
+			
+			<div id="imageSlideShow">
+				<div>
+					<img src='../resources/restaurantPhotos/default.png' alt="noimage" width="300" height="300">
 				</div>
-				<?php 
-			} ?>
-		</ul>
+				<div>
+					<input id="previousPhoto" type="button" value="Previous">
+					<input id="nextPhoto" type="button" value="Next">
+				</div>
+			</div>
+	
+			<?php
+			//If user is the owner of the page, he can choose to edit the page
+			if($username == $restaurantOwner && $loggedUser == true){ ?>
+			<form action="EditRestaurantPage.php" method="post">
+				<input id="editRestaurantPage" type="submit" value="Edit">
+			</form>
+			<?php } ?>
+	
+			<p>Address: <?=$restaurantAddress?></p>
+			<p>Number: <?=$restaurantContact?></p>
+			<p>Rating: <?=$restaurantAverageRating?> / 5 </p>
+			<p><?=$restaurantDescription?></p>
+			<p>Category: <?=$restaurantCategory?></p>
+			<p>Creation Date: <?=date("d/m/Y", strtotime($restaurantCreationDate));?></p>
+		</div>
+	
+		<div id="reviews">
+			<h1>Reviews:</h1>
+			<ul id="reviewsList">
+				<?php for($i = 0; $i < count($restaurantReviews); $i++){ 
+					//Gets the user who wrote the actual review
+					$stmt = $dbh->prepare('SELECT * FROM users WHERE idUser = ?');
+					$stmt->execute(array($restaurantReviews[$i]['idUser']));
+					$reviewUser = $stmt->fetch();
+					$reviewId = $restaurantReviews[$i]['idReview'];
+					$reviewUserPicture = getProfilePicturePath($restaurantReviews[$i]['idUser']);
+					?>
+					<div class="review">
+						<p class="reviewRating">Rating: <?=intval($restaurantReviews[$i]['rating'])?></p>
+	
+						<p><?=$restaurantReviews[$i]['text']?></p>
+						<p><img src=<?=$reviewUserPicture?> width="25" height="25"> <a href="../profile/<?=$reviewUser['username'];?>"><?=$reviewUser['name'];?></a></p>
+						<ul class="responses" id="response<?=$reviewId?>">
+							<?php 
+								//Get the users who wrote the responses
+							$stmt = $dbh->prepare('SELECT * FROM responses WHERE idReview = ?');
+							$stmt->execute(array($reviewId));
+							$responses = $stmt->fetchAll();
+							for($j = 0; $j < count($responses); $j++){
+								$stmt = $dbh->prepare('SELECT * FROM users WHERE idUser = ?');
+								$stmt->execute(array($responses[$j]['idUser']));
+								$responseUser = $stmt->fetch();
+	
+								$responseUserPicture = getProfilePicturePath($responses[$j]['idUser']);
+								?>
+								<div class="response">
+									<li>
+										<?=$responses[$j]['text']?>
+									</li>
+									<p>
+										<img src=<?=$responseUserPicture?> width="25" height="25"> <a href="../profile/<?=$responseUser['username']?>"><?=$responseUser['name']?></a>
+										<?php if($responseUser['username'] == $restaurantOwner){ ?>
+										<label id="ownerTag">Owner</label> <?php } ?>
+									</p>
+								</div>
+								<?php 
+							} ?>
+						</ul>
+	
+						<?php if($loggedUser == true){ //Anonymous users can't comment ?> 
+						<form class="addResponse" id="form<?=$reviewId?>" >
+							<textarea id="newResponseText" rows="3" placeholder="Write your response..."></textarea><br>
+							<input id="newResponseUser" type="hidden" value=<?=$username?>><br>
+							<input id="newResponseReview" type="hidden" value=<?=$reviewId?> >
+							<input class="submitResponse" type="button" value="Send">
+						</form>
+						<?php } ?>
+					</div>
+					<?php 
+				} ?>
+			</ul>
+		</div>
+	
+		<div id="addReview">
+			<?php if($loggedUser == true && $username != $restaurantOwner){ //Anonymous users or Owner can't review ?>
+			<form id="formReview">
+				<textarea id="newReviewText"  rows="6" placeholder="Write your review..."></textarea>
+				<br>
+				Rating:
+				<div class="newReviewRadio">
+					<input class="newReviewRating" type="radio" id="radio5" name="select" value="5"/>
+					<label for="radio5">5</label>
+				</div>
+				<div class="newReviewRadio">
+					<input class="newReviewRating" type="radio" id="radio4" name="select" value="4"/>
+					<label for="radio4">4</label>
+				</div>
+				<div class="newReviewRadio">
+					<input class="newReviewRating" type="radio" id="radio3" name="select" value="3"/>
+					<label for="radio3">3</label>
+				</div>
+				<div class="newReviewRadio">
+					<input class="newReviewRating" type="radio" id="radio2" name="select" value="2"/>
+					<label for="radio2">2</label>
+				</div>
+				<div class="newReviewRadio">
+					<input class="newReviewRating" type="radio" id="radio1" name="select" value="1"/>
+					<label for="radio1">1</label>
+				</div>
+				<div class="newReviewRadio">
+					<input class="newReviewRating" type="radio" id="radio0" name="select" value="0"/>
+					<label for="radio0">0</label>
+				</div>
+				<br>
+				<input id="newReviewUser" type="hidden" value=<?=$username?>><br>
+				<input id="newReviewRestaurant" type="hidden" value=<?=$restaurantId?> >
+				<input id="submitReview" type="button" value="Send">
+			</form>
+			<?php } ?>
+		</div>
 	</div>
-
-	<div id="addReview">
-		<?php if($loggedUser == true && $username != $restaurantOwner){ //Anonymous users or Owner can't review ?>
-		<form>
-			Add a Review:<br>
-			<input id="newReviewText" type="text" placeholder="Write your review..."><br>
-			<input id="newReviewRating" type="number" min="0" max="5" placeholder="Rate"><br>
-			<input id="newReviewUser" type="hidden" value=<?=$username?>><br>
-			<input id="newReviewRestaurant" type="hidden" value=<?=$restaurantId?> >
-			<input id="submitReview" type="button" value="Send">
-		</form>
-		<?php } ?>
-	</div>
-
 	<footer>
 		<?php include '../footer.php' ?>
 	</footer>

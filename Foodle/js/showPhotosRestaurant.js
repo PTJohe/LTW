@@ -16,6 +16,7 @@ $(document).ready(function()
 			if(result == -1)
 			{
 				alert("Error");
+				actualImage = -1;
 			}
 			else if(result.length > 0)
 			{
@@ -27,11 +28,14 @@ $(document).ready(function()
 				actualImage = -1;
 			}
 			
-			$("#imageSlideShow").children('img').attr('src', '../resources/restaurantPhotos/' + imageIds[actualImage][0] + '.png');
+			if(actualImage > -1)
+			{
+				$("#imageSlideShow").find('img').attr('src', '../resources/restaurantPhotos/' + imageIds[actualImage][0] + '.png');
+			}
 		}
 		});
 		
-	$("#imageSlideShow").children("input").click(function()
+	$("#imageSlideShow").find("input").click(function()
 	{
 		var change = 0; //+1 or -1 in the array of photos
 		if($(this).attr("id") == "previousPhoto")
@@ -70,6 +74,6 @@ $(document).ready(function()
 		
 		var newImage = imageIds[actualImage][0];
 		//imageIds[actualImage][actualImage] porque ele devolve na resposta ao ajax sempre objetos, com o indice la dentro
-		$("#imageSlideShow").children('img').attr('src', '../resources/restaurantPhotos/' + newImage + '.png');
+		$("#imageSlideShow").find('img').attr('src', '../resources/restaurantPhotos/' + newImage + '.png');
 	});
 });

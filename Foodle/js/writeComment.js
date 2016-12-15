@@ -3,7 +3,8 @@ $(document).ready(function()
 	$("#submitReview").click(function()
 	{
 		var reviewText = $("#newReviewText").val();
-		var reviewRating = $("#newReviewRating").val();
+		//var reviewRating = $("#newReviewRating").val();
+		var reviewRating = $('input[class=newReviewRating]:checked', '#formReview').val();
 		var reviewUser = $("#newReviewUser").val();
 		var reviewRestaurant = $("#newReviewRestaurant").val();
 		
@@ -30,10 +31,10 @@ $(document).ready(function()
 				{
 					//Adds the HTML to the page
 					var newReview = $('<div class="review"></div>');
-					newReview.append('<p>Rating: ' + reviewRating + '</p>');
+					newReview.append('<p class="reviewRating">Rating: ' + reviewRating + '</p>');
+					newReview.append('<p>' + reviewText + '</p>');
 					newReview.append('<p>Written by '+ result + '</p>');
-					newReview.append('<li>' + reviewText + '</li>');
-					$("#reviews").append(newReview);
+					$("#reviewsList").append(newReview);
 				}
 			}
 			});
@@ -75,8 +76,8 @@ $(document).ready(function()
 					
 					//Adds the HTML to the page
 					var newResponse = $('<div class="response"></div>');
-					newResponse.append('<p>Written by '+ responseUserFullName + ' </p>');
 					newResponse.append('<li>' + responseText + '</li>');
+					newResponse.append('<p>Written by '+ responseUserFullName + ' </p>');
 					$("#response" + responseReview).append(newResponse);
 					console.log($("#" + responseReview));
 				}

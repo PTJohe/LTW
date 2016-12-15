@@ -1,0 +1,171 @@
+@import url("../header.css");
+/*
+body {
+	text-align: center;
+	margin:0;
+	padding:0;
+	background-color: black;
+}*/
+
+#main
+{
+	text-align: center;
+	background-color: Cornsilk;
+	white-space: nowrap;
+	padding-top: 250px;
+	padding-bottom: 20px;
+}
+
+#restaurantDetails
+{
+	background-color: Bisque;
+	border-style: groove;
+	border-color: rgb(243, 96, 63);
+	margin-bottom: 20px;
+}
+
+#reviews
+{
+	margin: auto;
+	background-color: Bisque;
+	border-style: groove;
+	border-color: rgb(243, 96, 63);
+	width: 70%;
+}
+
+#reviews h1
+{
+	background-color: rgb(221,72,21);
+}
+
+#reviewsList
+{
+	padding: 0;
+	margin: 0 5px;
+}
+
+.reviewRating
+{
+	font-size: 200%;
+	font-style: italic;
+}
+
+.review
+{
+	margin:auto;
+	border: 2px solid rgb(221,72,21);
+}
+
+#logo
+{
+	border: 3px solid rgb(221,72,21);
+	border-radius:5px;
+	border-style: groove;
+}
+
+#imageSlideShow img
+{
+	border: 3px solid rgb(221,72,21);
+	border-radius:100px;
+	border-style: groove;
+}
+
+input[type="button"] {
+	background-color: rgb(221,72,21);
+	border:solid rgb(221,72,21);
+	border-radius:5px;
+	color: white;
+	display:inline;
+	padding: 2px;
+	text-decoration: none;
+	font-size: 20px;
+}
+
+input[type="button"]:hover{
+	background-color: Coral;
+	border:solid Coral;
+	cursor: pointer;
+}
+
+#addReview input:not([type="button"])
+{
+	border-radius:25px;
+	border: 2px solid white;
+	background-color: Bisque;
+	font-size: 20px;
+}
+
+#addReview textarea
+{
+	border-radius:15px;
+	border: 2px solid white;
+	background-color: Bisque;
+	font-size: 20px;
+}
+
+#addReview input[type="number"]
+{
+	vertical-align: top;
+}
+
+#addReview #newReviewText, #newReviewRating
+{
+	display: inline-block;
+}
+
+#addReview #newReviewText
+{
+	resize: none;
+	width: 50%;
+}
+
+::-webkit-input-placeholder
+{
+	text-align: center;
+}
+
+#addReview .newReviewRadio
+{
+	display: inline-block;
+}
+
+#addReview .newReviewRadio input[type=radio] 
+{
+	display: none;
+}
+
+#addReview .newReviewRadio input[type=radio] + label
+{
+	border-radius:10px;
+	border: 2px solid Bisque;
+	background-color: Bisque;
+	padding: 3px 8px;
+}
+
+#addReview .newReviewRadio input[type=radio]:checked + label
+{
+	border-radius:10px;
+	border: 2px solid rgb(221,72,21);
+	background-color: rgb(221,72,21);
+	color: white;
+}
+
+.responses
+{
+	list-style-type: none;
+}
+
+.response
+{
+	margin-left:10px;
+	margin-right: 3px;
+	border: 2px solid rgb(221,72,21);
+	padding-top: 5px;
+	border-style: inset;
+}
+
+.addResponse textarea
+{
+	resize: none;
+	width:30%;
+}
