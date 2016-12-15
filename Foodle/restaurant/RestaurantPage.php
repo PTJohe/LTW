@@ -7,27 +7,24 @@ include '../paths.php';
 include_once("../database/get_restaurants.php");
 include '../resources/resources.php';
 
+$dbh = new PDO('sqlite:../database.db');
+$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //To enable error handling
+
 //Get session parameters
 if(isset($_SESSION['username'])){
 	$loggedUser = true;
 	$username = $_SESSION['username'];
+
+
+	//Get current user id
+	$stmt = $dbh->prepare('SELECT idUser FROM users WHERE username = ?');
+	$stmt->execute(array($username));
+	$idUser = $stmt->fetch()[0];	
 }
 else{
 	$loggedUser = false;
 	$username = "anonymous";
 }
-//Opens database
-
-//FOR DEBUGGING
-/*
-$loggedUser = true;
-$username = "PTJohe";
-$_SESSION['username'] = $username;
-include 'nav.php';
-*/
-
-$dbh = new PDO('sqlite:../database.db');
-$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //To enable error handling
 
 //Store restaurantName in session
 if(isset($_GET['restaurantId'])){
@@ -76,8 +73,10 @@ $restaurantCreationDate = $selectedRestaurant['creationDate'];
 	<title><?=$restaurantName?></title>
 	<link rel="stylesheet" href="../css/restaurant/RestaurantPage.css">
 	<script src="../js/lib/jquery-1.11.3.min.js"></script>
+	<script src="../js/lib/jquery.form.js"></script>
 	<script src="../js/writeComment.js"></script>
 	<script src="../js/showPhotosRestaurant.js"></script>
+	<script src="../js/uploadPhoto.js"></script>
 </head>
 
 <body>
@@ -102,8 +101,22 @@ $restaurantCreationDate = $selectedRestaurant['creationDate'];
 						<input id="nextPhoto" type="button" value="Next">
 					</div>
 				</div>
-
-				<?php
+				<?php if($loggedUser){ 
+					?>
+					<div id="uploadNotification"></div>
+					<div>
+						<b>Upload photo of restaurant: </b>
+					</div>
+					<form method="post" enctype="multipart/form-data" id="uploadImageForm">
+						<div>
+							<input type='hidden' name='idRestaurant' value="<?PHP echo $_GET['restaurantId']; ?>" />
+							<input type='hidden' name='idUser' value="<?PHP echo $idUser; ?>" />
+							<input type="file" name="uploadedPhoto" id="uploadedPhoto"/>
+							<button type="submit" id="submitImage">Upload Photo</button>
+						</div>
+					</form>
+					<?php
+				}
 			//If user is the owner of the page, he can choose to edit the page
 				if($username == $restaurantOwner && $loggedUser == true){ ?>
 				<form action="EditRestaurantPage.php" method="post">
