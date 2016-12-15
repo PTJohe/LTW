@@ -22,7 +22,7 @@ $userSubmittedPhotos = $stmt->fetchAll();
 
 $inputPage = $_GET['page'];
 
-$maxResultsPerPage = 2;
+$maxResultsPerPage = 4;
 $offset = ($inputPage - 1 ) * $maxResultsPerPage;
 $totalPages = ceil(count($userSubmittedPhotos) / $maxResultsPerPage);
 
@@ -40,52 +40,65 @@ if(count($userSubmittedPhotos != 0) && $inputPage != 1){
 <head>
 	<title><?=$inputUsername?></title>
 	<meta charset="utf-8">
+	<link rel="stylesheet" href="../../../css/profile/viewAll.css">
 </head>
 <body>
 	<header>
 		<?php include '../header.php' ?>
 	</header>
-	<h1><?=$inputUsername?></h1>
 	<div id="main">
+		<div id="personalData">
+			<article>
+				<h1>All Submitted Photos</h1>
+			</article>
+		</div>
 		<section id="photos">
-			<?php
-			if(count($userSubmittedPhotos) == 0){	
-				?>
-				<p>This user hasn't submitted a photo yet.</p>
-				<?php 
-			} else { 
-				for($i = $offset; $i < count($userSubmittedPhotos); $i++){
+			<div id="allResults">
+				<?php
+				if(count($userSubmittedPhotos) == 0){	
+					?>
+					<p>This user hasn't submitted a photo yet.</p>
+					<?php 
+				} else { 
+					for($i = $offset; $i < count($userSubmittedPhotos); $i++){
 					//Limit number of Results Per Page
-					if($i >= $offset + $maxResultsPerPage)
-						break;	
+						if($i >= $offset + $maxResultsPerPage)
+							break;	
 					//Gets the restaurant name
-					$stmt = $dbh->prepare('SELECT * FROM restaurants WHERE idRestaurant = ?');
-					$stmt->execute(array($userSubmittedPhotos[$i]['idRestaurant']));
-					$selectedRestaurant = $stmt->fetch();
-					$restaurantName = $selectedRestaurant['restaurantName'];
+						$stmt = $dbh->prepare('SELECT * FROM restaurants WHERE idRestaurant = ?');
+						$stmt->execute(array($userSubmittedPhotos[$i]['idRestaurant']));
+						$selectedRestaurant = $stmt->fetch();
+						$restaurantName = $selectedRestaurant['restaurantName'];
 
-					$restaurantPhoto = getRestaurantPhotoPath($userSubmittedPhotos[$i]['idPhoto']);
-					$uploadDate = $userSubmittedPhotos[$i]['uploadDate'];
-					?>
+						$restaurantPhoto = getRestaurantPhotoPath($userSubmittedPhotos[$i]['idPhoto']);
+						$uploadDate = $userSubmittedPhotos[$i]['uploadDate'];
+						?>
 
-					<article>
-						<h3><?=$restaurantName?></h3>
-						<img src=<?=$restaurantPhoto?> alt=<?=$restaurantPhoto?> width="300" height="200">
-						<p>Submitted on <?=$uploadDate?></p>
-					</article>
-					<?php 
-				}
-				if($inputPage > 1){
+						<article>
+							<a href="../../../restaurant/<?php echo $userSubmittedPhotos[$i]['idRestaurant'] ?>">
+								<h3><?=$restaurantName?></h3>
+								<img src=<?=$restaurantPhoto?> alt=<?=$restaurantPhoto?> width="300" height="200">
+							</a>
+							<p>Submitted on <?=date("d/m/Y",strtotime($uploadDate))?></p>
+						</article>
+						<?php 
+					}
 					?>
-					<a href="<?php echo $inputPage - 1?>">Previous</a> 
-					<?php 
-				}
-				if($inputPage < $totalPages){
+				</div>
+				<div id="pageButtons">
+					<?php
+					if($inputPage > 1){
+						?>
+						<a href="<?php echo $inputPage - 1?>">Previous</a> 
+						<?php 
+					}
+					if($inputPage < $totalPages){
+						?>
+						<a href="<?php echo $inputPage + 1?>">Next</a> 
+						<?php 
+					} 
 					?>
-					<a href="<?php echo $inputPage + 1?>">Next</a> 
-					<?php 
-				} 
-				?>
+				</div>
 				<p>Page <?=$inputPage?> of <?=$totalPages?></p>
 				<?php 
 			} ?>
